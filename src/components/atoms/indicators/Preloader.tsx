@@ -68,10 +68,10 @@ const PreloaderBase = styled.div`
         display: block;
         position: absolute;
         box-sizing: border-box;
-        border: 2px solid #fff;
+        border: 2px solid var(--foreground);
         border-radius: var(--border-radius-half);
         animation: ${prRing} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #fff transparent transparent transparent;
+        border-color: var(--foreground) transparent transparent transparent;
     }
 
     .ring div:nth-child(1) {
