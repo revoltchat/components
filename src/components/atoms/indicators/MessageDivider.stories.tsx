@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { MessageDivider } from "./MessageDivider";
 
 export default {
-    title: "Design System/Atoms/MessageDivider",
+    title: "Design System/Atoms/Indicators/MessageDivider",
     component: MessageDivider,
     argTypes: {
         unread: { name: "Is unread?", type: "boolean", defaultValue: true },

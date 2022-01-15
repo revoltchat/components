@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Preloader } from "./Preloader";
 
 export default {
-    title: "Design System/Atoms/Preloader",
+    title: "Design System/Atoms/Indicators/Preloader",
     component: Preloader,
     argTypes: {
         type: {

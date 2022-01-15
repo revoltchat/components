@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 import { ComboBox } from "./ComboBox";
 
 export default {
-    title: "Design System/Atoms/ComboBox",
+    title: "Design System/Atoms/Inputs/ComboBox",
     component: ComboBox,
     argTypes: {
         value: { name: "Value", type: "string", defaultValue: "Element A" },
