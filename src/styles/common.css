@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+
+:root {
+    --ligatures: none;
+    --text-size: 14px;
+    --font: "Open Sans";
+    --sidebar-active: var(--secondary-background);
+    --titlebar-height: 29px;
+    --titlebar-action-padding: 8px;
+    --titlebar-logo-color: var(--secondary-foreground);
+    --app-height: 100vh;
+    --scrollbar-thickness: 3px;
+    --scrollbar-thickness-ff: thin;
+    --border-radius: 6px;
+    --border-radius-half: 50%;
+    --border-radius-user-icon: var(--border-radius-half);
+    --border-radius-channel-icon: var(--border-radius-half);
+    --border-radius-server-icon: var(--border-radius-half);
+    --input-border-width: 2px;
+    --textarea-padding: 16px;
+    --textarea-line-height: 20px;
+    --message-box-padding: 14px;
+    --attachment-max-width: 480px;
+    --attachment-max-height: 640px;
+    --attachment-default-width: 400px;
+    --attachment-max-text-width: 800px;
+    --bottom-navigation-height: 50px;
+}
+
+html {
+    background: var(--background);
+    font-family: var(--font);
+}
