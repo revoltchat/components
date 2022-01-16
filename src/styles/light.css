@@ -1,4 +1,4 @@
-html.light {
+html:not(.dark) {
     --accent: #fd6671;
     --accent-rgb: 253, 102, 113;
     --background: #f6f6f6;
