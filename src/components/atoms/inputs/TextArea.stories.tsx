@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 import { TextArea } from "./TextArea";
 
 export default {
-    title: "Design System/Atoms/Inputs/TextArea",
+    title: "Design System/Atoms/Inputs/Text Area",
     component: TextArea,
     argTypes: {
         value: {

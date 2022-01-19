@@ -5,7 +5,7 @@ import { ChangeEvent } from "react";
 import { InputBox } from "./InputBox";
 
 export default {
-    title: "Design System/Atoms/Inputs/InputBox",
+    title: "Design System/Atoms/Inputs/Input Box",
     component: InputBox,
     argTypes: {
         value: {

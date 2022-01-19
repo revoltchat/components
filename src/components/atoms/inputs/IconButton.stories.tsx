@@ -4,7 +4,7 @@ import { Globe } from "@styled-icons/boxicons-regular";
 import { IconButton } from "./IconButton";
 
 export default {
-    title: "Design System/Atoms/Inputs/IconButton",
+    title: "Design System/Atoms/Inputs/Icon Button",
     component: IconButton,
     argTypes: {
         shape: {

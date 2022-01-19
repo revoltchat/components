@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ColourSwatches } from "./ColourSwatches";
 
 export default {
-    title: "Design System/Atoms/Inputs/ColourSwatches",
+    title: "Design System/Atoms/Inputs/Colour Swatches",
     component: ColourSwatches,
     argTypes: {
         value: { name: "Value", type: "string", defaultValue: "#FD6671" },

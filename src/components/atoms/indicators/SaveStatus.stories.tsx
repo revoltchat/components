@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { SaveStatus } from "./SaveStatus";
 
 export default {
-    title: "Design System/Atoms/Indicators/SaveStatus",
+    title: "Design System/Atoms/Indicators/Save Status",
     component: SaveStatus,
     argTypes: {
         status: {

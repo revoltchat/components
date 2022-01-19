@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { LineDivider } from "./LineDivider";
 
 export default {
-    title: "Design System/Atoms/Layout/LineDivider",
+    title: "Design System/Atoms/Layout/Line Divider",
     component: LineDivider,
     argTypes: {},
 } as ComponentMeta<typeof LineDivider>;
