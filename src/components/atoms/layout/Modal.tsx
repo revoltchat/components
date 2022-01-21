@@ -2,6 +2,30 @@ import styled, { css, keyframes } from "styled-components";
 
 import { createPortal } from "react-dom";
 
+import { Button, Props as ButtonProps } from "../inputs/Button";
+import { useCallback, useEffect, useState } from "react";
+
+export type Action = Omit<ButtonProps, "onClick"> & {
+    confirmation?: boolean;
+    onClick: () => void;
+};
+
+export interface Props {
+    padding?: string;
+
+    disabled?: boolean;
+    transparent?: boolean;
+    nonDismissable?: boolean;
+
+    actions?: Action[];
+    onClose?: () => void;
+
+    registerOnClose?: (fn: () => void) => () => void;
+    registerOnConfirm?: (fn: (close: () => void) => void) => () => void;
+
+    children?: React.ReactChild;
+}
+
 const open = keyframes`
     0% {opacity: 0;}
     70% {opacity: 0;}
@@ -61,24 +85,84 @@ const Base = styled.div<{ closing?: boolean }>`
               `}
 `;
 
-const Container = styled.div`
-    overflow: hidden;
+const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
     max-width: calc(100vw - 20px);
-    border-radius: var(--border-radius);
 
     animation-name: ${zoomIn};
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.3, 0.3, 0.18, 1.1);
+
+    ${(props) =>
+        !props.transparent &&
+        css`
+            border-radius: ${props.actions
+                ? "var(--border-radius) var(--border-radius) 0 0"
+                : "var(--border-radius)"};
+
+            overflow: hidden;
+        `}
 `;
 
-const Content = styled.div`
-    //
+const Content = styled.div<Pick<Props, "transparent" | "padding">>`
+    padding: ${(props) => props.padding ?? "1rem"};
+
+    ${(props) =>
+        !props.transparent &&
+        css`
+            background: var(--secondary-header);
+        `}
 `;
 
-export function Modal() {
+const Actions = styled.div`
+    gap: 8px;
+    display: flex;
+    padding: 1rem;
+    flex-direction: row-reverse;
+
+    background: var(--secondary-background);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+`;
+
+export function Modal({
+    children,
+    actions,
+    disabled,
+    onClose,
+    nonDismissable,
+    registerOnClose,
+    registerOnConfirm,
+    ...props
+}: Props) {
+    const [closing, setClosing] = useState(false);
+
+    const closeModal = useCallback(() => {
+        setClosing(true);
+        setTimeout(() => onClose?.(), 2e2);
+    }, [setClosing, props]);
+
+    const confirm = useCallback(() => {
+        setClosing(true);
+        setTimeout(() => onClose?.(), 2e2);
+    }, [closeModal]);
+
+    useEffect(() => registerOnClose?.(closeModal), [closeModal]);
+    useEffect(() => registerOnConfirm?.(confirm), [confirm]);
+
     return createPortal(
-        <Base>
-            <Container>content</Container>
+        <Base closing={closing} onClick={() => !nonDismissable && closeModal()}>
+            <Container
+                {...props}
+                actions={actions ? actions.length > 0 : false}
+                onClick={(e) => e.stopPropagation()}>
+                <Content {...props}>{children}</Content>
+                {actions && actions.length > 0 && (
+                    <Actions>
+                        {actions.map((x, index) => (
+                            <Button disabled={disabled} key={index} {...x} />
+                        ))}
+                    </Actions>
+                )}
+            </Container>
         </Base>,
         document.body,
     );
