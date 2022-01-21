@@ -1,9 +1,11 @@
 import styled, { css, keyframes } from "styled-components";
 
 import { createPortal } from "react-dom";
+import { useCallback, useEffect, useState } from "react";
 
 import { Button, Props as ButtonProps } from "../inputs/Button";
-import { useCallback, useEffect, useState } from "react";
+import { H3 } from "../heading/H3";
+import { H5 } from "../heading/H5";
 
 export type Action = Omit<ButtonProps, "onClick"> & {
     confirmation?: boolean;
@@ -11,6 +13,8 @@ export type Action = Omit<ButtonProps, "onClick"> & {
 };
 
 export interface Props {
+    title?: string;
+    description?: string;
     padding?: string;
 
     disabled?: boolean;
@@ -86,8 +90,9 @@ const Base = styled.div<{ closing?: boolean }>`
 `;
 
 const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
-    max-width: 450px;
     width: 100%;
+    max-width: 450px;
+
     animation-name: ${zoomIn};
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.3, 0.3, 0.18, 1.1);
@@ -106,6 +111,10 @@ const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
 const Content = styled.div<Pick<Props, "transparent" | "padding">>`
     padding: ${(props) => props.padding ?? "1rem"};
     min-height: 130px;
+
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
 
     ${(props) =>
         !props.transparent &&
@@ -129,6 +138,8 @@ export function Modal({
     actions,
     disabled,
     onClose,
+    title,
+    description,
     nonDismissable,
     registerOnClose,
     registerOnConfirm,
@@ -157,7 +168,11 @@ export function Modal({
                 {...props}
                 actions={actions ? actions.length > 0 : false}
                 onClick={(e) => e.stopPropagation()}>
-                <Content {...props}>{children}</Content>
+                <Content {...props}>
+                    {title && <H3>{title}</H3>}
+                    {description && <H5>{description}</H5>}
+                    {children}
+                </Content>
                 {actions && actions.length > 0 && (
                     <Actions>
                         {actions.map((x, index) => (
