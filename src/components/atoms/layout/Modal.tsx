@@ -75,14 +75,17 @@ const Base = styled.div<{ closing?: boolean }>`
 const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
     width: 100%;
     max-width: 450px;
-
+    margin: 20px;
+    max-height: 650px;
     animation-name: ${animationZoomIn};
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.3, 0.3, 0.18, 1.1);
+    //overflow: hidden;
 
     ${(props) =>
         !props.transparent &&
         css`
+            background: var(--secondary-header);
             border-radius: ${props.actions
                 ? "var(--border-radius) var(--border-radius) 0 0"
                 : "var(--border-radius)"};
@@ -91,10 +94,19 @@ const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
         `}
 `;
 
+const Title = styled.div`
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    padding: 1rem;
+`;
+
 const Content = styled.div<Pick<Props, "transparent" | "padding">>`
     padding: ${(props) => props.padding ?? "1rem"};
+    padding-top: 0;
     min-height: 130px;
 
+    overflow: auto;
     gap: 4px;
     display: flex;
     flex-direction: column;
@@ -151,11 +163,11 @@ export function Modal({
                 {...props}
                 actions={actions ? actions.length > 0 : false}
                 onClick={(e) => e.stopPropagation()}>
-                <Content {...props}>
+                <Title>
                     {title && <H3>{title}</H3>}
                     {description && <H5>{description}</H5>}
-                    {children}
-                </Content>
+                </Title>
+                <Content {...props}>{children}</Content>
                 {actions && actions.length > 0 && (
                     <Actions>
                         {actions.map((x, index) => (
