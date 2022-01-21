@@ -44,7 +44,6 @@ html {
 
 ::-webkit-scrollbar {
     width: var(--scrollbar-thickness);
-    height: var(--scrollbar-thickness);
 }
 
 ::-webkit-scrollbar-track {
@@ -52,8 +51,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    min-width: 30px;
-    min-height: 30px;
+    min-height: 40px;
     border-radius: 60px;
     background: var(--scrollbar-thumb);
     border: 3px solid transparent;
