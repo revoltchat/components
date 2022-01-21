@@ -43,6 +43,7 @@ html {
 }
 
 ::-webkit-scrollbar {
+    height: var(--scrollbar-thickness);
     width: var(--scrollbar-thickness);
 }
 
