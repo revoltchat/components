@@ -35,3 +35,29 @@ html {
 * {
     box-sizing: border-box;
 }
+
+* {
+    scrollbar-width: var(--scrollbar-thickness-ff);
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+::-webkit-scrollbar {
+    width: var(--scrollbar-thickness);
+    height: var(--scrollbar-thickness);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    min-width: 30px;
+    min-height: 30px;
+
+    background-clip: content-box;
+    background: var(--scrollbar-thumb);
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
