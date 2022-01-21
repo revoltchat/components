@@ -77,7 +77,7 @@ const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
     margin: 20px;
     max-width: min(calc(100vw - 20px), 450px);
     max-height: min(calc(100vh - 20px), 650px);
-
+    min-height: 200px;
     display: flex;
     flex-direction: column;
 
@@ -106,7 +106,6 @@ const Title = styled.div`
 const Content = styled.div<Pick<Props, "transparent" | "padding">>`
     flex-grow: 1;
     padding-top: 0;
-    min-height: 130px;
     padding: ${(props) => props.padding ?? "1rem"};
 
     overflow-y: auto;
