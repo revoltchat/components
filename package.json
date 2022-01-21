@@ -1,6 +1,6 @@
 {
     "name": "@revoltchat/ui",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Revolt UI component library",
     "main": "dist/index.js",
     "repository": "https://github.com/revoltchat/components",
@@ -33,5 +33,11 @@
         "build": "rimraf dist && tsc",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook"
-    }
+    },
+    "files": [
+        "LICENSE",
+        "package.json",
+        "dist",
+        "src"
+    ]
 }
