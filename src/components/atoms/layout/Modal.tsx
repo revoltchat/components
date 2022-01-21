@@ -86,8 +86,8 @@ const Base = styled.div<{ closing?: boolean }>`
 `;
 
 const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
-    max-width: calc(100vw - 20px);
-
+    max-width: 450px;
+    width: 100%;
     animation-name: ${zoomIn};
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.3, 0.3, 0.18, 1.1);
@@ -105,6 +105,7 @@ const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
 
 const Content = styled.div<Pick<Props, "transparent" | "padding">>`
     padding: ${(props) => props.padding ?? "1rem"};
+    min-height: 130px;
 
     ${(props) =>
         !props.transparent &&

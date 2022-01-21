@@ -37,7 +37,7 @@ const Template: ComponentStory<typeof Details> = (args) => {
         <div style={{ color: "var(--foreground)" }}>
             <Details {...rest}>
                 <summary>
-                    <ChevronDown size={14} /> {summary}
+                    <ChevronDown size={20} /> {summary}
                 </summary>
                 {children}
             </Details>
