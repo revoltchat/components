@@ -1,6 +1,8 @@
-import styled, { css } from "styled-components/macro";
+import styled from "styled-components/macro";
+import { css } from "styled-components";
 
 export interface Props {
+    readonly icon?: boolean;
     readonly compact?: boolean;
     readonly palette?:
         | "primary"
@@ -16,7 +18,6 @@ export const Button = styled.button<Props>`
     z-index: 1;
 
     display: flex;
-    min-width: 96px;
     align-items: center;
     justify-content: center;
 
@@ -35,7 +36,18 @@ export const Button = styled.button<Props>`
     }
 
     ${(props) =>
-        props.compact
+        props.icon
+            ? css`
+                  height: 38px;
+                  width: 38px;
+              `
+            : css`
+                  min-width: 96px;
+              `}
+
+    ${(props) =>
+        !props.icon &&
+        (props.compact
             ? css`
                   height: 32px !important;
                   padding: 2px 12px !important;
@@ -45,7 +57,7 @@ export const Button = styled.button<Props>`
                   height: 38px;
                   padding: 2px 16px;
                   font-size: 0.8125rem;
-              `}
+              `)}
 
     ${(props) => {
         switch (props.palette) {
