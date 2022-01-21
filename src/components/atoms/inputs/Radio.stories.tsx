@@ -12,6 +12,11 @@ export default {
             type: "string",
             defaultValue: "Sample Radio Input",
         },
+        title: {
+            name: "Title",
+            type: "string",
+            defaultValue: "Sample Radio Input",
+        },
         description: {
             name: "Description",
             type: "string",
