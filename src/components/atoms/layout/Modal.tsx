@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useState } from "react";
@@ -6,6 +6,12 @@ import { useCallback, useEffect, useState } from "react";
 import { Button, Props as ButtonProps } from "../inputs/Button";
 import { H3 } from "../heading/H3";
 import { H5 } from "../heading/H5";
+import {
+    animationFadeIn,
+    animationFadeOut,
+    animationZoomIn,
+    animationZoomOut,
+} from "../../lib/animations";
 
 export type Action = Omit<ButtonProps, "onClick"> & {
     confirmation?: boolean;
@@ -29,29 +35,6 @@ export interface Props {
 
     children?: React.ReactChild;
 }
-
-const open = keyframes`
-    0% {opacity: 0;}
-    70% {opacity: 0;}
-    100% {opacity: 1;}
-`;
-
-const close = keyframes`
-    0% {opacity: 1;}
-    70% {opacity: 0;}
-    100% {opacity: 0;}
-`;
-
-const zoomIn = keyframes`
-    0% {transform: scale(0.5);}
-    98% {transform: scale(1.01);}
-    100% {transform: scale(1);}
-`;
-
-const zoomOut = keyframes`
-    0% {transform: scale(1);}
-    100% {transform: scale(0.5);}
-`;
 
 const Base = styled.div<{ closing?: boolean }>`
     top: 0;
@@ -78,14 +61,14 @@ const Base = styled.div<{ closing?: boolean }>`
     ${(props) =>
         props.closing
             ? css`
-                  animation-name: ${close};
+                  animation-name: ${animationFadeOut};
 
                   > div {
-                      animation-name: ${zoomOut};
+                      animation-name: ${animationZoomOut};
                   }
               `
             : css`
-                  animation-name: ${open};
+                  animation-name: ${animationFadeIn};
               `}
 `;
 
@@ -93,7 +76,7 @@ const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
     width: 100%;
     max-width: 450px;
 
-    animation-name: ${zoomIn};
+    animation-name: ${animationZoomIn};
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.3, 0.3, 0.18, 1.1);
 

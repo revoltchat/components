@@ -1,2 +1,4 @@
 ._stories.default
 node_modules
+storybook-static
+.vercel
