@@ -37,7 +37,7 @@ export default {
             name: "Actions",
             defaultValue: [
                 {
-                    children: "Ok",
+                    children: "OK",
                     palette: "accent",
                     confirmation: true,
                 },

@@ -9,8 +9,9 @@
     --titlebar-action-padding: 8px;
     --titlebar-logo-color: var(--secondary-foreground);
     --app-height: 100vh;
-    --scrollbar-thickness: 3px;
+    --scrollbar-thickness: 10px;
     --scrollbar-thickness-ff: thin;
+    --scrollbar-radius: var(--border-radius-half);
     --border-radius: 6px;
     --border-radius-half: 50%;
     --border-radius-user-icon: var(--border-radius-half);
@@ -53,9 +54,10 @@ html {
 ::-webkit-scrollbar-thumb {
     min-width: 30px;
     min-height: 30px;
-
-    background-clip: content-box;
+    border-radius: 60px;
     background: var(--scrollbar-thumb);
+    border: 3px solid transparent;
+    background-clip: content-box;
 }
 
 ::-webkit-scrollbar-corner {
