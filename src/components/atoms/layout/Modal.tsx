@@ -95,7 +95,7 @@ const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
 `;
 
 const Title = styled.div`
-    padding: 1rem;
+    padding: 1rem 1rem 0 1rem;
     flex-shrink: 0;
 
     gap: 8px;
