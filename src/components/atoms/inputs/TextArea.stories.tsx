@@ -1,8 +1,9 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { ChangeEvent } from "react";
+import { Markdown } from "@styled-icons/boxicons-logos";
 
-import { TextArea } from "./TextArea";
+import { TextArea, MarkdownTip } from "./TextArea";
 
 export default {
     title: "Design System/Atoms/Inputs/Text Area",
@@ -43,12 +44,27 @@ const Template: ComponentStory<typeof TextArea> = (args) => {
     const [_, updateArgs] = useArgs();
 
     return (
-        <TextArea
-            {...args}
-            onChange={(el: ChangeEvent<HTMLInputElement>) =>
-                updateArgs({ value: el.currentTarget.value })
-            }
-        />
+        <>
+            <TextArea
+                {...args}
+                onChange={(el: ChangeEvent<HTMLInputElement>) =>
+                    updateArgs({ value: el.currentTarget.value })
+                }
+            />
+            <MarkdownTip>
+                <Markdown size="24" />
+                <h5>
+                    Descriptions support Markdown formatting,{" "}
+                    <a
+                        href="https://developers.revolt.chat/markdown"
+                        target="_blank"
+                        rel="noreferrer">
+                        learn more here
+                    </a>
+                    .
+                </h5>
+            </MarkdownTip>
+        </>
     );
 };
 

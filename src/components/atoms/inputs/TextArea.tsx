@@ -54,3 +54,22 @@ export const TextArea = styled.textarea<TextAreaProps>`
 
     font-variant-ligatures: var(--ligatures);
 `;
+
+export const MarkdownTip = styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    gap: 4px;
+
+    svg {
+        flex-shrink: 0;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    h5 {
+        margin: 0;
+    }
+`;

@@ -11,7 +11,7 @@ export const TipBase = styled.div<Omit<Props, "children">>`
     padding: 12px;
     overflow: hidden;
     align-items: center;
-
+    gap: 10px;
     font-size: 14px;
     background: var(--primary-header);
     border-radius: var(--border-radius);
@@ -25,7 +25,6 @@ export const TipBase = styled.div<Omit<Props, "children">>`
 
     svg {
         flex-shrink: 0;
-        margin-inline-end: 10px;
     }
 
     ${(props) =>

@@ -7,6 +7,7 @@
     "author": "Paul Makles <insrt.uk>",
     "license": "AGPLv3",
     "dependencies": {
+        "@styled-icons/boxicons-logos": "^10.38.0",
         "@styled-icons/boxicons-regular": "^10.38.0",
         "@styled-icons/boxicons-solid": "^10.38.0"
     },
