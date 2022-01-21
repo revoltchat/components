@@ -21,7 +21,7 @@ export interface Props {
     onClose?: () => void;
 
     registerOnClose?: (fn: () => void) => () => void;
-    registerOnConfirm?: (fn: (close: () => void) => void) => () => void;
+    registerOnConfirm?: (fn: () => void, close: () => void) => () => void;
 
     children?: React.ReactChild;
 }
@@ -141,12 +141,14 @@ export function Modal({
     }, [setClosing, props]);
 
     const confirm = useCallback(() => {
-        setClosing(true);
-        setTimeout(() => onClose?.(), 2e2);
-    }, [closeModal]);
+        actions?.find((x) => x.confirmation)?.onClick?.();
+    }, [actions]);
 
     useEffect(() => registerOnClose?.(closeModal), [closeModal]);
-    useEffect(() => registerOnConfirm?.(confirm), [confirm]);
+    useEffect(
+        () => registerOnConfirm?.(confirm, closeModal),
+        [closeModal, confirm],
+    );
 
     return createPortal(
         <Base closing={closing} onClick={() => !nonDismissable && closeModal()}>

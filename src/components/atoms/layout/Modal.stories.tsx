@@ -27,7 +27,8 @@ export default {
             defaultValue: [
                 {
                     children: "Ok",
-                    palette: "secondary",
+                    palette: "accent",
+                    confirmation: true,
                 },
                 {
                     children: "Cancel",
@@ -56,7 +57,31 @@ export default {
 const Template: ComponentStory<typeof Modal> = (args) => {
     const [_, updateArgs] = useArgs();
     if (!(args as any).open) return <></>;
-    return <Modal {...args} onClose={() => updateArgs({ open: false })} />;
+    return (
+        <Modal
+            {...args}
+            onClose={() => updateArgs({ open: false })}
+            registerOnClose={(close) => {
+                const onKeyUp = (e: KeyboardEvent) =>
+                    e.key === "Escape" && close();
+
+                document.addEventListener("keyup", onKeyUp);
+                return () => document.removeEventListener("keyup", onKeyUp);
+            }}
+            registerOnConfirm={(confirm, close) => {
+                const onKeyUp = (e: KeyboardEvent) => {
+                    if (e.key === "Enter") {
+                        confirm();
+                        updateArgs({ disabled: true });
+                        setTimeout(close, 1000);
+                    }
+                };
+
+                document.addEventListener("keyup", onKeyUp);
+                return () => document.removeEventListener("keyup", onKeyUp);
+            }}
+        />
+    );
 };
 
 // const Template: ComponentStory<typeof Modal> = (args) => <Modal {...args} />;
