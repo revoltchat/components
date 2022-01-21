@@ -74,39 +74,43 @@ const Base = styled.div<{ closing?: boolean }>`
 
 const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
     width: 100%;
-    max-width: 450px;
     margin: 20px;
-    max-height: 650px;
+    max-width: min(calc(100vw - 20px), 450px);
+    max-height: min(calc(100vh - 20px), 650px);
+
+    display: flex;
+    flex-direction: column;
+
     animation-name: ${animationZoomIn};
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.3, 0.3, 0.18, 1.1);
-    //overflow: hidden;
 
     ${(props) =>
         !props.transparent &&
         css`
-            background: var(--secondary-header);
-            border-radius: ${props.actions
-                ? "var(--border-radius) var(--border-radius) 0 0"
-                : "var(--border-radius)"};
-
             overflow: hidden;
+            background: var(--secondary-header);
+            border-radius: var(--border-radius);
         `}
 `;
 
 const Title = styled.div`
-    display: flex;
-    gap: 8px;
-    flex-direction: column;
     padding: 1rem;
+    flex-shrink: 0;
+
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const Content = styled.div<Pick<Props, "transparent" | "padding">>`
-    padding: ${(props) => props.padding ?? "1rem"};
+    flex-grow: 1;
     padding-top: 0;
     min-height: 130px;
+    padding: ${(props) => props.padding ?? "1rem"};
 
-    overflow: auto;
+    overflow-y: auto;
+
     gap: 4px;
     display: flex;
     flex-direction: column;
@@ -119,6 +123,8 @@ const Content = styled.div<Pick<Props, "transparent" | "padding">>`
 `;
 
 const Actions = styled.div`
+    flex-shrink: 0;
+
     gap: 8px;
     display: flex;
     padding: 1rem;
@@ -163,10 +169,12 @@ export function Modal({
                 {...props}
                 actions={actions ? actions.length > 0 : false}
                 onClick={(e) => e.stopPropagation()}>
-                <Title>
-                    {title && <H3>{title}</H3>}
-                    {description && <H5>{description}</H5>}
-                </Title>
+                {(title || description) && (
+                    <Title>
+                        {title && <H3>{title}</H3>}
+                        {description && <H5>{description}</H5>}
+                    </Title>
+                )}
                 <Content {...props}>{children}</Content>
                 {actions && actions.length > 0 && (
                     <Actions>
