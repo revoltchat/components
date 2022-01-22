@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { Circle } from "@styled-icons/boxicons-solid";
 
 interface Props {
     children: React.ReactNode;
@@ -23,36 +24,8 @@ const Base = styled.label<BaseProps>`
     display: flex;
     cursor: pointer;
     user-select: none;
-    transition: 0.2s ease all;
+    transition: 0.1s ease all;
     border-radius: var(--border-radius);
-
-    .info {
-        display: flex;
-        word-break: break-word;
-        gap: 2px;
-        flex-direction: column;
-    }
-
-    .circle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        border: 2px solid var(--tertiary-foreground);
-        border-radius: var(--border-radius-half);
-        height: 20px;
-        width: 20px;
-
-        .innerCircle {
-            border-radius: inherit;
-            flex-shrink: 0;
-            background: var(--accent);
-            height: 10px;
-            width: 10px;
-
-            visibility: hidden;
-        }
-    }
 
     input {
         display: none;
@@ -66,12 +39,13 @@ const Base = styled.label<BaseProps>`
             background: var(--accent);
             border: 2px solid var(--accent);
 
-            .circle {
-                border: 2px solid var(--accent-contrast);
-                background: var(--accent-contrast);
+            div {
+                border-color: var(--accent-contrast);
 
-                .innerCircle {
+                svg {
+                    color: var(--accent-contrast);
                     visibility: visible;
+                    opacity: 1;
                 }
             }
         `}
@@ -82,18 +56,48 @@ const Base = styled.label<BaseProps>`
             &:hover {
                 background: var(--hover);
 
-                .innerCircle {
+                svg {
                     visibility: visible;
-                    background: var(--tertiary-foreground);
+                    opacity: 1;
+                    color: var(--tertiary-foreground);
                 }
             }
         `}
+`;
+
+const RadioCircle = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--tertiary-foreground);
+    border-radius: var(--border-radius-half);
+    height: 20px;
+    width: 20px;
+    transition: 0.1s ease-in-out all;
+
+    svg {
+        transition: inherit;
+        color: var(--accent);
+        flex-shrink: 0;
+        visibility: hidden;
+        opacity: 0;
+    }
+`;
+
+const Content = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    word-break: break-word;
+    transition: 0.1s ease-in-out all;
 `;
 
 const Title = styled.div<BaseProps>`
     font-size: 0.9375rem;
     font-weight: 600;
     color: var(--foreground);
+    transition: inherit;
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -109,8 +113,9 @@ const Title = styled.div<BaseProps>`
 
 const Description = styled.div<BaseProps>`
     font-size: 0.75rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--secondary-foreground);
+    transition: inherit;
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -135,9 +140,9 @@ export function Radio({
     const selected = value ?? false;
     return (
         <Base selected={selected}>
-            <div className="circle">
-                <div className="innerCircle" />
-            </div>
+            <RadioCircle>
+                <Circle size={12} />
+            </RadioCircle>
             <input
                 type="radio"
                 checked={selected}
@@ -145,12 +150,12 @@ export function Radio({
                     e.currentTarget.value === "on" && !disabled && onSelect?.()
                 }
             />
-            <div className="info">
+            <Content>
                 {title && <Title selected={selected}>{title}</Title>}
                 {description && (
                     <Description selected={selected}>{description}</Description>
                 )}
-            </div>
+            </Content>
         </Base>
     );
 }
