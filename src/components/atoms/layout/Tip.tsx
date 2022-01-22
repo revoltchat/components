@@ -13,7 +13,7 @@ export const TipBase = styled.div<Omit<Props, "children">>`
     overflow: hidden;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: 0.875rem;
     background: var(--primary-header);
     border-radius: var(--border-radius);
 

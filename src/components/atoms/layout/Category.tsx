@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Category = styled.div`
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--foreground);
     text-transform: uppercase;

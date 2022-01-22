@@ -32,7 +32,7 @@ const Base = styled.div<BaseProps>`
         flex-grow: 1;
         flex-direction: column;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 0.875rem;
 
         .title {
             display: -webkit-box;
@@ -45,10 +45,10 @@ const Base = styled.div<BaseProps>`
             ${(props) =>
                 props.largeDescription
                     ? css`
-                          font-size: 14px;
+                          font-size: 0.875rem;
                       `
                     : css`
-                          font-size: 11px;
+                          font-size: 0.6875rem;
                       `}
 
             font-weight: 400;
@@ -85,7 +85,7 @@ const Base = styled.div<BaseProps>`
             }*/
 
             .action {
-                font-size: 14px;
+                font-size: 0.875rem;
             }
         `}
     
@@ -100,13 +100,12 @@ const Base = styled.div<BaseProps>`
                 white-space: nowrap;
                 .title {
                     text-transform: uppercase;
-                    font-size: 12px;
+                    font-size: 0.75rem;
                     color: var(--secondary-foreground);
                 }
 
                 .description {
-                    font-size: 15px;
-
+                    font-size: 0.9375rem;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     overflow: hidden;

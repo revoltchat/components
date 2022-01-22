@@ -40,7 +40,7 @@ export const Details = styled.details<Props>`
         align-items: center;
         transition: 0.2s opacity;
 
-        font-size: 12px;
+        font-size: 0.75rem;
         font-weight: 600;
         text-transform: uppercase;
 

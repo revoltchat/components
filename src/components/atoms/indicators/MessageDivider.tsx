@@ -32,7 +32,7 @@ const Base = styled.div<{ unread?: boolean }>`
 `;
 
 const Unread = styled.div`
-    font-size: 10px;
+    font-size: 0.625rem;
     font-weight: 600;
     background: var(--accent);
     color: var(--accent-contrast);

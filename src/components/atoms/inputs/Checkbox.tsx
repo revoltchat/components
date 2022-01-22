@@ -9,13 +9,10 @@ const Base = styled.label`
     margin-top: 20px;
     align-items: center;
     border-radius: var(--border-radius);
-
     cursor: pointer;
     user-select: none;
-
-    font-size: 18px;
+    font-size: 1.125rem;
     color: var(--foreground);
-
     transition: 0.2s ease all;
 
     input {
@@ -41,7 +38,7 @@ const Base = styled.label`
 const Content = styled.span`
     display: flex;
     flex-grow: 1;
-    font-size: 14px;
+    font-size: 0.875rem;
     gap: 2px;
     font-weight: 600;
     flex-direction: column;

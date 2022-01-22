@@ -42,7 +42,7 @@ export const Button = styled.button<Props>`
             : props.compact
             ? css`
                   min-width: 96px;
-                  font-size: 13px;
+                  font-size: 0.8125rem;
                   height: 32px !important;
                   padding: 2px 12px !important;
               `
