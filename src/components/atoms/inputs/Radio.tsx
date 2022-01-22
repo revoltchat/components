@@ -25,7 +25,6 @@ const Base = styled.label<BaseProps>`
     user-select: none;
     transition: 0.2s ease all;
     border-radius: var(--border-radius);
-    color: var(--secondary-foreground);
 
     .info {
         display: flex;
@@ -55,14 +54,14 @@ const Base = styled.label<BaseProps>`
         }
     }
 
-    > input {
+    input {
         display: none;
     }
 
     ${(props) =>
         props.selected &&
         css`
-            color: white;
+            color: var(--accent-contrast);
             cursor: default;
             background: var(--accent);
             border: 2px solid var(--accent);
@@ -104,7 +103,7 @@ const Title = styled.div<BaseProps>`
     ${(props) =>
         props.selected &&
         css`
-            color: white;
+            color: var(--accent-contrast);
         `}
 `;
 
@@ -121,7 +120,7 @@ const Description = styled.div<BaseProps>`
     ${(props) =>
         props.selected &&
         css`
-            color: white;
+            color: var(--accent-contrast);
         `}
 `;
 
