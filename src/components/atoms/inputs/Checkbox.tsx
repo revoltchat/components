@@ -76,9 +76,7 @@ const Checkmark = styled.div<Pick<Props, "value">>`
     transition: 0.1s ease-in-out all;
 
     .check {
-        /*transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out,
-            color 0.1s ease-in-out;*/
-        transition: 0.1s ease-in-out all;
+        transition: inherit;
         color: var(--tertiary-foreground);
         visibility: hidden;
         opacity: 0;
