@@ -16,6 +16,7 @@ export const LineDivider = styled.div`
 export const Turbo = styled.div`
     display: flex;
     align-items: center;
+    gap: 2px;
     text-transform: uppercase;
     font-weight: 800;
     font-style: italic;
