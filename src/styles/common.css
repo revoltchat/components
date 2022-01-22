@@ -62,3 +62,7 @@ html {
 ::-webkit-scrollbar-corner {
     background: transparent;
 }
+
+hr {
+    all: unset;
+}
