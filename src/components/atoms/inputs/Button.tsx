@@ -1,8 +1,7 @@
 import styled, { css } from "styled-components";
 
 export interface Props {
-    readonly icon?: boolean;
-    readonly compact?: boolean;
+    readonly compact?: boolean | "icon";
     readonly palette?:
         | "primary"
         | "secondary"
@@ -35,28 +34,24 @@ export const Button = styled.button<Props>`
     }
 
     ${(props) =>
-        props.icon
+        props.compact === "icon"
             ? css`
                   height: 38px;
                   width: 38px;
               `
-            : css`
-                  min-width: 96px;
-              `}
-
-    ${(props) =>
-        !props.icon &&
-        (props.compact
+            : props.compact
             ? css`
+                  min-width: 96px;
+                  font-size: 13px;
                   height: 32px !important;
                   padding: 2px 12px !important;
-                  font-size: 13px;
               `
             : css`
                   height: 38px;
+                  min-width: 96px;
                   padding: 2px 16px;
                   font-size: 0.8125rem;
-              `)}
+              `}
 
     ${(props) => {
         switch (props.palette) {
