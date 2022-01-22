@@ -35,6 +35,10 @@ const Content = styled.div`
 `;
 
 const Title = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     font-size: 0.9375rem;
     font-weight: 600;
     color: var(--foreground);
