@@ -77,7 +77,6 @@ const Base = styled.div<{ closing?: boolean }>`
 const Container = styled.div<
     Pick<Props, "transparent" | "maxWidth"> & { actions: boolean }
 >`
-    width: 100%;
     min-height: 200px;
     max-width: min(calc(100vw - 20px), ${(props) => props.maxWidth ?? "450px"});
     max-height: min(calc(100vh - 20px), 650px);
@@ -89,6 +88,12 @@ const Container = styled.div<
     animation-name: ${animationZoomIn};
     animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.3, 0.3, 0.18, 1.1);
+
+    ${(props) =>
+        !props.maxWidth &&
+        css`
+            width: 100%;
+        `}
 
     ${(props) =>
         !props.transparent &&
@@ -115,6 +120,7 @@ const Content = styled.div<Pick<Props, "transparent" | "padding">>`
 
     overflow-y: auto;
     font-size: 0.9375rem;
+
     gap: 4px;
     display: flex;
     flex-direction: column;
