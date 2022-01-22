@@ -25,7 +25,7 @@ export const Turbo = styled.div`
     background: var(--accent);
     padding: 1px 5px;
     border-start-start-radius: 0 !important;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     position: relative;
 
     &::before {
