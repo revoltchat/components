@@ -29,7 +29,7 @@ export const TipBase = styled.div<Omit<Props, "children">>`
     }
 
     ${(props) =>
-        props.palette !== "primary"
+        !props.palette || props.palette !== "primary"
             ? css`
                   background: var(--${props.palette});
                   color: var(--${props.palette}-contrast);
