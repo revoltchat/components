@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof LineDivider> = (args) => (
     <LineDivider {...args}>
         <Turbo>
             <Bolt size={13} />
-            turbo
+            Turbo
         </Turbo>
     </LineDivider>
 );
