@@ -1,5 +1,6 @@
-import { Bolt } from "@styled-icons/boxicons-solid";
+import React from "react";
 import styled from "styled-components";
+import { Bolt } from "@styled-icons/boxicons-solid";
 
 export const Base = styled.div`
     gap: 2px;
