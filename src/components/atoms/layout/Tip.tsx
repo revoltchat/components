@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 interface Props {
     readonly palette?: "primary" | "success" | "warning" | "error";
-    readonly children: React.ReactChild;
+    readonly children: React.ReactNode;
 }
 
 export const TipBase = styled.div<Omit<Props, "children">>`

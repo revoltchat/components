@@ -99,8 +99,8 @@ export interface Props {
     readonly disabled?: boolean;
     readonly palette?: "primary" | "secondary";
 
-    readonly children: React.ReactChild;
-    readonly description?: React.ReactChild;
+    readonly children: React.ReactNode;
+    readonly description?: React.ReactNode;
 
     readonly value: boolean;
     readonly onChange: (state: boolean) => void;

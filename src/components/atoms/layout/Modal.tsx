@@ -33,7 +33,7 @@ export interface Props {
     registerOnClose?: (fn: () => void) => () => void;
     registerOnConfirm?: (fn: () => void, close: () => void) => () => void;
 
-    children?: React.ReactChild;
+    children?: React.ReactNode;
 }
 
 const Base = styled.div<{ closing?: boolean }>`

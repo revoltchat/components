@@ -12,8 +12,8 @@ export const Base = styled.span`
 `;
 
 export interface Props {
-    error?: React.ReactChild;
-    children?: React.ReactChild;
+    error?: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export function Error({ error, children }: Props) {

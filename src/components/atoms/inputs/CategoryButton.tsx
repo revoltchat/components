@@ -115,12 +115,12 @@ const Base = styled.div<BaseProps>`
 `;
 
 export interface Props extends BaseProps {
-    readonly icon?: React.ReactChild;
-    readonly children?: React.ReactChild;
-    readonly description?: React.ReactChild;
+    readonly icon?: React.ReactNode;
+    readonly children?: React.ReactNode;
+    readonly description?: React.ReactNode;
 
     readonly onClick?: () => void;
-    readonly action?: "chevron" | "external" | React.ReactChild;
+    readonly action?: "chevron" | "external" | React.ReactNode;
 }
 
 export function CategoryButton({

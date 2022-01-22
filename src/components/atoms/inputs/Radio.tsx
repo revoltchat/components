@@ -2,9 +2,9 @@ import { Circle } from "@styled-icons/boxicons-solid";
 import styled, { css } from "styled-components";
 
 interface Props {
-    children: React.ReactChild;
-    title?: React.ReactChild;
-    description?: React.ReactChild;
+    children: React.ReactNode;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
 
     value?: boolean;
     onSelect?: () => void;
