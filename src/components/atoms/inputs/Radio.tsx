@@ -19,7 +19,7 @@ interface BaseProps {
 const Base = styled.label<BaseProps>`
     border: 2px solid var(--secondary-header);
     padding: 10px;
-    gap: 8px;
+    gap: 10px;
     display: flex;
     cursor: pointer;
     user-select: none;
