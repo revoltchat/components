@@ -30,7 +30,7 @@ export interface Props {
     onClose?: () => void;
 
     registerOnClose?: (fn: () => void) => () => void;
-    registerOnConfirm?: (fn: () => void, close: () => void) => () => void;
+    registerOnConfirm?: (fn: () => void) => () => void;
 
     title?: React.ReactNode;
     description?: React.ReactNode;
@@ -157,11 +157,12 @@ export function Modal({
         actions?.find((x) => x.confirmation)?.onClick?.();
     }, [actions]);
 
-    useEffect(() => registerOnClose?.(closeModal), [closeModal]);
-    useEffect(
-        () => registerOnConfirm?.(confirm, closeModal),
-        [closeModal, confirm],
-    );
+    useEffect(() => {
+        if (nonDismissable) return;
+        registerOnClose?.(closeModal);
+    }, [closeModal]);
+
+    useEffect(() => registerOnConfirm?.(confirm), [confirm]);
 
     return createPortal(
         <Base closing={closing} onClick={() => !nonDismissable && closeModal()}>
