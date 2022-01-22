@@ -3,14 +3,11 @@ import styled, { css } from "styled-components";
 import { Circle } from "@styled-icons/boxicons-solid";
 
 interface Props {
-    children: React.ReactNode;
     title?: React.ReactNode;
     description?: React.ReactNode;
-
+    disabled?: boolean;
     value?: boolean;
     onSelect?: () => void;
-
-    disabled?: boolean;
 }
 
 interface BaseProps {
@@ -24,7 +21,7 @@ const Base = styled.label<BaseProps>`
     display: flex;
     cursor: pointer;
     user-select: none;
-    transition: 0.1s ease all;
+    transition: 0.1s ease-in-out all;
     border-radius: var(--border-radius);
 
     input {
@@ -59,7 +56,6 @@ const Base = styled.label<BaseProps>`
                 svg {
                     visibility: visible;
                     opacity: 1;
-                    color: var(--tertiary-foreground);
                 }
             }
         `}
@@ -74,11 +70,11 @@ const RadioCircle = styled.div`
     border-radius: var(--border-radius-half);
     height: 20px;
     width: 20px;
-    transition: 0.1s ease-in-out all;
+    transition: inherit;
 
     svg {
         transition: inherit;
-        color: var(--accent);
+        color: var(--tertiary-foreground);
         flex-shrink: 0;
         visibility: hidden;
         opacity: 0;
@@ -130,7 +126,6 @@ const Description = styled.div<BaseProps>`
 `;
 
 export function Radio({
-    children,
     title,
     description,
     value,

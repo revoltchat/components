@@ -7,11 +7,6 @@ export default {
     title: "Design System/Atoms/Inputs/Radio",
     component: Radio,
     argTypes: {
-        children: {
-            name: "Content",
-            type: "string",
-            defaultValue: "Sample Radio Input",
-        },
         title: {
             name: "Title",
             type: "string",
@@ -23,8 +18,8 @@ export default {
             defaultValue:
                 "This is a sample radio input for demonstration purposes.",
         },
-        value: { name: "Checked", type: "boolean", defaultValue: false },
         disabled: { name: "Disabled", type: "boolean", defaultValue: false },
+        value: { name: "Checked", type: "boolean", defaultValue: false },
     },
 } as ComponentMeta<typeof Radio>;
 
