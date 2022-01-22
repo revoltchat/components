@@ -24,11 +24,12 @@ const Base = styled.label<BaseProps>`
     cursor: pointer;
     user-select: none;
     transition: 0.2s ease all;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     color: var(--secondary-foreground);
 
     .info {
         display: flex;
+        word-break: break-word;
         gap: 2px;
         flex-direction: column;
     }
@@ -95,6 +96,11 @@ const Title = styled.div<BaseProps>`
     font-weight: 600;
     color: var(--secondary-foreground);
 
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+
     ${(props) =>
         props.selected &&
         css`
@@ -106,6 +112,11 @@ const Description = styled.div<BaseProps>`
     font-size: 12px;
     font-weight: 400;
     color: var(--secondary-foreground);
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 
     ${(props) =>
         props.selected &&
