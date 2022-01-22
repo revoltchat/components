@@ -25,6 +25,7 @@ export default {
             ],
             defaultValue: "primary",
         },
+        icon: { name: "Icon", type: "boolean", defaultValue: false },
         compact: { name: "Compact", type: "boolean", defaultValue: false },
         disabled: { name: "Disabled", type: "boolean", defaultValue: false },
     },

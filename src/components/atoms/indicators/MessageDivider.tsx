@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components/macro";
+import styled from "styled-components/macro";
+import { css } from "styled-components";
 
 const Base = styled.div<{ unread?: boolean }>`
     user-select: none;

@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components/macro";
+import styled from "styled-components/macro";
+import { css } from "styled-components";
 
 export interface Props {
     rotate?: string;
