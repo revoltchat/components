@@ -66,8 +66,8 @@ const Checkmark = styled.div<Pick<Props, "value">>`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     border: 2px solid var(--tertiary-foreground);
     border-radius: var(--border-radius);
     background: var(--secondary-background);
