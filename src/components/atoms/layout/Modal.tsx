@@ -13,10 +13,11 @@ import {
     animationZoomOut,
 } from "../../lib/animations";
 
-export type Action = Omit<ButtonProps, "onClick"> & {
-    confirmation?: boolean;
-    onClick: () => void;
-};
+export type Action = Omit<React.HTMLAttributes<HTMLButtonElement>, "as"> &
+    Omit<ButtonProps, "onClick"> & {
+        confirmation?: boolean;
+        onClick: () => void;
+    };
 
 export interface Props {
     padding?: string;
