@@ -9,15 +9,15 @@ const Base = styled.label`
     align-items: center;
     cursor: pointer;
     user-select: none;
-    transition: 0.2s ease all;
 
     input {
         display: none;
     }
 
     &:hover {
-        div .check {
+        .check {
             visibility: visible;
+            opacity: 1;
         }
     }
 
@@ -25,6 +25,8 @@ const Base = styled.label`
         opacity: 0.8;
         cursor: not-allowed;
     }
+
+    //TODO: When value is checked, allow me to add .hover { .checkmark { border-color:  var(--tertiary-foreground);} }
 `;
 
 const Content = styled.div`
@@ -71,21 +73,26 @@ const Checkmark = styled.div<Pick<Props, "value">>`
     background: var(--secondary-background);
     flex-shrink: 0;
     margin: 4px;
-    transition: 0.2s ease all;
+    transition: 0.1s ease-in-out all;
 
     .check {
+        /*transition: visibility 0.1s ease-in-out, opacity 0.1s ease-in-out,
+            color 0.1s ease-in-out;*/
+        transition: 0.1s ease-in-out all;
         color: var(--tertiary-foreground);
         visibility: hidden;
+        opacity: 0;
     }
 
     ${(props) =>
         props.value &&
         css`
-            border: 2px solid var(--accent);
+            border-color: var(--accent);
             background: var(--accent);
 
             .check {
                 visibility: visible;
+                opacity: 1;
                 color: var(--accent-contrast);
             }
         `}
@@ -120,7 +127,7 @@ export function Checkbox({
                 checked={value}
                 onChange={() => !disabled && onChange(!value)}
             />
-            <Checkmark value={value}>
+            <Checkmark value={value} className="checkmark">
                 <Check size={20} className="check" />
             </Checkmark>
         </Base>
