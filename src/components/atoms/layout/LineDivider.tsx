@@ -35,6 +35,7 @@ export const Turbo = styled.div`
         width: 2px;
         height: 4px;
         //background: blue;
+        //TODO: clean this up into a single line if possible?
         border: 8px solid var(--accent);
         border-right: 5px solid transparent;
         border-left: 5px solid transparent;
