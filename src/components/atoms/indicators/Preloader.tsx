@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components/macro";
+import styled, { keyframes } from "styled-components";
 
 const skSpinner = keyframes`
     0%, 80%, 100% { 

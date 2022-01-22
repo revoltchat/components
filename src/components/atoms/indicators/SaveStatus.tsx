@@ -1,6 +1,6 @@
 import { Check, CloudUpload } from "@styled-icons/boxicons-regular";
 import { Pencil } from "@styled-icons/boxicons-solid";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 
 const Base = styled.div`
     gap: 4px;

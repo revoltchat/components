@@ -1,6 +1,5 @@
 import { InfoCircle } from "@styled-icons/boxicons-regular";
-import styled from "styled-components/macro";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 
 interface Props {
     readonly palette?: "primary" | "success" | "warning" | "error";

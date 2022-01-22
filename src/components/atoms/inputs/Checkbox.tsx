@@ -1,6 +1,5 @@
 import { Check } from "@styled-icons/boxicons-regular";
-import styled from "styled-components/macro";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
 
 const Base = styled.label`
     gap: 4px;
