@@ -17,7 +17,7 @@ interface BaseProps {
 }
 
 const Base = styled.label<BaseProps>`
-    border: 1px solid grey;
+    border: 2px solid var(--secondary-header);
     padding: 10px;
     gap: 8px;
     display: flex;
@@ -39,7 +39,7 @@ const Base = styled.label<BaseProps>`
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        border: 1px solid grey;
+        border: 2px solid var(--secondary-header);
         border-radius: var(--border-radius-half);
         height: 20px;
         width: 20px;
@@ -65,10 +65,10 @@ const Base = styled.label<BaseProps>`
             color: white;
             cursor: default;
             background: var(--accent);
-            border: 1px solid var(--accent);
+            border: 2px solid var(--accent);
 
             .circle {
-                border: 1px solid white;
+                border: 2px solid white;
                 background: white;
 
                 .innerCircle {
@@ -85,7 +85,7 @@ const Base = styled.label<BaseProps>`
 
                 .innerCircle {
                     visibility: visible;
-                    background: grey;
+                    background: var(--secondary-header);
                 }
             }
         `}
