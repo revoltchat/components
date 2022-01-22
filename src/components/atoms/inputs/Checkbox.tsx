@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 import { Check } from "@styled-icons/boxicons-regular";
+import { VolumeFull } from "@styled-icons/boxicons-solid";
 
 const Base = styled.label`
     gap: 10px;
@@ -36,19 +37,40 @@ const Content = styled.div`
     gap: 3px;
 `;
 
-const Title = styled.div`
+const TitleContent = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    color: var(--foreground);
+`;
 
+const Title = styled.div`
     font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--foreground);
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+`;
+
+const TitleAction = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+
+    border-radius: var(--border-radius);
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &:active {
+        background-color: rgba(255, 255, 255, 0.15);
+    }
 `;
 
 const Description = styled.div`
@@ -117,7 +139,14 @@ export function Checkbox({
     return (
         <Base {...props}>
             <Content>
-                {title && <Title>{title}</Title>}
+                {title && (
+                    <TitleContent>
+                        <Title>{title}</Title>
+                        <TitleAction>
+                            <VolumeFull size={16} />
+                        </TitleAction>
+                    </TitleContent>
+                )}
                 {description && <Description>{description}</Description>}
             </Content>
             <input
