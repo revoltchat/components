@@ -60,24 +60,6 @@ export const Button = styled.button<Props>`
 
     ${(props) => {
         switch (props.palette) {
-            case "primary":
-                return css`
-                    font-weight: 500;
-                    color: var(--foreground);
-                    background: var(--primary-background);
-
-                    &:hover {
-                        background: var(--secondary-header);
-                    }
-
-                    &:disabled {
-                        background: var(--primary-background);
-                    }
-
-                    &:active {
-                        background: var(--secondary-background);
-                    }
-                `;
             case "secondary":
                 return css`
                     font-weight: 500;
@@ -132,6 +114,25 @@ export const Button = styled.button<Props>`
 
                     &:disabled {
                         filter: brightness(0.7);
+                    }
+                `;
+            default:
+            case "primary":
+                return css`
+                    font-weight: 500;
+                    color: var(--foreground);
+                    background: var(--primary-background);
+
+                    &:hover {
+                        background: var(--secondary-header);
+                    }
+
+                    &:disabled {
+                        background: var(--primary-background);
+                    }
+
+                    &:active {
+                        background: var(--secondary-background);
                     }
                 `;
         }

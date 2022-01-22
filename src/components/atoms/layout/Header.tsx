@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export interface Props {
-    readonly palette?: "primary" | "secondary";
+    readonly palette: "primary" | "secondary";
 
     readonly topBorder?: boolean;
     readonly bottomBorder?: boolean;

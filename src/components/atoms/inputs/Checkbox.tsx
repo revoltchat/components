@@ -78,19 +78,19 @@ const Checkmark = styled.div<Pick<Props, "value" | "palette">>`
                       // this should really be --accent-contrast.
                   }
               `
-            : props.palette === "primary"
+            : props.palette === "secondary"
             ? css`
-                  background: var(--secondary-background);
-
-                  svg {
-                      color: var(--secondary-background);
-                  }
-              `
-            : css`
                   background: var(--primary-background);
 
                   svg {
                       color: var(--primary-background);
+                  }
+              `
+            : css`
+                  background: var(--secondary-background);
+
+                  svg {
+                      color: var(--secondary-background);
                   }
               `}
 `;
