@@ -7,8 +7,8 @@ export default {
     title: "Design System/Atoms/Inputs/Checkbox",
     component: Checkbox,
     argTypes: {
-        children: {
-            name: "Content",
+        title: {
+            name: "Title",
             type: "string",
             defaultValue: "Sample Checkbox",
         },
@@ -17,12 +17,6 @@ export default {
             type: "string",
             defaultValue:
                 "This is a sample checkbox for demonstration purposes.",
-        },
-        palette: {
-            name: "Palette",
-            control: "radio",
-            options: ["primary", "secondary"],
-            defaultValue: "primary",
         },
         value: { name: "Checked", type: "boolean", defaultValue: false },
         disabled: { name: "Disabled", type: "boolean", defaultValue: false },

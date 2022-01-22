@@ -3,16 +3,12 @@ import styled, { css } from "styled-components";
 import { Check } from "@styled-icons/boxicons-regular";
 
 const Base = styled.label`
-    gap: 4px;
-    z-index: 1;
+    gap: 10px;
     display: flex;
     margin-top: 20px;
     align-items: center;
-    border-radius: var(--border-radius);
     cursor: pointer;
     user-select: none;
-    font-size: 1.125rem;
-    color: var(--foreground);
     transition: 0.2s ease all;
 
     input {
@@ -20,84 +16,70 @@ const Base = styled.label`
     }
 
     &:hover {
-        .check {
-            background: var(--background);
+        div .check {
+            visibility: visible;
         }
     }
 
     &[disabled] {
         opacity: 0.5;
         cursor: not-allowed;
-
-        &:hover {
-            background: unset;
-        }
     }
 `;
 
-const Content = styled.span`
+const Content = styled.div`
     display: flex;
-    flex-grow: 1;
-    font-size: 0.875rem;
-    gap: 2px;
-    font-weight: 600;
     flex-direction: column;
+    flex-grow: 1;
+    gap: 2px;
 `;
 
-const Description = styled.span`
+const Title = styled.div`
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--foreground);
+`;
+
+const Description = styled.div`
     font-size: 0.75rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--secondary-foreground);
 `;
 
-const Checkmark = styled.div<Pick<Props, "value" | "palette">>`
-    width: 24px;
-    height: 24px;
-
+const Checkmark = styled.div<Pick<Props, "value">>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--secondary-header);
     flex-shrink: 0;
-
     margin: 4px;
-    display: grid;
-    place-items: center;
-
     transition: 0.2s ease all;
     border-radius: var(--border-radius);
 
+    .check {
+        color: var(--secondary-header);
+        visibility: hidden;
+    }
+
     ${(props) =>
-        props.value
-            ? css`
-                  background: var(--accent) !important;
-                  // the background further up should be made less
-                  // important or moved so !important is no longer
-                  // necessary here.
+        props.value &&
+        css`
+            border: 2px solid var(--accent);
+            background: var(--accent);
 
-                  svg {
-                      color: var(--foreground);
-                      // this should really be --accent-contrast.
-                  }
-              `
-            : props.palette === "secondary"
-            ? css`
-                  background: var(--primary-background);
-
-                  svg {
-                      color: var(--primary-background);
-                  }
-              `
-            : css`
-                  background: var(--secondary-background);
-
-                  svg {
-                      color: var(--secondary-background);
-                  }
-              `}
+            .check {
+                visibility: visible;
+                color: var(--accent-contrast);
+            }
+        `}
 `;
 
 export type Props = {
     readonly disabled?: boolean;
-    readonly palette?: "primary" | "secondary";
 
-    readonly children: React.ReactNode;
+    readonly title?: React.ReactNode;
     readonly description?: React.ReactNode;
 
     readonly value: boolean;
@@ -106,8 +88,7 @@ export type Props = {
 
 export function Checkbox({
     disabled,
-    palette,
-    children,
+    title,
     description,
     value,
     onChange,
@@ -116,7 +97,7 @@ export function Checkbox({
     return (
         <Base {...props}>
             <Content>
-                <span>{children}</span>
+                {title && <Title>{title}</Title>}
                 {description && <Description>{description}</Description>}
             </Content>
             <input
@@ -124,8 +105,8 @@ export function Checkbox({
                 checked={value}
                 onChange={() => !disabled && onChange(!value)}
             />
-            <Checkmark value={value} palette={palette} className="check">
-                <Check size={20} />
+            <Checkmark value={value}>
+                <Check size={20} className="check" />
             </Checkmark>
         </Base>
     );
