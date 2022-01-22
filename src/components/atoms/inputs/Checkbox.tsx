@@ -62,7 +62,7 @@ const Checkmark = styled.div<Pick<Props, "value">>`
     justify-content: center;
     width: 22px;
     height: 22px;
-    border: 2px solid var(--secondary-header);
+    border: 2px solid var(--tertiary-foreground);
     border-radius: var(--border-radius);
     background: var(--secondary-background);
     flex-shrink: 0;
@@ -70,7 +70,7 @@ const Checkmark = styled.div<Pick<Props, "value">>`
     transition: 0.2s ease all;
 
     .check {
-        color: var(--secondary-header);
+        color: var(--tertiary-foreground);
         visibility: hidden;
     }
 

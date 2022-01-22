@@ -17,7 +17,7 @@ interface BaseProps {
 }
 
 const Base = styled.label<BaseProps>`
-    border: 2px solid var(--secondary-header);
+    border: 2px solid var(--tertiary-foreground);
     padding: 10px;
     gap: 10px;
     display: flex;
@@ -39,7 +39,7 @@ const Base = styled.label<BaseProps>`
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        border: 2px solid var(--secondary-header);
+        border: 2px solid var(--tertiary-foreground);
         border-radius: var(--border-radius-half);
         height: 20px;
         width: 20px;
@@ -68,8 +68,8 @@ const Base = styled.label<BaseProps>`
             border: 2px solid var(--accent);
 
             .circle {
-                border: 2px solid white;
-                background: white;
+                border: 2px solid var(--accent-contrast);
+                background: var(--accent-contrast);
 
                 .innerCircle {
                     visibility: visible;
@@ -85,7 +85,7 @@ const Base = styled.label<BaseProps>`
 
                 .innerCircle {
                     visibility: visible;
-                    background: var(--secondary-header);
+                    background: var(--tertiary-foreground);
                 }
             }
         `}
@@ -94,7 +94,7 @@ const Base = styled.label<BaseProps>`
 const Title = styled.div<BaseProps>`
     font-size: 0.9375rem;
     font-weight: 600;
-    color: var(--secondary-foreground);
+    color: var(--foreground);
 
     display: -webkit-box;
     -webkit-box-orient: vertical;
