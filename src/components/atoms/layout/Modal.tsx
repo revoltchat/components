@@ -21,6 +21,7 @@ export type Action = Omit<React.HTMLAttributes<HTMLButtonElement>, "as"> &
 
 export interface Props {
     padding?: string;
+    maxWidth?: string;
 
     disabled?: boolean;
     transparent?: boolean;
@@ -73,12 +74,15 @@ const Base = styled.div<{ closing?: boolean }>`
               `}
 `;
 
-const Container = styled.div<Pick<Props, "transparent"> & { actions: boolean }>`
+const Container = styled.div<
+    Pick<Props, "transparent" | "maxWidth"> & { actions: boolean }
+>`
     width: 100%;
-    margin: 20px;
-    max-width: min(calc(100vw - 20px), 450px);
-    max-height: min(calc(100vh - 20px), 650px);
     min-height: 200px;
+    max-width: min(calc(100vw - 20px), ${(props) => props.maxWidth ?? "450px"});
+    max-height: min(calc(100vh - 20px), 650px);
+
+    margin: 20px;
     display: flex;
     flex-direction: column;
 

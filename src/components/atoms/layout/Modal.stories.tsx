@@ -33,6 +33,11 @@ export default {
             type: "string",
             defaultValue: undefined,
         },
+        maxWidth: {
+            name: "Max Width",
+            type: "string",
+            defaultValue: undefined,
+        },
         actions: {
             name: "Actions",
             defaultValue: [
