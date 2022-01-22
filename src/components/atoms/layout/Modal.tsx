@@ -159,7 +159,7 @@ export function Modal({
 
     useEffect(() => {
         if (nonDismissable) return;
-        registerOnClose?.(closeModal);
+        return registerOnClose?.(closeModal);
     }, [closeModal]);
 
     useEffect(() => registerOnConfirm?.(confirm), [confirm]);
