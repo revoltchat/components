@@ -27,7 +27,7 @@ export interface Props {
     nonDismissable?: boolean;
 
     actions?: Action[];
-    onClose?: () => void;
+    onClose?: (force: boolean) => void;
 
     registerOnClose?: (fn: () => void) => () => void;
     registerOnConfirm?: (fn: () => void) => () => void;
@@ -150,8 +150,8 @@ export function Modal({
 
     const closeModal = useCallback(() => {
         setClosing(true);
-        setTimeout(() => onClose?.(), 2e2);
-    }, [setClosing, props]);
+        if (!closing) setTimeout(() => onClose?.(true), 2e2);
+    }, [closing, props]);
 
     const confirm = useCallback(() => {
         actions?.find((x) => x.confirmation)?.onClick?.();
@@ -159,7 +159,7 @@ export function Modal({
 
     useEffect(() => {
         if (nonDismissable) return;
-        registerOnClose?.(closeModal);
+        return registerOnClose?.(closeModal);
     }, [closeModal]);
 
     useEffect(() => registerOnConfirm?.(confirm), [confirm]);
