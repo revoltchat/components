@@ -1,6 +1,6 @@
 {
     "name": "@revoltchat/ui",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Revolt UI component library",
     "main": "lib/index.js",
     "repository": "https://github.com/revoltchat/components",
@@ -46,7 +46,7 @@
     "files": [
         "LICENSE",
         "package.json",
-        "dist",
+        "lib",
         "src"
     ]
 }
