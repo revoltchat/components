@@ -19,8 +19,6 @@ export type Action = Omit<ButtonProps, "onClick"> & {
 };
 
 export interface Props {
-    title?: string;
-    description?: string;
     padding?: string;
 
     disabled?: boolean;
@@ -33,6 +31,8 @@ export interface Props {
     registerOnClose?: (fn: () => void) => () => void;
     registerOnConfirm?: (fn: () => void, close: () => void) => () => void;
 
+    title?: React.ReactNode;
+    description?: React.ReactNode;
     children?: React.ReactNode;
 }
 
