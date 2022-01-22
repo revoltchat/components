@@ -79,7 +79,7 @@ const Template: ComponentStory<typeof Modal> = (args) => {
                 document.addEventListener("keyup", onKeyUp);
                 return () => document.removeEventListener("keyup", onKeyUp);
             }}
-            registerOnConfirm={(confirm, close) => {
+            registerOnConfirm={(confirm) => {
                 const onKeyUp = (e: KeyboardEvent) => {
                     if (e.key === "Enter") {
                         confirm();
