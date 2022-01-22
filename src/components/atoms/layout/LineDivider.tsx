@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export interface Props {
-    readonly palette: "primary" | "accent";
+    readonly palette?: "primary" | "accent";
 }
 
 export const LineDivider = styled.div<Props>`
