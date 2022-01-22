@@ -53,10 +53,11 @@ const Checkmark = styled.div<Pick<Props, "value">>`
     width: 22px;
     height: 22px;
     border: 2px solid var(--secondary-header);
+    border-radius: var(--border-radius);
+    background: var(--secondary-background);
     flex-shrink: 0;
     margin: 4px;
     transition: 0.2s ease all;
-    border-radius: var(--border-radius);
 
     .check {
         color: var(--secondary-header);
