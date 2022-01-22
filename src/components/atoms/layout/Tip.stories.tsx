@@ -9,7 +9,7 @@ export default {
         children: {
             name: "Content",
             type: "string",
-            defaultValue: "I am a tip!",
+            defaultValue: "This is a tip for demonstration purposes.",
         },
         palette: {
             name: "Palette",
