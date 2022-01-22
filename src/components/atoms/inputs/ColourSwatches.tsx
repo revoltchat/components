@@ -42,8 +42,6 @@ const Base = styled.div`
         height: 0;
         top: 72px;
         opacity: 0;
-        padding: 0;
-        border: 0;
         position: relative;
         pointer-events: none;
     }
@@ -67,19 +65,22 @@ const Base = styled.div`
 const Swatch = styled.div<{ type: "small" | "large"; colour: string }>`
     flex-shrink: 0;
     cursor: pointer;
+    border: 2px solid transparent;
     border-radius: var(--border-radius);
     background-color: ${(props) => props.colour};
 
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.1s ease-in-out all;
 
     &:hover {
-        border: 3px solid var(--foreground);
-        transition: border ease-in-out 0.07s;
+        border: 2px solid var(--foreground);
     }
 
     svg {
-        color: white;
+        transition: inherit;
+        color: var(--accent-contrast);
     }
 
     ${(props) =>

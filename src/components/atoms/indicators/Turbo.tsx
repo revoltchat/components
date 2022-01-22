@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { Bolt } from "@styled-icons/boxicons-solid";
 
 export const Base = styled.div`
-    gap: 2px;
     display: flex;
-    padding: 1px 5px;
     position: relative;
+    padding: 1px 5px;
+    gap: 2px;
+    user-select: none;
 
     align-items: center;
     font-weight: 800;
