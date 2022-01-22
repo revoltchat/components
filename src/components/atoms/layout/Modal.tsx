@@ -109,7 +109,7 @@ const Content = styled.div<Pick<Props, "transparent" | "padding">>`
     padding: ${(props) => props.padding ?? "1rem"};
 
     overflow-y: auto;
-
+    font-size: 0.9375rem;
     gap: 4px;
     display: flex;
     flex-direction: column;
