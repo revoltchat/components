@@ -109,7 +109,7 @@ const Container = styled.div<
 `;
 
 const Title = styled.div`
-    padding: 1rem 1rem 0 1rem;
+    padding: 1rem;
     flex-shrink: 0;
 
     gap: 8px;
@@ -120,7 +120,7 @@ const Title = styled.div`
 const Content = styled.div<Pick<Props, "transparent" | "padding">>`
     flex-grow: 1;
     padding-top: 0;
-    padding: ${(props) => props.padding ?? "1rem"};
+    padding: ${(props) => props.padding ?? "0 1rem 1rem"};
 
     overflow-y: auto;
     font-size: 0.9375rem;
