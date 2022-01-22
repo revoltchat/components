@@ -6,12 +6,12 @@ export default {
     title: "Design System/Atoms/Layout/Line Divider",
     component: LineDivider,
     argTypes: {
-        palette: {
+        /*palette: {
             name: "Palette",
             control: "radio",
             options: ["primary", "accent"],
             defaultValue: "primary",
-        },
+        },*/
         turbo: {
             name: "Turbo (Demo Content)",
             type: "boolean",

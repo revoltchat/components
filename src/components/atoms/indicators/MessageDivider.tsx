@@ -2,22 +2,19 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const Base = styled.div<{ unread?: boolean }>`
-    user-select: none;
-    align-items: center;
-
-    height: 0;
     display: flex;
+    align-items: center;
+    height: 0;
     margin: 17px 12px 5px;
     border-top: thin solid var(--tertiary-foreground);
+    user-select: none;
 
     time {
         margin-top: -2px;
-
         font-size: 0.6875rem;
         line-height: 0.6875rem;
-
-        padding-inline-end: 5px;
-        padding-inline-start: 5px;
+        font-weight: 600;
+        padding-inline: 5px 5px;
 
         // We set the background to mask the border.
         color: var(--tertiary-foreground);
