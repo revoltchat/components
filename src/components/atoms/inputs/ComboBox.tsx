@@ -1,27 +1,25 @@
 import styled from "styled-components";
 
 export const ComboBox = styled.select`
+    min-height: 42px;
     width: 100%;
-    padding: 10px;
-    cursor: pointer;
+    padding: 8px 16px;
 
+    font-size: 0.9375rem;
     font-family: inherit;
-    font-size: var(--text-size);
+    font-weight: 500;
 
     color: var(--secondary-foreground);
     background: var(--secondary-background);
 
     border: none;
-    outline: 2px solid transparent;
     border-radius: var(--border-radius);
-    transition: box-shadow 0.2s ease-in-out;
-    transition: outline-color 0.2s ease-in-out;
+    outline: none;
+    cursor: pointer;
 
-    &:focus {
+    transition: 0.1s ease-in-out all;
+
+    &:focus-visible {
         box-shadow: 0 0 0 1.5pt var(--accent);
     }
-
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
 `;

@@ -5,20 +5,22 @@ export interface Props {
 }
 
 export const InputBox = styled.input<Props>`
-    font-size: 1rem;
-    font-family: inherit;
-
-    z-index: 1;
-    border: none;
+    min-height: 42px;
+    width: 100%;
     padding: 8px 16px;
-    outline: 2px solid transparent;
+
+    font-size: 0.9375rem;
+    font-family: inherit;
+    font-weight: 500;
+
+    border: none;
     border-radius: var(--border-radius);
+    box-sizing: border-box;
+    outline: none;
 
-    transition: 0.2s ease background-color;
-    transition: box-shadow 0.2s ease-in-out;
-    transition: outline-color 0.2s ease-in-out;
+    transition: 0.1s ease-in-out all;
 
-    &:focus {
+    &:focus-visible {
         box-shadow: 0 0 0 1.5pt var(--accent);
     }
 
