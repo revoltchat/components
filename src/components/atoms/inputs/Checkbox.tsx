@@ -1,4 +1,5 @@
 import { Check } from "@styled-icons/boxicons-regular";
+import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 const Base = styled.label`
@@ -95,7 +96,7 @@ const Checkmark = styled.div<Pick<Props, "value" | "palette">>`
               `}
 `;
 
-export interface Props {
+export type Props = {
     readonly disabled?: boolean;
     readonly palette?: "primary" | "secondary";
 
@@ -104,7 +105,7 @@ export interface Props {
 
     readonly value: boolean;
     readonly onChange: (state: boolean) => void;
-}
+} & Omit<HTMLAttributes<HTMLLabelElement>, "value" | "children" | "onChange">;
 
 export function Checkbox({
     disabled,
@@ -113,9 +114,10 @@ export function Checkbox({
     description,
     value,
     onChange,
+    ...props
 }: Props) {
     return (
-        <Base>
+        <Base {...props}>
             <Content>
                 <span>{children}</span>
                 {description && <Description>{description}</Description>}
