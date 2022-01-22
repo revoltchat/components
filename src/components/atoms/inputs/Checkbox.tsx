@@ -16,6 +16,11 @@ const Base = styled.label`
     }
 
     &:hover {
+        .playSound {
+            visibility: visible;
+            opacity: 1;
+        }
+
         .check {
             visibility: visible;
             opacity: 1;
@@ -47,7 +52,6 @@ const TitleContent = styled.div`
 const Title = styled.div`
     font-size: 0.9375rem;
     font-weight: 600;
-
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -61,6 +65,9 @@ const TitleAction = styled.div`
     flex-shrink: 0;
     width: 20px;
     height: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.1s ease-in-out all;
 
     border-radius: var(--border-radius);
 
@@ -142,7 +149,7 @@ export function Checkbox({
                 {title && (
                     <TitleContent>
                         <Title>{title}</Title>
-                        <TitleAction>
+                        <TitleAction className="playSound">
                             <VolumeFull size={16} />
                         </TitleAction>
                     </TitleContent>
