@@ -23,19 +23,19 @@ export const Turbo = styled.div`
     color: var(--accent-foreground);
     background: var(--accent);
     padding: 1px 5px;
-    border-radius: 8px;
+    border-start-start-radius: 0 !important;
+    border-radius: 5px;
     position: relative;
 
     &::before {
         content: "";
         position: absolute;
         top: 0;
+        right: -4px;
         left: -4px;
         display: flex;
         width: 2px;
         height: 4px;
-        //background: blue;
-        //TODO: clean this up into a single line if possible?
         border: 8px solid var(--accent);
         border-right: 5px solid transparent;
         border-left: 5px solid transparent;
