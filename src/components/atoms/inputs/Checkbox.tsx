@@ -31,7 +31,7 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: 2px;
+    gap: 3px;
 `;
 
 const Title = styled.div`
