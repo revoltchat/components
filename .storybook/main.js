@@ -7,6 +7,7 @@ module.exports = {
         "@storybook/addon-links",
         "@storybook/addon-essentials",
         "storybook-dark-mode",
+        "storybook-rtl-addon",
     ],
     framework: "@storybook/react",
 };
