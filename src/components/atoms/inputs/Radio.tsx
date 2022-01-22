@@ -92,7 +92,7 @@ const Base = styled.label<BaseProps>`
 `;
 
 const Title = styled.div<BaseProps>`
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: 600;
     color: var(--secondary-foreground);
 
@@ -109,7 +109,7 @@ const Title = styled.div<BaseProps>`
 `;
 
 const Description = styled.div<BaseProps>`
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 400;
     color: var(--secondary-foreground);
 
