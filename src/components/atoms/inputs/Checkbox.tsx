@@ -22,7 +22,7 @@ const Base = styled.label`
     }
 
     &[disabled] {
-        opacity: 0.5;
+        opacity: 0.8;
         cursor: not-allowed;
     }
 `;
@@ -38,12 +38,22 @@ const Title = styled.div`
     font-size: 0.9375rem;
     font-weight: 600;
     color: var(--foreground);
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 `;
 
 const Description = styled.div`
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--secondary-foreground);
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 `;
 
 const Checkmark = styled.div<Pick<Props, "value">>`
