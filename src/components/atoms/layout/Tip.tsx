@@ -1,5 +1,6 @@
-import { InfoCircle } from "@styled-icons/boxicons-regular";
+import React from "react";
 import styled, { css } from "styled-components";
+import { InfoCircle } from "@styled-icons/boxicons-regular";
 
 interface Props {
     readonly palette?: "primary" | "success" | "warning" | "error";

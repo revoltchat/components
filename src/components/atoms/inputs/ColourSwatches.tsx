@@ -1,7 +1,7 @@
+import React, { useRef } from "react";
+import styled, { css } from "styled-components";
 import { Check } from "@styled-icons/boxicons-regular";
 import { Palette } from "@styled-icons/boxicons-solid";
-import { useRef } from "react";
-import styled, { css } from "styled-components";
 import { useDebounceCallback } from "../../../lib/debounce";
 
 interface Props {

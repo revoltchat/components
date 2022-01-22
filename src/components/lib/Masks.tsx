@@ -1,4 +1,5 @@
 // This file must be imported and used at least once for SVG masks.
+import React from "react";
 
 export default function Masks() {
     return (

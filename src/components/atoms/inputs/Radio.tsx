@@ -1,4 +1,4 @@
-import { Circle } from "@styled-icons/boxicons-solid";
+import React from "react";
 import styled, { css } from "styled-components";
 
 interface Props {

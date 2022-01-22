@@ -1,6 +1,6 @@
-import { Check } from "@styled-icons/boxicons-regular";
-import { HTMLAttributes } from "react";
+import React, { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
+import { Check } from "@styled-icons/boxicons-regular";
 
 const Base = styled.label`
     gap: 4px;

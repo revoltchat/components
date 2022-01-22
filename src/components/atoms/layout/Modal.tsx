@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 import { createPortal } from "react-dom";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { Button, Props as ButtonProps } from "../inputs/Button";
 import { H3 } from "../heading/H3";

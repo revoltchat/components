@@ -1,5 +1,6 @@
-import { ChevronRight, LinkExternal } from "@styled-icons/boxicons-regular";
+import React from "react";
 import styled, { css } from "styled-components";
+import { ChevronRight, LinkExternal } from "@styled-icons/boxicons-regular";
 
 interface BaseProps {
     // ! FIXME: Use Pick<>
