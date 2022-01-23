@@ -8,4 +8,8 @@ export const H3 = styled.h3`
     font-weight: 700;
     text-transform: uppercase;
     color: var(--secondary-foreground);
+
+    &:first-child {
+        margin-top: 0;
+    }
 `;

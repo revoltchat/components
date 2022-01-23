@@ -56,6 +56,7 @@ const Base = styled.div<BaseProps>`
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 3;
             overflow: hidden;
+            color: var(--secondary-foreground);
 
             a:hover {
                 text-decoration: underline;
