@@ -11,7 +11,7 @@ export const TextArea = styled.textarea<TextAreaProps>`
     width: 100%;
     resize: none;
     display: block;
-
+    font-size: 14px;
     color: var(--foreground);
     background: var(--secondary-background);
 
@@ -60,6 +60,8 @@ export const MarkdownTip = styled.div`
     align-items: center;
     margin-top: 8px;
     gap: 4px;
+    user-select: none;
+    color: var(--foreground);
 
     svg {
         flex-shrink: 0;

@@ -86,7 +86,7 @@ const Content = styled.div`
     flex-direction: column;
     gap: 2px;
     word-break: break-word;
-    transition: 0.1s ease-in-out all;
+    transition: inherit;
 `;
 
 const Title = styled.div<BaseProps>`

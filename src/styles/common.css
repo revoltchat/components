@@ -18,7 +18,7 @@
     --border-radius-channel-icon: var(--border-radius-half);
     --border-radius-server-icon: var(--border-radius-half);
     --input-border-width: 2px;
-    --textarea-padding: 16px;
+    --textarea-padding: 10px;
     --textarea-line-height: 20px;
     --message-box-padding: 14px;
     --attachment-max-width: 480px;
@@ -63,10 +63,17 @@ html {
     background: transparent;
 }
 
-hr {
+a,
+hr,
+input,
+select,
+textarea {
     all: unset;
+    box-sizing: border-box;
 }
 
-input {
-    all: unset;
+a {
+    cursor: pointer;
+    -webkit-user-drag: none;
+    color: var(--accent);
 }

@@ -5,9 +5,9 @@ export interface Props {
 }
 
 export const InputBox = styled.input<Props>`
-    min-height: 42px;
+    //min-height: 42px;
     width: 100%;
-    padding: 8px 16px;
+    padding: 11px 16px;
 
     font-size: 0.9375rem;
     font-family: inherit;

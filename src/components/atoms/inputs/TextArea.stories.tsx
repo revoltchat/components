@@ -2,6 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useArgs } from "@storybook/client-api";
 import { ChangeEvent } from "react";
 import { Markdown } from "@styled-icons/boxicons-logos";
+import { H5 } from "../heading/H5";
 
 import { TextArea, MarkdownTip } from "./TextArea";
 
@@ -53,7 +54,7 @@ const Template: ComponentStory<typeof TextArea> = (args) => {
             />
             <MarkdownTip>
                 <Markdown size="24" />
-                <h5>
+                <H5>
                     Descriptions support Markdown formatting,{" "}
                     <a
                         href="https://developers.revolt.chat/markdown"
@@ -62,7 +63,7 @@ const Template: ComponentStory<typeof TextArea> = (args) => {
                         learn more here
                     </a>
                     .
-                </h5>
+                </H5>
             </MarkdownTip>
         </>
     );
