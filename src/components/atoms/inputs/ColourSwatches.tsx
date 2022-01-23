@@ -39,6 +39,9 @@ const Base = styled.div`
 
     input {
         width: 0;
+        padding: 0;
+        border: 0;
+        margin: 0;
         height: 0;
         top: 72px;
         opacity: 0;

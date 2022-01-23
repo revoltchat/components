@@ -84,13 +84,12 @@ const RadioCircle = styled.div`
 const Content = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 2px;
     word-break: break-word;
     transition: inherit;
 `;
 
 const Title = styled.div<BaseProps>`
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     font-weight: 600;
     color: var(--foreground);
     transition: inherit;
@@ -108,7 +107,7 @@ const Title = styled.div<BaseProps>`
 `;
 
 const Description = styled.div<BaseProps>`
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 500;
     color: var(--secondary-foreground);
     transition: inherit;
