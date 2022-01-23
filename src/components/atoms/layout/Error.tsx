@@ -6,8 +6,10 @@ export const Base = styled.span`
     display: flex;
     align-items: center;
     flex-direction: row;
+    color: var(--foreground);
 
     .error {
+        font-weight: 600;
         color: var(--error);
     }
 `;
