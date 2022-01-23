@@ -77,3 +77,25 @@ a {
     -webkit-user-drag: none;
     color: var(--accent);
 }
+
+/* HEADING HIERARCHY LIST */
+/* TITLES -> DESCRIPTIONS */
+
+h1 {
+    /* SETTINGS TITLE */
+}
+h2 {
+    /* MODAL TITLE */
+}
+h3 {
+    /* SETTINGS SECTION TITLE */
+}
+h4 {
+    /* MODAL DESCRIPTION */
+}
+h5 {
+    /* SETTINGS DESCRIPTION */
+}
+h6 {
+    /* unused */
+}

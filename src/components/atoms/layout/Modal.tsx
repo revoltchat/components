@@ -4,8 +4,8 @@ import { createPortal } from "react-dom";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { Button, Props as ButtonProps } from "../inputs/Button";
-import { H3 } from "../heading/H3";
-import { H5 } from "../heading/H5";
+import { H2 } from "../heading/H2";
+import { H4 } from "../heading/H4";
 import {
     animationFadeIn,
     animationFadeOut,
@@ -111,7 +111,7 @@ const Container = styled.div<
 const Title = styled.div`
     padding: 1rem;
     flex-shrink: 0;
-
+    word-break: break-word;
     gap: 8px;
     display: flex;
     flex-direction: column;
@@ -186,8 +186,8 @@ export function Modal({
                 onClick={(e) => e.stopPropagation()}>
                 {(title || description) && (
                     <Title>
-                        {title && <H3>{title}</H3>}
-                        {description && <H5>{description}</H5>}
+                        {title && <H2>{title}</H2>}
+                        {description && <H4>{description}</H4>}
                     </Title>
                 )}
                 <Content {...props}>{children}</Content>
