@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 import { Check } from "@styled-icons/boxicons-regular";
-import { VolumeFull } from "@styled-icons/boxicons-solid";
+// import { VolumeFull } from "@styled-icons/boxicons-solid";
 
 const Base = styled.label`
     gap: 10px;
@@ -149,9 +149,9 @@ export function Checkbox({
                 {title && (
                     <TitleContent>
                         <Title>{title}</Title>
-                        <TitleAction className="playSound">
+                        {/*<TitleAction className="playSound">
                             <VolumeFull size={16} />
-                        </TitleAction>
+                        </TitleAction>*/}
                     </TitleContent>
                 )}
                 {description && <Description>{description}</Description>}
