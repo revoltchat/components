@@ -7,3 +7,4 @@ export { IconButton } from "./IconButton";
 export { InputBox } from "./InputBox";
 export { Radio } from "./Radio";
 export { TextArea } from "./TextArea";
+export { OverrideSwitch } from "./OverrideSwitch";

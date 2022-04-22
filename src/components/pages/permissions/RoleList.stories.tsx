@@ -5,12 +5,13 @@ import { useArgs } from "@storybook/client-api";
 import { Props, RoleList } from "./RoleList";
 
 export default {
-    title: "Pages/Permissions/RoleList",
+    title: "Pages/Permissions/Role List",
     component: RoleList,
     args: {
         server: {
-            orderedRoles: {
-                a: {
+            orderedRoles: [
+                {
+                    id: "a",
                     name: "Admin",
                     permissions: {
                         a: 0,
@@ -19,7 +20,8 @@ export default {
                     colour: "rgb(123, 104, 238)",
                     rank: 1,
                 },
-                b: {
+                {
+                    id: "b",
                     name: "Moderator",
                     permissions: {
                         a: 0,
@@ -28,7 +30,8 @@ export default {
                     colour: "rgb(253, 102, 113)",
                     rank: 2,
                 },
-                c: {
+                {
+                    id: "c",
                     name: "Bot",
                     permissions: {
                         a: 0,
@@ -37,9 +40,11 @@ export default {
                     colour: "rgb(52, 152, 219)",
                     rank: 3,
                 },
-            },
+            ],
         },
         showDefault: true,
+        selected: "default",
+        ...({} as any),
     },
 } as ComponentMeta<typeof RoleList>;
 

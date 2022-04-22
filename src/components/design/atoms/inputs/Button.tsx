@@ -6,6 +6,7 @@ export interface Props {
         | "primary"
         | "secondary"
         | "plain"
+        | "plain-secondary"
         | "accent"
         | "success"
         | "warning"
@@ -74,8 +75,11 @@ export const Button = styled.button<Props>`
                     }
                 `;
             case "plain":
+            case "plain-secondary":
                 return css`
-                    color: var(--foreground);
+                    color: ${props.palette === "plain"
+                        ? "var(--foreground)"
+                        : "var(--secondary-foreground)"};
                     background: transparent;
 
                     &:hover {
@@ -87,7 +91,7 @@ export const Button = styled.button<Props>`
                     }
 
                     &:active {
-                        color: var(--secondary-foreground);
+                        color: var(--tertiary-foreground);
                     }
                 `;
             case "accent":

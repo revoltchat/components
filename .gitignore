@@ -3,6 +3,7 @@ node_modules
 storybook-static
 .vercel
 lib
+esm
 
 .yarn/cache
 .yarn/install-state.gz
