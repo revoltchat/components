@@ -1,7 +1,7 @@
 // This file must be imported and used at least once for SVG masks.
 import React from "react";
 
-export default function Masks() {
+export function Masks() {
     return (
         <svg width={0} height={0} style={{ position: "fixed" }}>
             <defs>
