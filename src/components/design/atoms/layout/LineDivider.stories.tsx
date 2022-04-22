@@ -1,3 +1,4 @@
+import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Turbo } from "../indicators/Turbo";
 import { LineDivider } from "./LineDivider";

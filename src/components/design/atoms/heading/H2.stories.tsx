@@ -1,3 +1,4 @@
+import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { H2 } from "./H2";
