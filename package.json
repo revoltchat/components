@@ -1,6 +1,6 @@
 {
     "name": "@revoltchat/ui",
-    "version": "1.0.27",
+    "version": "1.0.28",
     "description": "Revolt UI component library",
     "type": "commonjs",
     "main": "lib/index.js",
@@ -58,7 +58,8 @@
         "LICENSE",
         "package.json",
         "lib",
-        "src"
+        "src",
+        "esm"
     ],
     "packageManager": "yarn@3.2.0",
     "peerDependencies": {
