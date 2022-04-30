@@ -17,6 +17,13 @@ const SwitchContainer = styled.div.attrs({
     border-radius: var(--border-radius);
     background: var(--secondary-background);
     border: 1px solid var(--tertiary-background);
+
+    ${(props) =>
+        props["aria-disabled"] &&
+        css`
+            pointer-events: none;
+            opacity: 0.6;
+        `}
 `;
 
 const Switch = styled.div.attrs({
@@ -52,12 +59,13 @@ const Switch = styled.div.attrs({
 
 export interface Props {
     state: State;
+    disabled?: boolean;
     onChange: (state: State) => void;
 }
 
-export function OverrideSwitch({ state, onChange }: Props) {
+export function OverrideSwitch({ state, disabled, onChange }: Props) {
     return (
-        <SwitchContainer>
+        <SwitchContainer aria-disabled={disabled}>
             <Switch
                 onClick={() => onChange("Deny")}
                 state="Deny"
