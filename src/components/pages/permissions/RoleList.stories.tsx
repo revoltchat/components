@@ -42,6 +42,7 @@ export default {
                 },
             ],
         },
+        rank: 2,
         showDefault: true,
         selected: "default",
         ...({} as any),

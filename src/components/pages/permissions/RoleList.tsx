@@ -5,11 +5,21 @@ import { Role, Server } from "revolt-api";
 import styled from "styled-components";
 import { ButtonItem } from "../../design/navigation/ButtonItem";
 import { Button } from "../../design";
+import { Lock } from "@styled-icons/boxicons-solid";
 
 const Base = styled.div`
     gap: 4px;
     display: flex;
     flex-direction: column;
+
+    button {
+        text-align: left;
+
+        gap: 4px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
 `;
 
 const Rank = styled.span`
@@ -34,6 +44,10 @@ export interface Props {
      */
     selected: string;
     /**
+     * Rank of user looking at the list
+     */
+    rank?: number;
+    /**
      * Select a new role
      */
     onSelect: (value: string) => void;
@@ -47,7 +61,14 @@ export interface Props {
  * Component displaying a list of roles on a server
  */
 export const RoleList = observer(
-    ({ server, showDefault, selected, onSelect, onCreateRole }: Props) => {
+    ({
+        server,
+        showDefault,
+        selected,
+        rank,
+        onSelect,
+        onCreateRole,
+    }: Props) => {
         // If a role gets deleted, unselect it immediately.
         useLayoutEffect(() => {
             if (!server.roles) return;
@@ -59,13 +80,19 @@ export const RoleList = observer(
         return (
             <Base>
                 {server.orderedRoles.map((role) => {
+                    const role_rank = role.rank ?? 0;
+
                     return (
                         <ButtonItem
                             key={role.id}
                             selected={role.id === selected}
                             style={{ color: role.colour! }}
                             onClick={() => onSelect?.(role.id)}>
-                            <Rank>{role.rank ?? 0}</Rank> {role.name}
+                            <Rank>{role_rank}</Rank>
+                            {role.name}
+                            {typeof rank === "number" && role_rank <= rank && (
+                                <Lock size={16} />
+                            )}
                         </ButtonItem>
                     );
                 })}
