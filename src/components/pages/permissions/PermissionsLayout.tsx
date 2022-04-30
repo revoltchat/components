@@ -17,7 +17,10 @@ const Base = styled.div`
     }
 `;
 
-export type Props = Pick<RoleListProps, "onCreateRole"> & {
+export type Props = Omit<
+    RoleListProps,
+    "server" | "showDefault" | "selected" | "onSelect"
+> & {
     editor: React.FC<{ selected: string }>;
     server?: RoleListProps["server"];
     channel?: {
@@ -31,8 +34,8 @@ export type Props = Pick<RoleListProps, "onCreateRole"> & {
 export function PermissionsLayout({
     channel,
     server: givenServer,
-    onCreateRole,
     editor: Editor,
+    ...listProps
 }: Props) {
     const [selected, setSelected] = useState("default");
 
@@ -46,7 +49,7 @@ export function PermissionsLayout({
                 server={server}
                 selected={selected}
                 onSelect={setSelected}
-                onCreateRole={onCreateRole}
+                {...listProps}
             />
             {editor}
         </Base>
