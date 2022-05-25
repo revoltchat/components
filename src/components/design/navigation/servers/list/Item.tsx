@@ -24,8 +24,8 @@ const SwooshWrapper = styled.div`
 `;
 
 const Inner = observer(({ item, linkComponent: LinkComponent }: InnerProps) => {
-    const unread = item.unread;
-    const count = item.mentions.length;
+    const unread = item.isUnread();
+    const count = item.getMentions().length;
 
     return (
         <LinkComponent id={item._id}>
