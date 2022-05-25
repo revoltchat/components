@@ -43,7 +43,7 @@ export type Props = {
     /**
      * Punch a hole through the avatar
      */
-    holepunch?: "bottom-right" | "top-right" | "none";
+    holepunch?: "bottom-right" | "top-right" | "none" | false;
 
     /**
      * Specify overlay component
@@ -64,7 +64,7 @@ export function Avatar({ size, holepunch, fallback, src, overlay }: Props) {
                 y="0"
                 width="32"
                 height="32"
-                mask={holepunch && `url(#holepunch-${holepunch})`}>
+                mask={holepunch ? `url(#holepunch-${holepunch})` : undefined}>
                 {src && <Image src={src} />}
                 {!src && (
                     <FallbackBase>
