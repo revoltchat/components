@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Bolt } from "@styled-icons/boxicons-solid";
 
-export const Base = styled.div`
+const Base = styled.div`
     display: flex;
     position: relative;
     padding: 1px 5px;
