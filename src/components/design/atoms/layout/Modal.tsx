@@ -11,7 +11,7 @@ import {
     animationFadeOut,
     animationZoomIn,
     animationZoomOut,
-} from "../../../lib/animations";
+} from "../../../common/animations";
 
 export type Action = Omit<React.HTMLAttributes<HTMLButtonElement>, "as"> &
     Omit<ButtonProps, "onClick"> & {

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Base = styled.span`
+const Base = styled.span`
     gap: 6px;
     display: flex;
     align-items: center;

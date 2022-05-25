@@ -1,8 +1,10 @@
+export { Avatar } from "./Avatar";
 export { Banner } from "./Banner";
 export { Category } from "./Category";
 export { Details } from "./Details";
 export { Error } from "./Error";
 export { Header } from "./Header";
+export { Initials } from "./Initials";
 export { LineDivider } from "./LineDivider";
 export { Modal } from "./Modal";
 export { Tip } from "./Tip";
