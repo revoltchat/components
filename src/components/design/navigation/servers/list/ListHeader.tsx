@@ -7,12 +7,13 @@ import { isTouchscreenDevice } from "../../../../../lib/isTouchscreenDevice";
 import { Unreads } from "../../../atoms/indicators/Unreads";
 import styled from "styled-components";
 import { Props } from "./ServerList";
-import { useLink } from "../../../../../lib/context";
+import { useLink, useTrigger } from "../../../../../lib/context";
 import { Tooltip } from "../../../atoms/indicators/Tooltip";
 import { UserTooltip } from "../../../atoms/indicators/UserTooltip";
 
 const UserItem = observer(({ client, home, active }: Props) => {
     const Link = useLink();
+    const Trigger = useTrigger();
 
     // Count incoming friend requests, but don't display this on mobile.
     const alertCount = isTouchscreenDevice
@@ -25,28 +26,30 @@ const UserItem = observer(({ client, home, active }: Props) => {
         <Link to={home()}>
             {!active && <SwooshOverlay />}
             <UserTooltip user={client.user!} div right>
-                <Avatar
-                    src={client.user!.generateAvatarURL(
-                        {
-                            max_side: 256,
-                        },
-                        false,
-                    )}
-                    size={42}
-                    interactive
-                    holepunch={alertCount ? "right" : "bottom-right"}
-                    overlay={
-                        <>
-                            <Unreads
-                                count={alertCount}
-                                unread={alertCount > 0}
-                            />
-                            <UserStatus
-                                status={client.user?.status?.presence}
-                            />
-                        </>
-                    }
-                />
+                <Trigger id="Status">
+                    <Avatar
+                        src={client.user!.generateAvatarURL(
+                            {
+                                max_side: 256,
+                            },
+                            false,
+                        )}
+                        size={42}
+                        interactive
+                        holepunch={alertCount ? "right" : "bottom-right"}
+                        overlay={
+                            <>
+                                <Unreads
+                                    count={alertCount}
+                                    unread={alertCount > 0}
+                                />
+                                <UserStatus
+                                    status={client.user?.status?.presence}
+                                />
+                            </>
+                        }
+                    />
+                </Trigger>
             </UserTooltip>
         </Link>
     );

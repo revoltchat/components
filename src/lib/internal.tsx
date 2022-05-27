@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import type { Client } from "revolt.js";
 import { Masks } from "../../lib";
-import { LinkProvider, TextProvider } from "./context";
+import { LinkProvider, TextProvider, TrigProvider } from "./context";
 export const mockClient = () => (window as any).mock as Client;
 
 export const InjectMockClient = ({
@@ -43,7 +43,10 @@ export const MaskDecorator = (Story: React.FC) => (
 );
 
 export const ContextDecorator = (Story: React.FC) => (
-    <>
+    <TrigProvider
+        value={({ children }) => (
+            <div onContextMenu={() => alert("CTX MENU")}>{children}</div>
+        )}>
         <TextProvider value={({ id }) => <>{id}</>}>
             <LinkProvider
                 value={({ to, children }) => (
@@ -54,5 +57,5 @@ export const ContextDecorator = (Story: React.FC) => (
                 <Story />
             </LinkProvider>
         </TextProvider>
-    </>
+    </TrigProvider>
 );

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactNode } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import type { Server } from "revolt.js";
 import { DraggableProps } from "../../../../common";
@@ -7,7 +7,7 @@ import { DraggableProps } from "../../../../common";
 import { Avatar } from "../../../atoms";
 import { Unreads } from "../../../atoms/indicators/Unreads";
 import { Swoosh } from "./Swoosh";
-import { useLink } from "../../../../../lib/context";
+import { useLink, useTrigger } from "../../../../../lib/context";
 import { Tooltip } from "../../../atoms/indicators/Tooltip";
 
 export const ItemContainer = styled.div<{ head?: boolean }>`
@@ -43,21 +43,24 @@ export function SwooshOverlay() {
 
 const Inner = observer(({ item }: InnerProps) => {
     const Link = useLink();
+    const Trigger = useTrigger();
     const unread = !!item.isUnread();
     const count = item.getMentions().length;
 
     return (
         <Tooltip content={item.name} div right>
-            <Link to={"/server/" + item._id}>
-                <Avatar
-                    size={42}
-                    interactive
-                    fallback={item.name}
-                    holepunch={(unread || count > 0) && "top-right"}
-                    overlay={<Unreads unread={unread} count={count} />}
-                    src={item.generateIconURL({ max_side: 256 }, false)}
-                />
-            </Link>
+            <Trigger id="Menu" data={{ server: item._id, unread }}>
+                <Link to={"/server/" + item._id}>
+                    <Avatar
+                        size={42}
+                        interactive
+                        fallback={item.name}
+                        holepunch={(unread || count > 0) && "top-right"}
+                        overlay={<Unreads unread={unread} count={count} />}
+                        src={item.generateIconURL({ max_side: 256 }, false)}
+                    />
+                </Link>
+            </Trigger>
         </Tooltip>
     );
 });
