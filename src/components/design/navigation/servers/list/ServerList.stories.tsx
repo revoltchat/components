@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ServerList } from "./ServerList";
@@ -7,7 +7,7 @@ import {
     InjectMockClient,
     MaskDecorator,
 } from "../../../../../lib/internal";
-import { Tooltip } from "../../../atoms/indicators/Tooltip";
+import { reorder } from "../../../../common";
 
 export default {
     title: "Navigation/Servers/List",
@@ -15,6 +15,14 @@ export default {
     argTypes: {
         client: {
             name: "Revolt.js Client",
+            type: "symbol",
+        },
+        servers: {
+            name: "Ordered Servers",
+            type: "symbol",
+        },
+        reorder: {
+            name: "Reordering Function",
             type: "symbol",
         },
         active: {
@@ -42,17 +50,35 @@ export default {
 
 const Template: ComponentStory<typeof ServerList> = (args) => (
     <InjectMockClient>
-        {({ client }) => (
-            <div
-                style={{
-                    // height: "240px",
-                    height: "560px",
-                    display: "flex",
-                    flexDirection: "row",
-                }}>
-                <ServerList {...args} client={client} />
-            </div>
-        )}
+        {({ client }) => {
+            const [servers, setServers] = useState([
+                ...client.servers.values(),
+            ]);
+
+            const reorderFn = useCallback(
+                (source, dest) => {
+                    setServers((servers) => reorder(servers, source, dest));
+                },
+                [setServers],
+            );
+
+            return (
+                <div
+                    style={{
+                        // height: "240px",
+                        height: "560px",
+                        display: "flex",
+                        flexDirection: "row",
+                    }}>
+                    <ServerList
+                        {...args}
+                        client={client}
+                        servers={servers}
+                        reorder={reorderFn}
+                    />
+                </div>
+            );
+        }}
     </InjectMockClient>
 );
 

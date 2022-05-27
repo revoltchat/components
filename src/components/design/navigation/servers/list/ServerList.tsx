@@ -1,14 +1,14 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Virtuoso } from "react-virtuoso";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Item, ItemContainer } from "./Item";
 
 import { ListHeader } from "./ListHeader";
 import { FooterProps, ListFooter } from "./ListFooter";
-import { useDragEndReorder, useDndComponents } from "../../../../common";
+import { useDndComponents, useDragEndCustomReorder } from "../../../../common";
 
-import type { Client } from "revolt.js";
+import type { Client, Server } from "revolt.js";
 import type { INotificationChecker } from "revolt.js/dist/util/Unreads";
 import { Avatar } from "../../../atoms";
 import { Cog } from "@styled-icons/boxicons-solid";
@@ -35,6 +35,18 @@ export type Props = {
      * Active server ID
      */
     active?: string;
+};
+
+type ParentProps = {
+    /**
+     * Server ordering
+     */
+    servers: Server[];
+
+    /**
+     * Reordering function
+     */
+    reorder: (source: number, dest: number) => void;
 };
 
 const Base = styled.div`
@@ -69,15 +81,15 @@ const Shadow = styled.div`
 /**
  * Server List
  */
-export function ServerList(props: Props & FooterProps) {
-    const { active, client, createServer } = props;
-    const [items, setItems] = useState([...client.servers.values()]);
+export function ServerList(props: Props & ParentProps & FooterProps) {
+    const { servers, reorder, ...innerProps } = props;
+    const { active, createServer } = props;
 
     const Link = useLink();
 
     return (
         <Base>
-            <DragDropContext onDragEnd={useDragEndReorder(setItems)}>
+            <DragDropContext onDragEnd={useDragEndCustomReorder(reorder)}>
                 <Droppable
                     droppableId="droppable"
                     mode="virtual"
@@ -86,23 +98,23 @@ export function ServerList(props: Props & FooterProps) {
                             active={false}
                             provided={provided}
                             isDragging={snapshot.isDragging}
-                            item={items[rubric.source.index]}
+                            item={servers[rubric.source.index]}
                         />
                     )}>
                     {(provided) => {
                         return (
                             <Virtuoso
-                                totalCount={items.length + 2}
+                                totalCount={servers.length + 2}
                                 components={useDndComponents()}
                                 className="list"
                                 // @ts-expect-error Incompatible types between libraries
                                 scrollerRef={provided.innerRef}
                                 itemContent={(index) => {
                                     if (index === 0) {
-                                        return <ListHeader {...props} />;
+                                        return <ListHeader {...innerProps} />;
                                     }
 
-                                    if (index === items.length + 1) {
+                                    if (index === servers.length + 1) {
                                         return (
                                             <ListFooter
                                                 createServer={createServer}
@@ -110,7 +122,7 @@ export function ServerList(props: Props & FooterProps) {
                                         );
                                     }
 
-                                    const item = items[index - 1];
+                                    const item = servers[index - 1];
 
                                     return (
                                         <Draggable

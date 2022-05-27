@@ -66,7 +66,7 @@ export function useDndComponents() {
  * @param endIndex End index
  * @returns New list
  */
-function reorder(list: any[], startIndex: number, endIndex: number) {
+export function reorder(list: any[], startIndex: number, endIndex: number) {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -99,5 +99,29 @@ export function useDragEndReorder(
             );
         },
         [setItems],
+    );
+}
+
+/**
+ * Modified version of above function to provide simple reordering interface
+ *
+ * @param reorder Reorder function
+ * @returns Drag end handler
+ */
+export function useDragEndCustomReorder(
+    reorder: (source: number, dest: number) => void,
+) {
+    return useCallback(
+        (result: DropResult) => {
+            if (!result.destination) {
+                return;
+            }
+            if (result.source.index === result.destination.index) {
+                return;
+            }
+
+            reorder(result.source.index, result.destination!.index);
+        },
+        [reorder],
     );
 }
