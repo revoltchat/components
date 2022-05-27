@@ -1,0 +1,8 @@
+<script type="module">
+    import { Client } from "https://cdn.skypack.dev/revolt.js@6.0.1";
+    const client = new Client({
+        unreads: true,
+    });
+    client.mock();
+    window.mock = client;
+</script>

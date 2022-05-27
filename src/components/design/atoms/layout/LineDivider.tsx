@@ -2,11 +2,12 @@ import styled, { css } from "styled-components";
 
 export interface Props {
     readonly palette?: "primary" | "accent";
+    readonly compact?: boolean;
 }
 
 export const LineDivider = styled.div<Props>`
     display: flex;
-    margin: 18px auto;
+    margin: ${(props) => (props.compact ? "6px" : "18px")} auto;
     user-select: none;
     align-items: center;
 

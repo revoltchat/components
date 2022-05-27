@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Initials } from "./Initials";
 
 const Image = styled.img`
@@ -24,6 +24,20 @@ const FallbackBase = styled.div`
     background: var(--secondary-background);
 `;
 
+const ParentBase = styled.svg<Pick<Props, "interactive">>`
+    foreignObject {
+        transition: 150ms ease filter;
+    }
+
+    ${(props) =>
+        props.interactive &&
+        css`
+            &:hover foreignObject {
+                filter: brightness(0.8);
+            }
+        `}
+`;
+
 export type Props = {
     /**
      * Avatar size
@@ -43,12 +57,17 @@ export type Props = {
     /**
      * Punch a hole through the avatar
      */
-    holepunch?: "bottom-right" | "top-right" | "none" | false;
+    holepunch?: "bottom-right" | "top-right" | "right" | "none" | false;
 
     /**
      * Specify overlay component
      */
     overlay?: ReactNode;
+
+    /**
+     * Whether this icon is interactive
+     */
+    interactive?: boolean;
 };
 
 /**
@@ -56,9 +75,20 @@ export type Props = {
  *
  * Partially inspired by Adw.Avatar API, we allow users to specify a fallback component (usually just text) to display in case the URL is invalid.
  */
-export function Avatar({ size, holepunch, fallback, src, overlay }: Props) {
+export function Avatar({
+    size,
+    holepunch,
+    fallback,
+    src,
+    overlay,
+    interactive,
+}: Props) {
     return (
-        <svg width={size} height={size} viewBox="0 0 32 32">
+        <ParentBase
+            width={size}
+            height={size}
+            viewBox="0 0 32 32"
+            interactive={interactive}>
             <foreignObject
                 x="0"
                 y="0"
@@ -77,6 +107,6 @@ export function Avatar({ size, holepunch, fallback, src, overlay }: Props) {
                 )}
             </foreignObject>
             {overlay}
-        </svg>
+        </ParentBase>
     );
 }

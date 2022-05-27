@@ -1,0 +1,111 @@
+import React from "react";
+import { ItemContainer, SwooshOverlay } from "./Item";
+import { observer } from "mobx-react-lite";
+import type { Channel } from "revolt.js";
+import { Avatar, LineDivider, UserStatus } from "../../../atoms";
+import { isTouchscreenDevice } from "../../../../../lib/isTouchscreenDevice";
+import { Unreads } from "../../../atoms/indicators/Unreads";
+import styled from "styled-components";
+import { Props } from "./ServerList";
+
+const UserItem = observer(
+    ({ client, linkComponent: LinkComponent, home, active }: Props) => {
+        // Count incoming friend requests, but don't display this on mobile.
+        const alertCount = isTouchscreenDevice
+            ? 0
+            : [...client.users.values()].filter(
+                  (x) => x.relationship === "Incoming",
+              ).length;
+
+        return (
+            <LinkComponent url={home()}>
+                {!active && <SwooshOverlay />}
+                <Avatar
+                    src={client.user!.generateAvatarURL(
+                        {
+                            max_side: 256,
+                        },
+                        false,
+                    )}
+                    size={42}
+                    interactive
+                    holepunch={alertCount ? "right" : "bottom-right"}
+                    overlay={
+                        <>
+                            <Unreads
+                                count={alertCount}
+                                unread={alertCount > 0}
+                            />
+                            <UserStatus
+                                status={client.user?.status?.presence}
+                            />
+                        </>
+                    }
+                />
+            </LinkComponent>
+        );
+    },
+);
+
+const List = styled.div`
+    gap: 12px;
+    display: flex;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    flex-direction: column;
+`;
+
+const ChannelInner = observer(
+    ({
+        channel,
+        permit,
+    }: {
+        channel: Channel;
+    } & Pick<Props, "permit">) => {
+        const unread = channel.isUnread(permit);
+        const count = channel.getMentions(permit).length;
+
+        return (
+            <Avatar
+                size={42}
+                interactive
+                holepunch={unread && "top-right"}
+                src={channel.generateIconURL({ max_side: 256 }, false)}
+                overlay={<Unreads unread={unread} count={count} />}
+            />
+        );
+    },
+);
+
+const UnreadDMs = observer(
+    ({ client, permit, linkComponent: LinkComponent }: Props) => {
+        const channels = [...client.channels.values()].filter(
+            (x) =>
+                (x.channel_type === "DirectMessage" ||
+                    x.channel_type === "Group") &&
+                x.unread,
+        );
+
+        if (channels.length === 0) return null;
+
+        return (
+            <List>
+                {channels.map((channel) => (
+                    <LinkComponent url={`/channel/${channel._id}`}>
+                        <ChannelInner channel={channel} permit={permit} />
+                    </LinkComponent>
+                ))}
+            </List>
+        );
+    },
+);
+
+export function ListHeader(props: Props) {
+    return (
+        <ItemContainer head>
+            <UserItem {...props} />
+            <UnreadDMs {...props} />
+            <LineDivider compact />
+        </ItemContainer>
+    );
+}

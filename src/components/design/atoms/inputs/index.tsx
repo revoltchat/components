@@ -1,4 +1,5 @@
 export { Button } from "./Button";
+export { ButtonItem } from "./ButtonItem";
 export { CategoryButton } from "./CategoryButton";
 export { Checkbox } from "./Checkbox";
 export { ColourSwatches } from "./ColourSwatches";

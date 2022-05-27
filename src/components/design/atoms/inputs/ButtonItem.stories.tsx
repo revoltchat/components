@@ -4,7 +4,7 @@ import { ComponentMeta } from "@storybook/react";
 import { ButtonItem } from "./ButtonItem";
 
 export default {
-    title: "Design System/Navigation/Button Item",
+    title: "Design System/Atoms/Inputs/Button Item",
     component: ButtonItem,
 } as ComponentMeta<typeof ButtonItem>;
 

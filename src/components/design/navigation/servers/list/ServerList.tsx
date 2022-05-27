@@ -2,14 +2,37 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Virtuoso } from "react-virtuoso";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { InnerProps, Item } from "./Item";
+import { InnerProps, Item, ItemContainer } from "./Item";
 
-import { ClientServer } from "../../../../../lib/types";
+import { ListHeader } from "./ListHeader";
+import { ListFooter } from "./ListFooter";
 import { useDragEndReorder, useDndComponents } from "../../../../common";
 
+import type { Client } from "revolt.js";
+import type { INotificationChecker } from "revolt.js/dist/util/Unreads";
+import { Avatar } from "../../../atoms";
+import { Cog } from "@styled-icons/boxicons-solid";
+
 export type Props = Pick<InnerProps, "linkComponent"> & {
-    active: string;
-    servers: ClientServer[];
+    /**
+     * Client handle
+     */
+    client: Client;
+
+    /**
+     * Function to generate home URL
+     */
+    home: () => string;
+
+    /**
+     * Check whether a channel or server is muted
+     */
+    permit: INotificationChecker;
+
+    /**
+     * Active server ID
+     */
+    active?: string;
 };
 
 const Base = styled.div`
@@ -31,8 +54,9 @@ const Base = styled.div`
 /**
  * Server List
  */
-export function ServerList({ active, servers, linkComponent }: Props) {
-    const [items, setItems] = useState(servers);
+export function ServerList(props: Props) {
+    const { active, client, linkComponent: LinkComponent } = props;
+    const [items, setItems] = useState([...client.servers.values()]);
 
     return (
         <Base>
@@ -44,7 +68,7 @@ export function ServerList({ active, servers, linkComponent }: Props) {
                         <Item
                             active={false}
                             provided={provided}
-                            linkComponent={linkComponent}
+                            linkComponent={LinkComponent}
                             isDragging={snapshot.isDragging}
                             item={items[rubric.source.index]}
                         />
@@ -52,16 +76,30 @@ export function ServerList({ active, servers, linkComponent }: Props) {
                     {(provided) => {
                         return (
                             <Virtuoso
-                                data={items}
+                                totalCount={items.length + 2}
                                 components={useDndComponents()}
                                 className="list"
                                 // @ts-expect-error Incompatible types between libraries
                                 scrollerRef={provided.innerRef}
-                                itemContent={(index, item) => {
+                                itemContent={(index) => {
+                                    if (index === 0) {
+                                        return <ListHeader {...props} />;
+                                    }
+
+                                    if (index === items.length + 1) {
+                                        return (
+                                            <ListFooter
+                                                linkComponent={LinkComponent}
+                                            />
+                                        );
+                                    }
+
+                                    const item = items[index - 1];
+
                                     return (
                                         <Draggable
                                             draggableId={item._id}
-                                            index={index}
+                                            index={index - 1}
                                             key={item._id}>
                                             {(provided) => (
                                                 <Item
@@ -70,7 +108,7 @@ export function ServerList({ active, servers, linkComponent }: Props) {
                                                     isDragging={false}
                                                     provided={provided}
                                                     linkComponent={
-                                                        linkComponent
+                                                        LinkComponent
                                                     }
                                                 />
                                             )}
@@ -82,6 +120,15 @@ export function ServerList({ active, servers, linkComponent }: Props) {
                     }}
                 </Droppable>
             </DragDropContext>
+            <LinkComponent url="/settings">
+                <ItemContainer head>
+                    <Avatar
+                        size={42}
+                        fallback={<Cog size={18} />}
+                        interactive
+                    />
+                </ItemContainer>
+            </LinkComponent>
         </Base>
     );
 }
