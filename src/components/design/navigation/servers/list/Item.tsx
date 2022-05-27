@@ -16,6 +16,8 @@ export const ItemContainer = styled.div<{ head?: boolean }>`
     padding-right: 7px;
     padding-bottom: 6px;
 
+    cursor: pointer;
+
     ${(props) =>
         props.head &&
         css`

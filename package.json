@@ -1,6 +1,6 @@
 {
     "name": "@revoltchat/ui",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "Revolt UI component library",
     "type": "commonjs",
     "main": "lib/index.js",
@@ -52,7 +52,7 @@
     },
     "scripts": {
         "build": "yarn build:clean && yarn build:esm && yarn build:bundle",
-        "build:clean": "rimraf dist",
+        "build:clean": "rimraf dist esm",
         "build:esm": "tsc",
         "watch:esm": "tsc-watch",
         "build:bundle": "babel src --out-dir lib --extensions \".ts,.tsx\"",
