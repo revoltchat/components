@@ -1,37 +1,44 @@
 import { Plus } from "@styled-icons/boxicons-regular";
 import { Compass } from "@styled-icons/boxicons-solid";
 import React from "react";
+import { useLink } from "../../../../../lib";
 import { Avatar } from "../../../atoms";
+import { Tooltip } from "../../../atoms/indicators/Tooltip";
 
 import { ItemContainer } from "./Item";
-import { Props } from "./ServerList";
 
 /**
  * Buttons at the bottom of the list, including "create new server" and "discovery".
  */
-export function ListFooter({
-    linkComponent: LinkComponent,
-}: Pick<Props, "linkComponent">) {
+export function ListFooter() {
+    const Link = useLink();
+
     return (
         <>
-            <LinkComponent url="/create">
+            <Link to="/create">
                 <ItemContainer>
-                    <Avatar
-                        size={42}
-                        fallback={<Plus color="var(--accent)" size={24} />}
-                        interactive
-                    />
+                    <Tooltip content="Add a server" div right>
+                        <Avatar
+                            size={42}
+                            fallback={<Plus color="var(--accent)" size={24} />}
+                            interactive
+                        />
+                    </Tooltip>
                 </ItemContainer>
-            </LinkComponent>
-            <LinkComponent url="/discover">
+            </Link>
+            <Link to="/discover">
                 <ItemContainer>
-                    <Avatar
-                        size={42}
-                        fallback={<Compass color="var(--accent)" size={24} />}
-                        interactive
-                    />
+                    <Tooltip content="Discover Revolt" div right>
+                        <Avatar
+                            size={42}
+                            fallback={
+                                <Compass color="var(--accent)" size={24} />
+                            }
+                            interactive
+                        />
+                    </Tooltip>
                 </ItemContainer>
-            </LinkComponent>
+            </Link>
         </>
     );
 }

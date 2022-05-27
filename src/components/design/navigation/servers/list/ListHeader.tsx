@@ -7,19 +7,24 @@ import { isTouchscreenDevice } from "../../../../../lib/isTouchscreenDevice";
 import { Unreads } from "../../../atoms/indicators/Unreads";
 import styled from "styled-components";
 import { Props } from "./ServerList";
+import { useLink, useText } from "../../../../../lib/context";
+import { Tooltip } from "../../../atoms/indicators/Tooltip";
 
-const UserItem = observer(
-    ({ client, linkComponent: LinkComponent, home, active }: Props) => {
-        // Count incoming friend requests, but don't display this on mobile.
-        const alertCount = isTouchscreenDevice
-            ? 0
-            : [...client.users.values()].filter(
-                  (x) => x.relationship === "Incoming",
-              ).length;
+const UserItem = observer(({ client, home, active }: Props) => {
+    const Link = useLink();
+    const Text = useText();
 
-        return (
-            <LinkComponent url={home()}>
-                {!active && <SwooshOverlay />}
+    // Count incoming friend requests, but don't display this on mobile.
+    const alertCount = isTouchscreenDevice
+        ? 0
+        : [...client.users.values()].filter(
+              (x) => x.relationship === "Incoming",
+          ).length;
+
+    return (
+        <Link to={home()}>
+            {!active && <SwooshOverlay />}
+            <Tooltip content={"I am a tooltip!"} div right>
                 <Avatar
                     src={client.user!.generateAvatarURL(
                         {
@@ -42,10 +47,10 @@ const UserItem = observer(
                         </>
                     }
                 />
-            </LinkComponent>
-        );
-    },
-);
+            </Tooltip>
+        </Link>
+    );
+});
 
 const List = styled.div`
     gap: 12px;
@@ -66,39 +71,46 @@ const ChannelInner = observer(
         const count = channel.getMentions(permit).length;
 
         return (
-            <Avatar
-                size={42}
-                interactive
-                holepunch={unread && "top-right"}
-                src={channel.generateIconURL({ max_side: 256 }, false)}
-                overlay={<Unreads unread={unread} count={count} />}
-            />
+            <Tooltip
+                content={
+                    channel.name ?? channel.recipient?.username ?? "Unknown"
+                }
+                div
+                right>
+                <Avatar
+                    size={42}
+                    interactive
+                    holepunch={unread && "top-right"}
+                    src={channel.generateIconURL({ max_side: 256 }, false)}
+                    overlay={<Unreads unread={unread} count={count} />}
+                />
+            </Tooltip>
         );
     },
 );
 
-const UnreadDMs = observer(
-    ({ client, permit, linkComponent: LinkComponent }: Props) => {
-        const channels = [...client.channels.values()].filter(
-            (x) =>
-                (x.channel_type === "DirectMessage" ||
-                    x.channel_type === "Group") &&
-                x.unread,
-        );
+const UnreadDMs = observer(({ client, permit }: Props) => {
+    const Link = useLink();
 
-        if (channels.length === 0) return null;
+    const channels = [...client.channels.values()].filter(
+        (x) =>
+            (x.channel_type === "DirectMessage" ||
+                x.channel_type === "Group") &&
+            x.unread,
+    );
 
-        return (
-            <List>
-                {channels.map((channel) => (
-                    <LinkComponent url={`/channel/${channel._id}`}>
-                        <ChannelInner channel={channel} permit={permit} />
-                    </LinkComponent>
-                ))}
-            </List>
-        );
-    },
-);
+    if (channels.length === 0) return null;
+
+    return (
+        <List>
+            {channels.map((channel) => (
+                <Link to={`/channel/${channel._id}`}>
+                    <ChannelInner channel={channel} permit={permit} />
+                </Link>
+            ))}
+        </List>
+    );
+});
 
 export function ListHeader(props: Props) {
     return (

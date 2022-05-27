@@ -2,7 +2,12 @@ import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ServerList } from "./ServerList";
-import { InjectMockClient, MaskDecorator } from "../../../../../lib/internal";
+import {
+    ContextDecorator,
+    InjectMockClient,
+    MaskDecorator,
+} from "../../../../../lib/internal";
+import { Tooltip } from "../../../atoms/indicators/Tooltip";
 
 export default {
     title: "Navigation/Servers/List",
@@ -32,18 +37,8 @@ export default {
             defaultValue: () => "/",
         },
     },
-    decorators: [MaskDecorator],
+    decorators: [MaskDecorator, ContextDecorator],
 } as ComponentMeta<typeof ServerList>;
-
-function DemoLinkComponent({
-    url,
-    children,
-}: {
-    url: string;
-    children: React.ReactNode;
-}) {
-    return <a onClick={() => alert(`Navigating to ${url}!`)}>{children}</a>;
-}
 
 const Template: ComponentStory<typeof ServerList> = (args) => (
     <InjectMockClient>
@@ -55,11 +50,7 @@ const Template: ComponentStory<typeof ServerList> = (args) => (
                     display: "flex",
                     flexDirection: "row",
                 }}>
-                <ServerList
-                    {...args}
-                    client={client}
-                    linkComponent={DemoLinkComponent}
-                />
+                <ServerList {...args} client={client} />
             </div>
         )}
     </InjectMockClient>

@@ -2,7 +2,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Virtuoso } from "react-virtuoso";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { InnerProps, Item, ItemContainer } from "./Item";
+import { Item, ItemContainer } from "./Item";
 
 import { ListHeader } from "./ListHeader";
 import { ListFooter } from "./ListFooter";
@@ -12,8 +12,10 @@ import type { Client } from "revolt.js";
 import type { INotificationChecker } from "revolt.js/dist/util/Unreads";
 import { Avatar } from "../../../atoms";
 import { Cog } from "@styled-icons/boxicons-solid";
+import { useLink } from "../../../../../lib/context";
+import { Tooltip } from "../../../atoms/indicators/Tooltip";
 
-export type Props = Pick<InnerProps, "linkComponent"> & {
+export type Props = {
     /**
      * Client handle
      */
@@ -68,8 +70,10 @@ const Shadow = styled.div`
  * Server List
  */
 export function ServerList(props: Props) {
-    const { active, client, linkComponent: LinkComponent } = props;
+    const { active, client } = props;
     const [items, setItems] = useState([...client.servers.values()]);
+
+    const Link = useLink();
 
     return (
         <Base>
@@ -81,7 +85,6 @@ export function ServerList(props: Props) {
                         <Item
                             active={false}
                             provided={provided}
-                            linkComponent={LinkComponent}
                             isDragging={snapshot.isDragging}
                             item={items[rubric.source.index]}
                         />
@@ -100,11 +103,7 @@ export function ServerList(props: Props) {
                                     }
 
                                     if (index === items.length + 1) {
-                                        return (
-                                            <ListFooter
-                                                linkComponent={LinkComponent}
-                                            />
-                                        );
+                                        return <ListFooter />;
                                     }
 
                                     const item = items[index - 1];
@@ -120,9 +119,6 @@ export function ServerList(props: Props) {
                                                     active={item._id === active}
                                                     isDragging={false}
                                                     provided={provided}
-                                                    linkComponent={
-                                                        LinkComponent
-                                                    }
                                                 />
                                             )}
                                         </Draggable>
@@ -136,15 +132,17 @@ export function ServerList(props: Props) {
             <Shadow>
                 <div />
             </Shadow>
-            <LinkComponent url="/settings">
-                <ItemContainer head>
-                    <Avatar
-                        size={42}
-                        fallback={<Cog size={18} />}
-                        interactive
-                    />
-                </ItemContainer>
-            </LinkComponent>
+            <ItemContainer head>
+                <Link to="/settings">
+                    <Tooltip i18n="app.settings.title" div right>
+                        <Avatar
+                            size={42}
+                            fallback={<Cog size={18} />}
+                            interactive
+                        />
+                    </Tooltip>
+                </Link>
+            </ItemContainer>
         </Base>
     );
 }

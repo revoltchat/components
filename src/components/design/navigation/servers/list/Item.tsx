@@ -7,6 +7,8 @@ import { DraggableProps } from "../../../../common";
 import { Avatar } from "../../../atoms";
 import { Unreads } from "../../../atoms/indicators/Unreads";
 import { Swoosh } from "./Swoosh";
+import { useLink } from "../../../../../lib/context";
+import { Tooltip } from "../../../atoms/indicators/Tooltip";
 
 export const ItemContainer = styled.div<{ head?: boolean }>`
     width: 56px;
@@ -39,33 +41,34 @@ export function SwooshOverlay() {
     );
 }
 
-const Inner = observer(({ item, linkComponent: LinkComponent }: InnerProps) => {
+const Inner = observer(({ item }: InnerProps) => {
+    const Link = useLink();
     const unread = !!item.isUnread();
     const count = item.getMentions().length;
 
     return (
-        <LinkComponent url={"/server/" + item._id}>
-            <Avatar
-                size={42}
-                interactive
-                fallback={item.name}
-                holepunch={(unread || count > 0) && "top-right"}
-                overlay={<Unreads unread={unread} count={count} />}
-                src={item.generateIconURL({ max_side: 256 }, false)}
-            />
-        </LinkComponent>
+        <Tooltip content={item.name} div right>
+            <Link to={"/server/" + item._id}>
+                <Avatar
+                    size={42}
+                    interactive
+                    fallback={item.name}
+                    holepunch={(unread || count > 0) && "top-right"}
+                    overlay={<Unreads unread={unread} count={count} />}
+                    src={item.generateIconURL({ max_side: 256 }, false)}
+                />
+            </Link>
+        </Tooltip>
     );
 });
 
 export type InnerProps = {
     item: Server;
-    linkComponent: React.FC<{ url: string; children: ReactNode }>;
 };
 
-type Props = DraggableProps<Server> &
-    Pick<InnerProps, "linkComponent"> & {
-        active: boolean;
-    };
+type Props = DraggableProps<Server> & {
+    active: boolean;
+};
 
 export function Item({ provided, isDragging, active, ...innerProps }: Props) {
     return (
