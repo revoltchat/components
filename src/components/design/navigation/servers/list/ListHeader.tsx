@@ -7,12 +7,12 @@ import { isTouchscreenDevice } from "../../../../../lib/isTouchscreenDevice";
 import { Unreads } from "../../../atoms/indicators/Unreads";
 import styled from "styled-components";
 import { Props } from "./ServerList";
-import { useLink, useText } from "../../../../../lib/context";
+import { useLink } from "../../../../../lib/context";
 import { Tooltip } from "../../../atoms/indicators/Tooltip";
+import { UserTooltip } from "../../../atoms/indicators/UserTooltip";
 
 const UserItem = observer(({ client, home, active }: Props) => {
     const Link = useLink();
-    const Text = useText();
 
     // Count incoming friend requests, but don't display this on mobile.
     const alertCount = isTouchscreenDevice
@@ -24,7 +24,7 @@ const UserItem = observer(({ client, home, active }: Props) => {
     return (
         <Link to={home()}>
             {!active && <SwooshOverlay />}
-            <Tooltip content={"I am a tooltip!"} div right>
+            <UserTooltip user={client.user!} div right>
                 <Avatar
                     src={client.user!.generateAvatarURL(
                         {
@@ -47,7 +47,7 @@ const UserItem = observer(({ client, home, active }: Props) => {
                         </>
                     }
                 />
-            </Tooltip>
+            </UserTooltip>
         </Link>
     );
 });

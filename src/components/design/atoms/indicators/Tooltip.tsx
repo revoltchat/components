@@ -2,7 +2,7 @@ import React from "react";
 import Tippy, { TippyProps } from "@tippyjs/react";
 import { useText } from "../../../../lib";
 
-type Props = TippyProps & {
+export type TooltipProps = TippyProps & {
     /**
      * Add wrapper <div/> around content.
      *
@@ -26,7 +26,7 @@ type Props = TippyProps & {
 /**
  * Generic tooltip component
  */
-export function Tooltip({ div, ...props }: Props) {
+export function Tooltip({ div, ...props }: TooltipProps) {
     // Wrap the child element in a div
     if (div) {
         const { children, ...tippy } = props;
