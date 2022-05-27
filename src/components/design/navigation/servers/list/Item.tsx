@@ -9,6 +9,7 @@ import { Unreads } from "../../../atoms/indicators/Unreads";
 import { Swoosh } from "./Swoosh";
 import { useLink, useTrigger } from "../../../../../lib/context";
 import { Tooltip } from "../../../atoms/indicators/Tooltip";
+import { INotificationChecker } from "revolt.js/dist/util/Unreads";
 
 export const ItemContainer = styled.div<{ head?: boolean }>`
     width: 56px;
@@ -43,11 +44,11 @@ export function SwooshOverlay() {
     );
 }
 
-const Inner = observer(({ item }: InnerProps) => {
+const Inner = observer(({ item, permit }: InnerProps) => {
     const Link = useLink();
     const Trigger = useTrigger();
-    const unread = !!item.isUnread();
-    const count = item.getMentions().length;
+    const unread = !!item.isUnread(permit);
+    const count = item.getMentions(permit).length;
 
     return (
         <Tooltip content={item.name} div right>
@@ -69,11 +70,13 @@ const Inner = observer(({ item }: InnerProps) => {
 
 export type InnerProps = {
     item: Server;
+    permit: INotificationChecker;
 };
 
-type Props = DraggableProps<Server> & {
-    active: boolean;
-};
+type Props = DraggableProps<Server> &
+    InnerProps & {
+        active: boolean;
+    };
 
 export function Item({ provided, isDragging, active, ...innerProps }: Props) {
     return (

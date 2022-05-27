@@ -83,7 +83,7 @@ const Shadow = styled.div`
  */
 export function ServerList(props: Props & ParentProps & FooterProps) {
     const { servers, reorder, ...innerProps } = props;
-    const { active, createServer } = props;
+    const { active, createServer, permit } = props;
 
     const Link = useLink();
 
@@ -96,6 +96,7 @@ export function ServerList(props: Props & ParentProps & FooterProps) {
                     renderClone={(provided, snapshot, rubric) => (
                         <Item
                             active={false}
+                            permit={permit}
                             provided={provided}
                             isDragging={snapshot.isDragging}
                             item={servers[rubric.source.index]}
@@ -132,6 +133,7 @@ export function ServerList(props: Props & ParentProps & FooterProps) {
                                             {(provided) => (
                                                 <Item
                                                     item={item}
+                                                    permit={permit}
                                                     active={item._id === active}
                                                     isDragging={false}
                                                     provided={provided}
