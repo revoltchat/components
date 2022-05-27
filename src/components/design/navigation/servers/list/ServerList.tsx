@@ -51,6 +51,19 @@ const Base = styled.div`
     }
 `;
 
+const Shadow = styled.div`
+    height: 0;
+    z-index: 1;
+    display: relative;
+
+    div {
+        height: 12px;
+        margin-top: -12px;
+        display: absolute;
+        background: linear-gradient(to bottom, transparent, var(--background));
+    }
+`;
+
 /**
  * Server List
  */
@@ -120,6 +133,9 @@ export function ServerList(props: Props) {
                     }}
                 </Droppable>
             </DragDropContext>
+            <Shadow>
+                <div />
+            </Shadow>
             <LinkComponent url="/settings">
                 <ItemContainer head>
                     <Avatar

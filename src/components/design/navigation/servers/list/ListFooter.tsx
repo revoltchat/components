@@ -6,6 +6,9 @@ import { Avatar } from "../../../atoms";
 import { ItemContainer } from "./Item";
 import { Props } from "./ServerList";
 
+/**
+ * Buttons at the bottom of the list, including "create new server" and "discovery".
+ */
 export function ListFooter({
     linkComponent: LinkComponent,
 }: Pick<Props, "linkComponent">) {
