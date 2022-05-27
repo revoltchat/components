@@ -75,9 +75,7 @@ const ChannelInner = observer(
 
         return (
             <Tooltip
-                content={
-                    channel.name ?? channel.recipient?.username ?? "Unknown"
-                }
+                content={channel.name ?? channel.recipient?.username}
                 div
                 right>
                 <Avatar

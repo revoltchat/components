@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Item, ItemContainer } from "./Item";
 
 import { ListHeader } from "./ListHeader";
-import { ListFooter } from "./ListFooter";
+import { FooterProps, ListFooter } from "./ListFooter";
 import { useDragEndReorder, useDndComponents } from "../../../../common";
 
 import type { Client } from "revolt.js";
@@ -69,8 +69,8 @@ const Shadow = styled.div`
 /**
  * Server List
  */
-export function ServerList(props: Props) {
-    const { active, client } = props;
+export function ServerList(props: Props & FooterProps) {
+    const { active, client, createServer } = props;
     const [items, setItems] = useState([...client.servers.values()]);
 
     const Link = useLink();
@@ -103,7 +103,11 @@ export function ServerList(props: Props) {
                                     }
 
                                     if (index === items.length + 1) {
-                                        return <ListFooter />;
+                                        return (
+                                            <ListFooter
+                                                createServer={createServer}
+                                            />
+                                        );
                                     }
 
                                     const item = items[index - 1];

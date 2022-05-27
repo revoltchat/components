@@ -7,15 +7,19 @@ import { Tooltip } from "../../../atoms/indicators/Tooltip";
 
 import { ItemContainer } from "./Item";
 
+export interface FooterProps {
+    createServer: () => void;
+}
+
 /**
  * Buttons at the bottom of the list, including "create new server" and "discovery".
  */
-export function ListFooter() {
+export function ListFooter({ createServer }: FooterProps) {
     const Link = useLink();
 
     return (
         <>
-            <Link to="/create">
+            <a onClick={createServer}>
                 <ItemContainer>
                     <Tooltip content="Add a server" div right>
                         <Avatar
@@ -25,7 +29,7 @@ export function ListFooter() {
                         />
                     </Tooltip>
                 </ItemContainer>
-            </Link>
+            </a>
             <Link to="/discover">
                 <ItemContainer>
                     <Tooltip content="Discover Revolt" div right>
