@@ -10,7 +10,7 @@ interface BaseProps {
     readonly largeDescription?: boolean;
 }
 
-const Base = styled.button<BaseProps>`
+const Base = styled.a<BaseProps>`
     // ! FIXME: clean up CSS
     padding: 9.8px 12px;
     border-radius: var(--border-radius);
