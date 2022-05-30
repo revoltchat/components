@@ -5,13 +5,12 @@ import { ChevronRight, LinkExternal } from "@styled-icons/boxicons-regular";
 interface BaseProps {
     // ! FIXME: Use Pick<>
     // figure out wtf largeDesc and hover are
-    readonly hover?: boolean;
     readonly account?: boolean;
     readonly disabled?: boolean;
     readonly largeDescription?: boolean;
 }
 
-const Base = styled.div<BaseProps>`
+const Base = styled.button<BaseProps>`
     // ! FIXME: clean up CSS
     padding: 9.8px 12px;
     border-radius: var(--border-radius);
@@ -65,31 +64,28 @@ const Base = styled.div<BaseProps>`
     }
 
     ${(props) =>
-        props.hover &&
-        css`
-            cursor: pointer;
-            opacity: 1;
-            transition: 0.1s ease background-color;
-
-            &:hover {
-                background: var(--secondary-background);
-            }
-        `}
-
-    ${(props) =>
-        props.disabled &&
-        css`
-            opacity: 0.4;
-            /*.content,
+        props.disabled
+            ? css`
+                  opacity: 0.4;
+                  /*.content,
             .action {
                 color: var(--tertiary-foreground);
             }*/
 
-            .action {
-                font-size: 0.875rem;
-            }
-        `}
-    
+                  .action {
+                      font-size: 0.875rem;
+                  }
+              `
+            : css`
+                  cursor: pointer;
+                  opacity: 1;
+                  transition: 0.1s ease background-color;
+
+                  &:hover {
+                      background: var(--secondary-background);
+                  }
+              `}
+
     ${(props) =>
         props.account &&
         css`
@@ -131,15 +127,10 @@ export function CategoryButton({
     account,
     disabled,
     onClick,
-    hover,
     action,
 }: Props) {
     return (
-        <Base
-            hover={hover || typeof onClick !== "undefined"}
-            onClick={onClick}
-            disabled={disabled}
-            account={account}>
+        <Base onClick={onClick} disabled={disabled} account={account}>
             {icon}
             <div className="content">
                 <div className="title">{children}</div>
