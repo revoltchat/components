@@ -9,7 +9,7 @@ const normal = `var(--secondary-foreground)`;
 const hover = `var(--foreground)`;
 // TODO: add active modifier
 
-export const IconButton = styled.div<Props>`
+export const IconButton = styled.a<Props>`
     width: fit-content;
 
     z-index: 1;
