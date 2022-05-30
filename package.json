@@ -53,7 +53,7 @@
     "scripts": {
         "build": "yarn build:clean && yarn build:esm && yarn build:bundle",
         "build:clean": "rimraf dist esm",
-        "build:esm": "tsc",
+        "build:esm": "babel src --no-babelrc --out-dir esm --extensions \".ts,.tsx\" --config-file ./.babelrc.es && tsc",
         "watch:esm": "tsc-watch",
         "build:bundle": "babel src --out-dir lib --extensions \".ts,.tsx\"",
         "watch:bundle": "yarn build:bundle --watch",
