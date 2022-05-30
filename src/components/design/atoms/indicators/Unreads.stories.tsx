@@ -4,6 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Unreads } from "./Unreads";
 import { Avatar } from "../layout/Avatar";
 import { Masks } from "../../../common";
+import { MaskDecorator } from "../../../../lib/internal";
 
 export default {
     title: "Design System/Atoms/Indicators/Unreads",
@@ -14,17 +15,15 @@ export default {
             defaultValue: true,
         },
     },
+    decorators: [MaskDecorator],
 } as ComponentMeta<typeof Unreads>;
 
 const Template: ComponentStory<typeof Unreads> = (args) => (
-    <>
-        <Avatar
-            size={256}
-            holepunch={(args.unread || args.count > 0) && "top-right"}
-            overlay={<Unreads {...args} />}
-        />
-        <Masks />
-    </>
+    <Avatar
+        size={256}
+        holepunch={(args.unread || args.count > 0) && "top-right"}
+        overlay={<Unreads {...args} />}
+    />
 );
 
 export const Default = Template.bind({});

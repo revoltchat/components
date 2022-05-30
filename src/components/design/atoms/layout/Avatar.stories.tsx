@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Avatar } from "./Avatar";
 import { Masks } from "../../../common";
+import { MaskDecorator } from "../../../../lib/internal";
 
 export default {
     title: "Design System/Atoms/Layout/Avatar",
@@ -31,13 +32,9 @@ export default {
             type: "symbol",
         },
     },
+    decorators: [MaskDecorator],
 } as ComponentMeta<typeof Avatar>;
 
-const Template: ComponentStory<typeof Avatar> = (args) => (
-    <div>
-        <Avatar {...args} />
-        <Masks />
-    </div>
-);
+const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
 
 export const Default = Template.bind({});

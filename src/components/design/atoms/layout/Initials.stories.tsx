@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Initials } from "./Initials";
 import { Masks } from "../../../common";
+import { MaskDecorator } from "../../../../lib/internal";
 
 export default {
     title: "Design System/Atoms/Layout/Initials",
@@ -16,13 +17,11 @@ export default {
             name: "Max Length",
         },
     },
+    decorators: [MaskDecorator],
 } as ComponentMeta<typeof Initials>;
 
 const Template: ComponentStory<typeof Initials> = (args) => (
-    <div>
-        <Initials {...args} />
-        <Masks />
-    </div>
+    <Initials {...args} />
 );
 
 export const Default = Template.bind({});
