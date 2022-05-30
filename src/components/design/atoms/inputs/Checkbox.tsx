@@ -5,16 +5,22 @@ import { Check } from "@styled-icons/boxicons-regular";
 
 const Base = styled.label`
     gap: 10px;
+    padding: 4px;
     display: flex;
-    align-items: center;
     cursor: pointer;
     user-select: none;
+    align-items: center;
+
+    border-radius: var(--border-radius);
+    transition: 0.1s ease background-color;
 
     input {
         display: none;
     }
 
     &:hover {
+        background: var(--secondary-background);
+
         .playSound {
             visibility: visible;
             opacity: 1;
@@ -35,8 +41,8 @@ const Base = styled.label`
 `;
 
 const Content = styled.div`
-    display: flex;
     flex-direction: column;
+    display: flex;
     flex-grow: 1;
     gap: 3px;
 `;
