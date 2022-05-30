@@ -6,7 +6,6 @@ import { Check } from "@styled-icons/boxicons-regular";
 const Base = styled.label`
     gap: 10px;
     display: flex;
-    margin-top: 20px;
     align-items: center;
     cursor: pointer;
     user-select: none;
@@ -133,7 +132,10 @@ export type Props = {
 
     readonly value: boolean;
     readonly onChange: (state: boolean) => void;
-} & Omit<HTMLAttributes<HTMLLabelElement>, "value" | "children" | "onChange">;
+} & Omit<
+    HTMLAttributes<HTMLLabelElement>,
+    "value" | "children" | "onChange" | "title"
+>;
 
 export function Checkbox({
     disabled,
