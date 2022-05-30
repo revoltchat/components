@@ -7,6 +7,11 @@ export default {
     title: "Design System/Atoms/Layout/Category",
     component: Category,
     argTypes: {
+        compact: {
+            name: "Compact",
+            type: "boolean",
+            defaultValue: false,
+        },
         children: {
             name: "Content",
             type: "string",

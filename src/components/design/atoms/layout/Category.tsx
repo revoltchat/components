@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Category = styled.div`
+export interface Props {
+    compact?: boolean;
+}
+
+export const Category = styled.div<Props>`
     font-size: 0.75rem;
     font-weight: 700;
     color: var(--foreground);
@@ -9,7 +13,7 @@ export const Category = styled.div`
     margin-top: 4px;
     margin-bottom: 4px;
     white-space: nowrap;
-    padding: 6px 0 6px 8px;
+    padding: ${(props) => (props.compact ? "0 4px" : "6px 0 6px 8px")};
 
     display: flex;
     align-items: center;
