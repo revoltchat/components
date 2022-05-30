@@ -125,7 +125,6 @@ const Content = styled.div<Pick<Props, "transparent" | "padding">>`
     overflow-y: auto;
     font-size: 0.9375rem;
 
-    gap: 4px;
     display: flex;
     flex-direction: column;
 
