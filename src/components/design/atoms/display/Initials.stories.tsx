@@ -6,7 +6,7 @@ import { Masks } from "../../../common";
 import { MaskDecorator } from "../../../../lib/internal";
 
 export default {
-    title: "Design System/Atoms/Layout/Initials",
+    title: "Design System/Atoms/Display/Initials",
     component: Initials,
     argTypes: {
         input: {

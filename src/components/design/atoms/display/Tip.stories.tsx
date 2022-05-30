@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Tip } from "./Tip";
 
 export default {
-    title: "Design System/Atoms/Layout/Tip",
+    title: "Design System/Atoms/Display/Tip",
     component: Tip,
     argTypes: {
         children: {

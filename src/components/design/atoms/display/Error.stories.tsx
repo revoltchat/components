@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Error } from "./Error";
 
 export default {
-    title: "Design System/Atoms/Layout/Error",
+    title: "Design System/Atoms/Display/Error",
     component: Error,
     argTypes: {
         children: {

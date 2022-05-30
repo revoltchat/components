@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Category } from "./Category";
 
 export default {
-    title: "Design System/Atoms/Layout/Category",
+    title: "Design System/Atoms/Display/Category",
     component: Category,
     argTypes: {
         compact: {

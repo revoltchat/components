@@ -5,7 +5,7 @@ import { ChevronDown, ChevronRight } from "@styled-icons/boxicons-regular";
 import { Details } from "./Details";
 
 export default {
-    title: "Design System/Atoms/Layout/Details",
+    title: "Design System/Atoms/Display/Details",
     component: Details,
     argTypes: {
         children: {

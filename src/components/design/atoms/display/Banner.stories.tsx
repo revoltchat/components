@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Banner } from "./Banner";
 
 export default {
-    title: "Design System/Atoms/Layout/Banner",
+    title: "Design System/Atoms/Display/Banner",
     component: Banner,
     argTypes: {
         children: {

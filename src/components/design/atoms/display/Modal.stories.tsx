@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Modal } from "./Modal";
 
 export default {
-    title: "Design System/Atoms/Layout/Modal",
+    title: "Design System/Atoms/Display/Modal",
     component: Modal,
     argTypes: {
         open: {

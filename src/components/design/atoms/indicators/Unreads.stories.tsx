@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Unreads } from "./Unreads";
-import { Avatar } from "../layout/Avatar";
+import { Avatar } from "../display/Avatar";
 import { Masks } from "../../../common";
 import { MaskDecorator } from "../../../../lib/internal";
 

@@ -6,7 +6,7 @@ import { Masks } from "../../../common";
 import { MaskDecorator } from "../../../../lib/internal";
 
 export default {
-    title: "Design System/Atoms/Layout/Avatar",
+    title: "Design System/Atoms/Display/Avatar",
     component: Avatar,
     argTypes: {
         size: {

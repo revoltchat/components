@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Header } from "./Header";
 
 export default {
-    title: "Design System/Atoms/Layout/Header",
+    title: "Design System/Atoms/Display/Header",
     component: Header,
     argTypes: {
         children: {

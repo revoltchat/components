@@ -4,7 +4,7 @@ import { Turbo } from "../indicators/Turbo";
 import { LineDivider } from "./LineDivider";
 
 export default {
-    title: "Design System/Atoms/Layout/Line Divider",
+    title: "Design System/Atoms/Display/Line Divider",
     component: LineDivider,
     argTypes: {
         /*palette: {
