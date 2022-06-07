@@ -43,9 +43,7 @@ const UserItem = observer(({ client, home, active }: Props) => {
                                     count={alertCount}
                                     unread={alertCount > 0}
                                 />
-                                <UserStatus
-                                    status={client.user?.status?.presence}
-                                />
+                                <UserStatus user={client.user!} />
                             </>
                         }
                     />

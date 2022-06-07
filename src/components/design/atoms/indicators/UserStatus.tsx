@@ -1,14 +1,17 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
+
 import type { UserStatus as Interface } from "revolt-api";
+import type { User } from "revolt.js";
 
 export type Props = {
     /**
-     * User status
+     * User we are dealing with
      */
-    status: Interface["presence"];
+    user?: User;
 };
 
-const mappings: Record<Props["status"] & string, string> = {
+const mappings: Record<Interface["presence"] & string, string> = {
     Online: "online",
     Idle: "away",
     Busy: "busy",
@@ -18,13 +21,18 @@ const mappings: Record<Props["status"] & string, string> = {
 /**
  * Overlays user status in current SVG
  */
-export function UserStatus({ status }: Props) {
+export const UserStatus = observer(({ user }: Props) => {
     return (
         <circle
             cx="27"
             cy="27"
             r="5"
-            fill={`var(--status-${mappings[status!] ?? "invisible"})`}
+            fill={`var(--status-${
+                mappings[
+                    user?.status?.presence ??
+                        (user?.online ? "Online" : "Invisible")
+                ]
+            })`}
         />
     );
-}
+});

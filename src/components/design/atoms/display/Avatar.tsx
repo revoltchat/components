@@ -25,6 +25,8 @@ const FallbackBase = styled.div`
 `;
 
 const ParentBase = styled.svg<Pick<Props, "interactive">>`
+    user-select: none;
+
     foreignObject {
         transition: 150ms ease filter;
     }
@@ -32,6 +34,8 @@ const ParentBase = styled.svg<Pick<Props, "interactive">>`
     ${(props) =>
         props.interactive &&
         css`
+            cursor: pointer;
+
             &:hover foreignObject {
                 filter: brightness(0.8);
             }
