@@ -16,7 +16,7 @@ import {
 export type Action = Omit<React.HTMLAttributes<HTMLButtonElement>, "as"> &
     Omit<ButtonProps, "onClick"> & {
         confirmation?: boolean;
-        onClick: () => void;
+        onClick: () => void | boolean | Promise<boolean>;
     };
 
 export interface Props {
@@ -166,8 +166,10 @@ export function Modal({
         if (!closing) setTimeout(() => onClose?.(true), 2e2);
     }, [closing, props]);
 
-    const confirm = useCallback(() => {
-        actions?.find((x) => x.confirmation)?.onClick?.();
+    const confirm = useCallback(async () => {
+        if (await actions?.find((x) => x.confirmation)?.onClick?.()) {
+            closeModal();
+        }
     }, [actions]);
 
     useEffect(() => {
@@ -193,7 +195,16 @@ export function Modal({
                 {actions && actions.length > 0 && (
                     <Actions>
                         {actions.map((x, index) => (
-                            <Button disabled={disabled} key={index} {...x} />
+                            <Button
+                                disabled={disabled}
+                                key={index}
+                                {...x}
+                                onClick={async () => {
+                                    if (await x.onClick()) {
+                                        closeModal();
+                                    }
+                                }}
+                            />
                         ))}
                     </Actions>
                 )}
