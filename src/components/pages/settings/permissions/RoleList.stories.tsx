@@ -5,7 +5,7 @@ import { useArgs } from "@storybook/client-api";
 import { Props, RoleList } from "./RoleList";
 
 export default {
-    title: "Pages/Permissions/Role List",
+    title: "Pages/Settings/Permissions/Role List",
     component: RoleList,
     args: {
         server: {

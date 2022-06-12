@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 import { Role, Server } from "revolt-api";
 import styled from "styled-components";
-import { Button, ButtonItem } from "../../design";
+import { Button, ButtonItem } from "../../../design";
 import { Lock } from "@styled-icons/boxicons-solid";
 
 const Base = styled.div`

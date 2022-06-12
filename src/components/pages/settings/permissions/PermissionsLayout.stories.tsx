@@ -6,7 +6,7 @@ import { PermissionsLayout, Props } from "./PermissionsLayout";
 import RoleListStory from "./RoleList.stories";
 
 export default {
-    title: "Pages/Permissions/Permissions Layout",
+    title: "Pages/Settings/Permissions/Permissions Layout",
     component: PermissionsLayout,
     args: {
         server: RoleListStory.args!.server,
