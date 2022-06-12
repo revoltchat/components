@@ -1,26 +1,39 @@
 import React, { createContext, Fragment, useContext } from "react";
 
-const LinkComponentContext = createContext<React.FC<{ to: string }>>(Fragment);
-const TextComponentContext = createContext<React.FC<{ id: string }>>(Fragment);
-const TrigComponentContext =
-    createContext<
-        React.FC<
-            | {
-                  id: "Menu";
-                  data?: {
-                      server?: string;
-                      channel?: string;
-                      unread?: boolean;
-                  };
-              }
-            | { id: "Status" }
-        >
-    >(Fragment);
+export type ContextMenu =
+    | {
+          id: "Menu";
+          data?: {
+              server?: string;
+              channel?: string;
+              unread?: boolean;
+          };
+      }
+    | { id: "Status" };
 
-export const LinkProvider = LinkComponentContext.Provider;
-export const TextProvider = TextComponentContext.Provider;
-export const TrigProvider = TrigComponentContext.Provider;
+export type Action = {
+    type: "WriteClipboard";
+    text: string;
+};
 
-export const useLink = () => useContext(LinkComponentContext);
-export const useText = () => useContext(TextComponentContext);
-export const useTrigger = () => useContext(TrigComponentContext);
+const UIContext = createContext<{
+    Link: React.FC<{ to: string; replace?: boolean }>;
+    Text: React.FC<{ id: string }>;
+    Trigger: React.FC<ContextMenu>;
+    emitAction: (action: Action) => void;
+    // TODO: migrate to react router v6 and add `navigate`
+}>({
+    Link: Fragment,
+    Text: Fragment,
+    Trigger: Fragment,
+    emitAction: () => {},
+});
+
+export const UIProvider = UIContext.Provider;
+
+export const useLink = () => useContext(UIContext).Link;
+export const useText = () => useContext(UIContext).Text;
+export const useTrigger = () => useContext(UIContext).Trigger;
+export const useEmitter = () => useContext(UIContext).emitAction;
+
+export const useUI = () => useContext(UIContext);

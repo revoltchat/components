@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import type { Client } from "revolt.js";
 import { Masks } from "../../lib";
-import { LinkProvider, TextProvider, TrigProvider } from "./context";
+import { UIProvider } from "./context";
 export const mockClient = () => (window as any).mock as Client;
 
 export const InjectMockClient = ({
@@ -43,19 +43,17 @@ export const MaskDecorator = (Story: React.FC) => (
 );
 
 export const ContextDecorator = (Story: React.FC) => (
-    <TrigProvider
-        value={({ children }) => (
-            <div onContextMenu={() => alert("CTX MENU")}>{children}</div>
-        )}>
-        <TextProvider value={({ id }) => <>{id}</>}>
-            <LinkProvider
-                value={({ to, children }) => (
-                    <a onClick={() => alert(`Navigate to ${to}!`)}>
-                        {children}
-                    </a>
-                )}>
-                <Story />
-            </LinkProvider>
-        </TextProvider>
-    </TrigProvider>
+    <UIProvider
+        value={{
+            Link: ({ to, children }) => (
+                <a onClick={() => alert(`Navigate to ${to}!`)}>{children}</a>
+            ),
+            Text: ({ id }) => <>{id}</>,
+            Trigger: ({ children }) => (
+                <div onContextMenu={() => alert("CTX MENU")}>{children}</div>
+            ),
+            emitAction: (action) => console.info(action),
+        }}>
+        <Story />
+    </UIProvider>
 );
