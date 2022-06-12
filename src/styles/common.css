@@ -54,6 +54,7 @@ html {
 * {
     box-sizing: border-box;
     font-family: var(--font) !important;
+    image-rendering: -webkit-optimize-contrast;
     scrollbar-width: var(--scrollbar-thickness-ff);
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }

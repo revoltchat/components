@@ -1,16 +1,21 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, Fragment, useContext } from "react";
 
-const LinkComponentContext = createContext<React.FC<{ to: string }>>(null!);
-const TextComponentContext = createContext<React.FC<{ id: string }>>(null!);
-const TrigComponentContext = createContext<
-    React.FC<
-        | {
-              id: "Menu";
-              data?: { server?: string; channel?: string; unread?: boolean };
-          }
-        | { id: "Status" }
-    >
->(null!);
+const LinkComponentContext = createContext<React.FC<{ to: string }>>(Fragment);
+const TextComponentContext = createContext<React.FC<{ id: string }>>(Fragment);
+const TrigComponentContext =
+    createContext<
+        React.FC<
+            | {
+                  id: "Menu";
+                  data?: {
+                      server?: string;
+                      channel?: string;
+                      unread?: boolean;
+                  };
+              }
+            | { id: "Status" }
+        >
+    >(Fragment);
 
 export const LinkProvider = LinkComponentContext.Provider;
 export const TextProvider = TextComponentContext.Provider;
