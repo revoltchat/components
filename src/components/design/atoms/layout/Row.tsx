@@ -23,6 +23,8 @@ interface Props {
 export const Row = styled.div<Props>`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     gap: ${(props) => props.gap ?? "8px"};
 
     ${(props) =>

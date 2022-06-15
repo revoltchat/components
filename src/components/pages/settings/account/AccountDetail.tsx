@@ -19,6 +19,15 @@ const UserId = styled.div`
     }
 `;
 
+const EditButton = styled.div`
+    @media screen and (max-width: 800px) {
+        width 100%;
+        button {
+            width 100%;
+        }
+    }
+`;
+
 export interface Props {
     /**
      * User object
@@ -65,13 +74,15 @@ export function AccountDetail({ user }: Props) {
                     </Tooltip>
                 </UserId>
             </Column>
-            <Column centred>
-                <Link to="/settings/profile" replace>
-                    <Button palette="secondary">
-                        <Text id="app.settings.pages.profile.edit_profile" />
-                    </Button>
-                </Link>
-            </Column>
+            <EditButton>
+                <Column centred>
+                    <Link to="/settings/profile" replace>
+                        <Button palette="secondary">
+                            <Text id="app.settings.pages.profile.edit_profile" />
+                        </Button>
+                    </Link>
+                </Column>
+            </EditButton>
         </Row>
     );
 }
