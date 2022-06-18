@@ -63,7 +63,7 @@ const Head = styled.div`
     }
 `;
 
-export default observer(({ message, head }: Props) => {
+export const Message = observer(({ message, head }: Props) => {
     return (
         <Wrapper head={head}>
             <MessageEl>
