@@ -31,6 +31,7 @@ export interface Props {
     actions?: Action[];
     onClose?: (force: boolean) => void;
 
+    signal?: "close" | "confirm";
     registerOnClose?: (fn: () => void) => () => void;
     registerOnConfirm?: (fn: () => void) => () => void;
 
@@ -157,6 +158,7 @@ export function Modal({
     nonDismissable,
     registerOnClose,
     registerOnConfirm,
+    signal,
     ...props
 }: Props) {
     const [closing, setClosing] = useState(false);
@@ -178,6 +180,14 @@ export function Modal({
     }, [closeModal]);
 
     useEffect(() => registerOnConfirm?.(confirm), [confirm]);
+
+    useEffect(() => {
+        if (signal === "close") {
+            closeModal();
+        } else {
+            confirm();
+        }
+    }, [signal]);
 
     return createPortal(
         <Base closing={closing} onClick={() => !nonDismissable && closeModal()}>
