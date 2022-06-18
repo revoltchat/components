@@ -33,7 +33,7 @@ export function AccountDetail({ user }: Props) {
     const { Link, Text, emitAction } = useUI();
 
     return (
-        <Row gap="16px">
+        <Row gap="16px" centred>
             <Link to="/settings/profile" replace>
                 <Avatar
                     src={user.generateAvatarURL({
@@ -43,35 +43,35 @@ export function AccountDetail({ user }: Props) {
                     interactive
                 />
             </Link>
-            <Column centred grow>
-                <H1>@{user.username}</H1>
-                <UserId>
-                    <Tooltip
-                        content={
-                            <Text id="app.settings.pages.account.unique_id" />
-                        }>
-                        <HelpCircle size={16} />
-                    </Tooltip>
-                    <Tooltip content={<Text id="app.special.copy" />}>
-                        <a
-                            onClick={() =>
-                                emitAction({
-                                    type: "WriteClipboard",
-                                    text: user._id,
-                                })
+            <Row grow>
+                <Column>
+                    <H1>@{user.username}</H1>
+                    <UserId>
+                        <Tooltip
+                            content={
+                                <Text id="app.settings.pages.account.unique_id" />
                             }>
-                            {user._id}
-                        </a>
-                    </Tooltip>
-                </UserId>
-            </Column>
-            <Column centred>
-                <Link to="/settings/profile" replace>
-                    <Button palette="secondary">
-                        <Text id="app.settings.pages.profile.edit_profile" />
-                    </Button>
-                </Link>
-            </Column>
+                            <HelpCircle size={16} />
+                        </Tooltip>
+                        <Tooltip content={<Text id="app.special.copy" />}>
+                            <a
+                                onClick={() =>
+                                    emitAction({
+                                        type: "WriteClipboard",
+                                        text: user._id,
+                                    })
+                                }>
+                                {user._id}
+                            </a>
+                        </Tooltip>
+                    </UserId>
+                </Column>
+            </Row>
+            <Link to="/settings/profile" replace>
+                <Button palette="secondary">
+                    <Text id="app.settings.pages.profile.edit_profile" />
+                </Button>
+            </Link>
         </Row>
     );
 }
