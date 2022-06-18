@@ -31,7 +31,7 @@ export interface Props {
     actions?: Action[];
     onClose?: (force: boolean) => void;
 
-    signal?: "close" | "confirm";
+    signal?: "close" | "confirm" | "force";
     registerOnClose?: (fn: () => void) => () => void;
     registerOnConfirm?: (fn: () => void) => () => void;
 
@@ -174,18 +174,18 @@ export function Modal({
         }
     }, [actions]);
 
-    useEffect(() => {
-        if (nonDismissable) return;
-        return registerOnClose?.(closeModal);
-    }, [closeModal]);
-
+    useEffect(() => registerOnClose?.(closeModal), [closeModal]);
     useEffect(() => registerOnConfirm?.(confirm), [confirm]);
 
     useEffect(() => {
-        if (signal === "close") {
-            closeModal();
-        } else {
+        if (signal === "confirm") {
             confirm();
+        } else {
+            if (signal === "close" && nonDismissable) {
+                return;
+            }
+
+            closeModal();
         }
     }, [signal]);
 
