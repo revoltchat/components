@@ -180,7 +180,7 @@ export function Modal({
     useEffect(() => {
         if (signal === "confirm") {
             confirm();
-        } else {
+        } else if (signal) {
             if (signal === "close" && nonDismissable) {
                 return;
             }
