@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import Message from "./Message";
+import { Message } from "./Message";
 import {
     ContextDecorator,
     InjectMockClient,
