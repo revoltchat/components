@@ -28,7 +28,7 @@ export const Row = styled.div<Props>`
     ${(props) =>
         props.centred &&
         css`
-            justify-content: center;
+            align-items: center;
         `}
 
     ${(props) =>

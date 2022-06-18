@@ -39,10 +39,10 @@ export const Column = styled.div<Props>`
     ${(props) =>
         props.centred &&
         css`
-            justify-content: center;
+            align-items: center;
         `}
 
-${(props) =>
+    ${(props) =>
         props.grow &&
         css`
             flex-grow: 1;
