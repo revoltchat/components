@@ -1,6 +1,6 @@
 {
     "name": "@revoltchat/ui",
-    "version": "1.0.47",
+    "version": "1.0.48",
     "description": "Revolt UI component library",
     "type": "commonjs",
     "main": "lib/index.js",

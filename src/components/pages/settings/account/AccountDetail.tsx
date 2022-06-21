@@ -1,4 +1,5 @@
 import { HelpCircle } from "@styled-icons/boxicons-solid";
+import { observer } from "mobx-react-lite";
 import React from "react";
 import { User } from "revolt.js";
 import styled from "styled-components";
@@ -29,7 +30,7 @@ export interface Props {
 /**
  * Account information header component
  */
-export function AccountDetail({ user }: Props) {
+export const AccountDetail = observer(({ user }: Props) => {
     const { Link, Text, emitAction } = useUI();
 
     return (
@@ -74,4 +75,4 @@ export function AccountDetail({ user }: Props) {
             </Link>
         </Row>
     );
-}
+});
