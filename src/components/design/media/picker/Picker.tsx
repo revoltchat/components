@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from "react";
+import { Column, InputBox } from "../../atoms";
 import { VirtuosoGrid } from "react-virtuoso";
 import styled from "styled-components";
-import { InputBox } from "../../../../../lib";
-import { Column } from "../../atoms";
 
 interface Props {
     emojis: Record<string, string>;
