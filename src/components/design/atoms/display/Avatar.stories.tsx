@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Avatar } from "./Avatar";
-import { Masks } from "../../../common";
 import { MaskDecorator } from "../../../../lib/internal";
 
 export default {
