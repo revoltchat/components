@@ -1,6 +1,6 @@
 {
     "name": "@revoltchat/ui",
-    "version": "1.0.53",
+    "version": "1.0.54",
     "description": "Revolt UI component library",
     "type": "commonjs",
     "main": "lib/index.js",
@@ -19,10 +19,7 @@
         "prismjs": "^1.28.0",
         "react-beautiful-dnd": "^13.1.0",
         "react-device-detect": "^2.2.2",
-        "react-virtuoso": "^2.12.0",
-        "slate": "^0.81.1",
-        "slate-history": "^0.66.0",
-        "slate-react": "^0.81.0"
+        "react-virtuoso": "^2.12.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.17.6",
