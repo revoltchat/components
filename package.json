@@ -1,6 +1,6 @@
 {
     "name": "@revoltchat/ui",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "Revolt UI component library",
     "type": "commonjs",
     "main": "lib/index.js",
@@ -28,6 +28,7 @@
         "@storybook/react": "^6.5.5",
         "@tippyjs/react": "^4.2.6",
         "@types/lodash.isequal": "^4.5.5",
+        "@types/prismjs": "^1",
         "@types/react": "^17.0.44",
         "@types/react-beautiful-dnd": "^13",
         "@types/react-dom": "^17.0.15",
@@ -37,6 +38,7 @@
         "babel-preset-minify": "^0.5.1",
         "mobx": "^6.6.0",
         "mobx-react-lite": "^3.4.0",
+        "prismjs": "^1.28.0",
         "react": "^17.0.2",
         "react-beautiful-dnd": "^13.1.0",
         "react-device-detect": "^2.2.2",
@@ -44,6 +46,9 @@
         "react-virtuoso": "^2.12.0",
         "revolt.js": "latest",
         "rimraf": "^3.0.2",
+        "slate": "^0.81.1",
+        "slate-history": "^0.66.0",
+        "slate-react": "^0.81.0",
         "storybook-dark-mode": "^1.1.0",
         "storybook-rtl-addon": "^0.3.3",
         "styled-components": "^5.3.5",
@@ -72,9 +77,13 @@
         "@tippyjs/react": "*",
         "mobx": "*",
         "mobx-react-lite": "*",
+        "prismjs": "*",
         "react-beautiful-dnd": "*",
         "react-device-detect": "*",
         "react-virtuoso": "*",
-        "revolt.js": "*"
+        "revolt.js": "*",
+        "slate": "*",
+        "slate-history": "*",
+        "slate-react": "*"
     }
 }
