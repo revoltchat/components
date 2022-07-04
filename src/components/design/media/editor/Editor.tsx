@@ -1,3 +1,8 @@
+/**
+ * !  due to import issues with Vite:
+ *   this is being migrated to revite
+ */
+
 import React, { useCallback, useState } from "react";
 import { createEditor, Descendant, Range, Text } from "slate";
 
