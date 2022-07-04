@@ -3000,17 +3000,7 @@ __metadata:
     tsc-watch: ^5.0.3
     typescript: ^4.7.2
   peerDependencies:
-    "@tippyjs/react": "*"
-    mobx: "*"
-    mobx-react-lite: "*"
-    prismjs: "*"
-    react-beautiful-dnd: "*"
-    react-device-detect: "*"
-    react-virtuoso: "*"
     revolt.js: "*"
-    slate: "*"
-    slate-history: "*"
-    slate-react: "*"
   languageName: unknown
   linkType: soft
 
