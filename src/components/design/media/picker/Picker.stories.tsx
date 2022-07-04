@@ -9,13 +9,17 @@ export default {
     argTypes: {
         emojis: {
             name: "Emoji Dictionary",
-            defaultValue: emojiDictionary,
+            defaultValue: Object.keys(emojiDictionary),
         },
         renderEmoji: {
             name: "Emoji Component",
             type: "symbol",
             defaultValue: memo(({ emoji }: { emoji: string }) => (
-                <img src={parseEmoji(emoji)} />
+                <img
+                    src={parseEmoji(
+                        emojiDictionary[emoji as keyof typeof emojiDictionary],
+                    )}
+                />
             )),
         },
     },

@@ -4,7 +4,7 @@ import { VirtuosoGrid } from "react-virtuoso";
 import styled from "styled-components";
 
 interface Props {
-    emojis: Record<string, string>;
+    emojis: string[];
     renderEmoji: React.FC<{ emoji: string }>;
 }
 
@@ -67,13 +67,12 @@ const ListContainer = styled.div`
 
 export function Picker({ emojis, renderEmoji: Emoji }: Props) {
     const [query, setQuery] = useState("");
-    const keys = useMemo(() => Object.keys(emojis), []);
-    const filtered = useMemo(() => {
+    const filtered: string[] = useMemo(() => {
         const q = query.toLowerCase().trim();
-        if (!q) return keys;
+        if (!q) return emojis;
 
         // Low efficiency search algorithm
-        return keys.filter((key) => key.includes(q));
+        return emojis.filter((key) => key.includes(q));
     }, [query]);
 
     return (
@@ -97,17 +96,7 @@ export function Picker({ emojis, renderEmoji: Emoji }: Props) {
                         Item: ItemContainer,
                         List: ListContainer,
                     }}
-                    itemContent={(index) => (
-                        <Emoji
-                            emoji={
-                                emojis[
-                                    filtered[
-                                        index as keyof typeof keys
-                                    ] as keyof typeof emojis
-                                ]
-                            }
-                        />
-                    )}
+                    itemContent={(index) => <Emoji emoji={filtered[index]} />}
                 />
             </Parent>
         </Base>
