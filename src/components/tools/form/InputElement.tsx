@@ -22,7 +22,20 @@ import {
 /**
  * Available input types
  */
-type Type = "text" | "checkbox" | "colour" | "combo" | "radio" | "textarea";
+export type Type =
+    | "text"
+    | "checkbox"
+    | "colour"
+    | "combo"
+    | "radio"
+    | "textarea";
+
+/**
+ * Get default value
+ */
+export function emptyValue(type: Type) {
+    return type === "checkbox" ? false : "";
+}
 
 /**
  * Component props
@@ -31,7 +44,7 @@ type Props<T extends Type> = {
     type: T;
     value: Value<T> | (() => Value<T>);
     onChange: (v: Value<T>) => void;
-} & Omit<TypeProps<T>, "value" | "onChange">;
+} & TypeProps<T>;
 
 /**
  * Multi or single-select choice entry
@@ -70,12 +83,15 @@ type Metadata = {
 /**
  * Actual input value type
  */
-type Value<T extends Type> = Metadata[T]["value"];
+export type Value<T extends Type> = Metadata[T]["value"];
 
 /**
  * Additional component props for given input type
  */
-type TypeProps<T extends Type> = Metadata[T]["props"];
+export type TypeProps<T extends Type> = Omit<
+    Metadata[T]["props"],
+    "value" | "onChange"
+>;
 
 /**
  * Generic input element
@@ -129,7 +145,7 @@ export function InputElement<T extends Type>({
                         onChange(ev.currentTarget.value as Value<T>)
                     }
                     {...comboProps}>
-                    {options.map((option) => (
+                    {options.map((option: Choice) => (
                         <option key={option.value} value={option.value}>
                             {option.name}
                         </option>
