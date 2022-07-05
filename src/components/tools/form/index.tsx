@@ -1,1 +1,1 @@
-export { InputElement } from "./InputElement";
+export { InputElement, ObservedInputElement } from "./InputElement";

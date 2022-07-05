@@ -1,7 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { InputBox } from "../../design";
-import { Checkbox } from "../../../../lib/components/atoms/inputs/Checkbox";
+import { Checkbox, InputBox } from "../../design";
 
 // inputs:
 // - checkbox (bool)
