@@ -29,13 +29,14 @@ export type Type =
     | "colour"
     | "combo"
     | "radio"
-    | "textarea";
+    | "textarea"
+    | "custom";
 
 /**
  * Get default value
  */
 export function emptyValue(type: Type) {
-    return type === "checkbox" ? false : "";
+    return type === "custom" ? undefined : type === "checkbox" ? false : "";
 }
 
 /**
@@ -79,6 +80,7 @@ type Metadata = {
         };
     };
     textarea: { value: string; props: React.ComponentProps<typeof TextArea> };
+    custom: { value: never; props: { element: React.FC } };
 };
 
 /**
@@ -175,6 +177,11 @@ export function InputElement<T extends Type>({
                     })}
                 </Column>
             );
+            break;
+        }
+        case "custom": {
+            const Element = (props as unknown as TypeProps<"custom">).element;
+            el = <Element />;
             break;
         }
     }
