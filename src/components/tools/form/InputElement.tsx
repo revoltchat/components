@@ -80,7 +80,7 @@ type Metadata = {
         };
     };
     textarea: { value: string; props: React.ComponentProps<typeof TextArea> };
-    custom: { value: never; props: { element: React.FC } };
+    custom: { value: never; props: { element: JSX.Element } };
 };
 
 /**
@@ -180,8 +180,7 @@ export function InputElement<T extends Type>({
             break;
         }
         case "custom": {
-            const Element = (props as unknown as TypeProps<"custom">).element;
-            el = <Element />;
+            el = (props as unknown as TypeProps<"custom">).element;
             break;
         }
     }
