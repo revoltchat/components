@@ -168,13 +168,13 @@ export function InputElement<T extends Type>({
 
             el = (
                 <Column>
-                    {choices.map(({ name, value: choiceValue, ...props }) => {
+                    {choices.map(({ name, value: choiceValue, ...props }) => (
                         <Radio
                             title={name}
                             value={choiceValue === v}
                             {...props}
-                        />;
-                    })}
+                        />
+                    ))}
                 </Column>
             );
             break;
