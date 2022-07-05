@@ -109,7 +109,7 @@ export function InputElement<T extends Type>({
                 />
             );
         }
-        case "color": {
+        case "colour": {
             return (
                 <ColourSwatches
                     value={v as string}
