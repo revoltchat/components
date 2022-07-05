@@ -172,6 +172,7 @@ export function InputElement<T extends Type>({
                         <Radio
                             title={name}
                             value={choiceValue === v}
+                            onSelect={() => onChange(choiceValue)}
                             {...props}
                         />
                     ))}
