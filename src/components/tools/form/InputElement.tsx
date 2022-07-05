@@ -1,6 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import {
+    Category,
     Checkbox,
     ColourSwatches,
     Column,
@@ -91,7 +92,9 @@ export type Value<T extends Type> = Metadata[T]["value"];
 export type TypeProps<T extends Type> = Omit<
     Metadata[T]["props"],
     "value" | "onChange"
->;
+> & {
+    field?: React.ReactChild;
+};
 
 /**
  * Generic input element
@@ -104,9 +107,10 @@ export function InputElement<T extends Type>({
 }: Props<T>) {
     const v = typeof value === "function" ? value() : value;
 
+    let el = null;
     switch (type) {
         case "text": {
-            return (
+            el = (
                 <InputBox
                     value={v as string}
                     onChange={(ev) =>
@@ -117,7 +121,7 @@ export function InputElement<T extends Type>({
             );
         }
         case "checkbox": {
-            return (
+            el = (
                 <Checkbox
                     value={v as boolean}
                     onChange={(value) => onChange(value as Value<T>)}
@@ -126,7 +130,7 @@ export function InputElement<T extends Type>({
             );
         }
         case "colour": {
-            return (
+            el = (
                 <ColourSwatches
                     value={v as string}
                     onChange={(value) => onChange(value as Value<T>)}
@@ -138,7 +142,7 @@ export function InputElement<T extends Type>({
             const { options, ...comboProps } =
                 props as unknown as TypeProps<"combo">;
 
-            return (
+            el = (
                 <ComboBox
                     value={v as string}
                     onChange={(ev) =>
@@ -156,7 +160,7 @@ export function InputElement<T extends Type>({
         case "radio": {
             const { choices } = props as unknown as TypeProps<"radio">;
 
-            return (
+            el = (
                 <Column>
                     {choices.map(({ name, value: choiceValue, ...props }) => {
                         <Radio
@@ -170,7 +174,16 @@ export function InputElement<T extends Type>({
         }
     }
 
-    return null;
+    if (props.field) {
+        return (
+            <>
+                <Category>{props.field}</Category>
+                {el}
+            </>
+        );
+    }
+
+    return el;
 }
 
 /**

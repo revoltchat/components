@@ -55,12 +55,12 @@ export function ModalForm<T extends FormTemplate>(props: Props<T>) {
                     palette: "plain",
                 },
             ]}>
+            <Form {...props} onSubmit={onSubmit} observed={values} />
             {error && (
                 <Category>
                     <Error error={<Text id={error} children={error} />} />
                 </Category>
             )}
-            <Form {...props} onSubmit={onSubmit} observed={values} />
         </Modal>
     );
 }
