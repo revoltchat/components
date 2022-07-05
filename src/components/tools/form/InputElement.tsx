@@ -119,6 +119,7 @@ export function InputElement<T extends Type>({
                     {...props}
                 />
             );
+            break;
         }
         case "checkbox": {
             el = (
@@ -128,6 +129,7 @@ export function InputElement<T extends Type>({
                     {...props}
                 />
             );
+            break;
         }
         case "colour": {
             el = (
@@ -137,6 +139,7 @@ export function InputElement<T extends Type>({
                     {...props}
                 />
             );
+            break;
         }
         case "combo": {
             const { options, ...comboProps } =
@@ -156,6 +159,7 @@ export function InputElement<T extends Type>({
                     ))}
                 </ComboBox>
             );
+            break;
         }
         case "radio": {
             const { choices } = props as unknown as TypeProps<"radio">;
@@ -171,6 +175,7 @@ export function InputElement<T extends Type>({
                     })}
                 </Column>
             );
+            break;
         }
     }
 
