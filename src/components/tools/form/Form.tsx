@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { Column } from "../../design";
 import {
@@ -18,7 +18,7 @@ export type FormTemplate = Record<string, Type>;
 /**
  * Generate value object from form schema
  */
-type MapFormToValues<T extends FormTemplate> = {
+export type MapFormToValues<T extends FormTemplate> = {
     [Property in keyof T]: Value<T[Property]>;
 };
 
@@ -32,7 +32,7 @@ type MapFormToData<T extends FormTemplate> = {
 /**
  * Form props
  */
-interface Props<T extends FormTemplate> {
+export interface Props<T extends FormTemplate> {
     /**
      * Form schema
      */
@@ -70,7 +70,7 @@ interface Props<T extends FormTemplate> {
  * @param defaults Defaults to apply
  * @returns Initial values
  */
-function getInitialValues<T extends FormTemplate>(
+export function getInitialValues<T extends FormTemplate>(
     schema: T,
     defaults?: Partial<MapFormToValues<T>>,
 ) {
@@ -104,8 +104,16 @@ export function Form<T extends FormTemplate>({
     const keys = useMemo(() => Object.keys(schema), []);
     const values = observed ?? observable(getInitialValues(schema, defaults));
 
+    const submit = useCallback(
+        (ev: React.FormEvent) => {
+            ev.preventDefault();
+            onSubmit?.(values);
+        },
+        [onSubmit],
+    );
+
     return (
-        <Base>
+        <Base onSubmit={submit}>
             {keys.map((key) => (
                 <ObservedInputElement
                     key={key}
