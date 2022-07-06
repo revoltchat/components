@@ -1,7 +1,7 @@
 import { observable } from "mobx";
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
-import { Column } from "../../design";
+import { Button, Column } from "../../design";
 import {
     emptyValue,
     ObservedInputElement,
@@ -62,6 +62,11 @@ export interface Props<T extends FormTemplate> {
      * Provide default values for keys
      */
     defaults?: Partial<MapFormToValues<T>>;
+
+    /**
+     * Submit button properties
+     */
+    submitBtn?: Omit<React.ComponentProps<typeof Button>, "type">;
 }
 
 /**
@@ -100,6 +105,7 @@ export function Form<T extends FormTemplate>({
     onSubmit,
     observed,
     defaults,
+    submitBtn,
 }: Props<T>) {
     const keys = useMemo(() => Object.keys(schema), []);
     const values = observed ?? observable(getInitialValues(schema, defaults));
@@ -128,7 +134,9 @@ export function Form<T extends FormTemplate>({
                     {...data[key]}
                 />
             ))}
-            {/*onSubmit && <Button type="submit" children="Submit" />*/}
+            {submitBtn && (
+                <Button type="submit" children="Submit" {...submitBtn} />
+            )}
         </Base>
     );
 }
