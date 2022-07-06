@@ -1,4 +1,5 @@
 import { observable } from "mobx";
+import { noop } from "mobx/dist/internal";
 import React, { useCallback, useRef, useState } from "react";
 import { useText } from "../../../lib";
 import { Button, Category, Error, Modal } from "../../design";
@@ -62,7 +63,10 @@ export function ModalForm<T extends FormTemplate>(props: Props<T>) {
     return (
         <Modal
             {...props}
-            registerOnConfirm={(fn) => (confirm.current = fn)}
+            registerOnConfirm={(fn) => {
+                confirm.current = fn;
+                return noop;
+            }}
             actions={[
                 {
                     onClick: onSubmit,
