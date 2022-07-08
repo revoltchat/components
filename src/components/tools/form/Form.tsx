@@ -91,11 +91,6 @@ export function getInitialValues<T extends FormTemplate>(
 }
 
 /**
- * Render the form as a column using <form> tag
- */
-const Base = styled.form(Column);
-
-/**
  * Dynamic Form component
  */
 export function Form<T extends FormTemplate>({
@@ -119,25 +114,27 @@ export function Form<T extends FormTemplate>({
     );
 
     return (
-        <Base onSubmit={submit}>
-            {keys.map((key) => (
-                <ObservedInputElement
-                    key={key}
-                    type={schema[key]}
-                    value={() =>
-                        values[key] as Value<typeof schema[typeof key]>
-                    }
-                    onChange={(value) => {
-                        values[key as keyof typeof values] = value;
-                        onChange?.(values, key);
-                    }}
-                    {...data[key]}
-                />
-            ))}
-            {submitBtn && (
-                <Button type="submit" children="Submit" {...submitBtn} />
-            )}
-        </Base>
+        <form onSubmit={submit}>
+            <Column>
+                {keys.map((key) => (
+                    <ObservedInputElement
+                        key={key}
+                        type={schema[key]}
+                        value={() =>
+                            values[key] as Value<typeof schema[typeof key]>
+                        }
+                        onChange={(value) => {
+                            values[key as keyof typeof values] = value;
+                            onChange?.(values, key);
+                        }}
+                        {...data[key]}
+                    />
+                ))}
+                {submitBtn && (
+                    <Button type="submit" children="Submit" {...submitBtn} />
+                )}
+            </Column>
+        </form>
     );
 }
 

@@ -188,10 +188,10 @@ export function InputElement<T extends Type>({
 
     if (props.field) {
         return (
-            <>
+            <div>
                 <Category>{props.field}</Category>
                 {el}
-            </>
+            </div>
         );
     }
 
