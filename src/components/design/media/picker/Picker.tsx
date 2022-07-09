@@ -143,7 +143,7 @@ type Generated = {
     /**
      * Emoji items
      */
-    items: string[][][];
+    items: string[][];
 
     /**
      * Emoji count for each category
@@ -175,8 +175,9 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
             const q = query.trim();
 
             // Prepare data structures
-            const items: string[][][] = [];
+            const items: string[][] = [];
             const categoriesWithDefault: Category[] = [];
+            const categoryCounts: number[] = [];
 
             // Iterate through all categories
             for (const cat of [
@@ -211,16 +212,14 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
                 const categoryEmojis = sliceArray(append, ROW_SIZE);
 
                 // Append emojis to full list
-                items.push(categoryEmojis);
+                items.push(...categoryEmojis);
 
                 // Append non empty category
                 categoriesWithDefault.push(cat);
-            }
 
-            // Calculate total number of rows for each category
-            const categoryCounts = items
-                .map((category) => category.length)
-                .filter((count) => count !== 0);
+                // Append category length
+                categoryCounts.push(categoryEmojis.length)
+            }
 
             return {
                 items,
@@ -282,25 +281,13 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
                     }}
                     itemContent={(itemIndex, groupIndex) => {
                         console.log("Item:", itemIndex, "Group:", groupIndex);
-                        const itemsBeforeCount = categoryCounts
-                            .slice(0, groupIndex)
-                            .reduce(
-                                (sumSoFar, categoryCount) =>
-                                    sumSoFar + categoryCount,
-                                0,
-                            );
-
-                        const offsetIndex = itemIndex - itemsBeforeCount;
-                        console.log(offsetIndex);
                         return (
                             <>
-                                {items[groupIndex][offsetIndex].map(
-                                    (emojiString) => (
-                                        <EmojiContainer>
-                                            <Emoji emoji={emojiString} />
-                                        </EmojiContainer>
-                                    ),
-                                )}
+                                {items[itemIndex].map((emojiString) => (
+                                    <EmojiContainer>
+                                        <Emoji emoji={emojiString} />
+                                    </EmojiContainer>
+                                ))}
                             </>
                         );
                     }}
