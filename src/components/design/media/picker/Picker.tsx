@@ -99,6 +99,8 @@ const ItemContainer = styled.div<{ type: OverrideType["type"] }>`
     ${(props) =>
         props.type &&
         css`
+            user-select: none;
+            pointer-events: none;
             filter: brightness(0.75);
         `}
 `;
