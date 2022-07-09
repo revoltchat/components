@@ -218,7 +218,7 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
                 categoriesWithDefault.push(cat);
 
                 // Append category length
-                categoryCounts.push(categoryEmojis.length)
+                categoryCounts.push(categoryEmojis.length);
             }
 
             return {
@@ -251,13 +251,13 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
                     groupContent={(groupIndex) => {
                         return (
                             <CategoryBar>
-                                {categoriesWithDefault[groupIndex].id ===
-                                "default" ? (
-                                    <EmojiContainer>
-                                        <Emoji emoji="smiley" />
-                                    </EmojiContainer>
-                                ) : (
-                                    <CategoryIcon>
+                                <CategoryIcon>
+                                    {categoriesWithDefault[groupIndex].id ===
+                                    "default" ? (
+                                        <EmojiContainer>
+                                            <Emoji emoji="smiley" />
+                                        </EmojiContainer>
+                                    ) : (
                                         <Avatar
                                             size={32}
                                             fallback={
@@ -271,8 +271,8 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
                                                 ].iconURL
                                             }
                                         />
-                                    </CategoryIcon>
-                                )}
+                                    )}
+                                </CategoryIcon>
                                 <CategoryName>
                                     {categoriesWithDefault[groupIndex].name}
                                 </CategoryName>
