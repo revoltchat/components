@@ -1,7 +1,7 @@
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Virtuoso } from "react-virtuoso";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Item, ItemContainer } from "./Item";
 
 import { ListHeader } from "./ListHeader";
@@ -14,6 +14,7 @@ import { Avatar } from "../../../atoms";
 import { Cog } from "@styled-icons/boxicons-solid";
 import { useLink } from "../../../../../lib/context";
 import { Tooltip } from "../../../atoms/indicators/Tooltip";
+import { isTouchscreenDevice } from "../../../../../lib";
 
 export type Props = {
     /**
@@ -63,6 +64,11 @@ const Base = styled.div`
         width: 0;
         height: 0;
     }
+
+    ${isTouchscreenDevice &&
+    css`
+        padding-bottom: 50px;
+    `}
 `;
 
 const Shadow = styled.div`
