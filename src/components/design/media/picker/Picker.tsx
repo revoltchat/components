@@ -1,6 +1,6 @@
-import React, { memo, useMemo, useState } from "react";
+import React, { memo, useMemo, useRef, useState } from "react";
 import { Avatar, Column, InputBox } from "../../atoms";
-import { GroupedVirtuoso } from "react-virtuoso";
+import { GroupedVirtuoso, GroupedVirtuosoHandle } from "react-virtuoso";
 import styled from "styled-components";
 
 /**
@@ -28,7 +28,18 @@ interface Props {
      * Emoji component
      */
     renderEmoji: React.FC<{ emoji: string }>;
+
+    /**
+     * Select emoji handler
+     */
+    onSelect?: (emoji: string) => void;
 }
+
+/**
+ * Hard-coded row size
+ * ! FIXME: this will be calculated automatically later I guess
+ */
+const ROW_SIZE = 8;
 
 /**
  * Base layout of the picker
@@ -41,7 +52,8 @@ const Base = styled(Column)`
     right: 10px;
     bottom: 10px;
 
-    width: 330px;
+    // row width + scrollbar + group selector
+    width: calc(${ROW_SIZE} * 40px + 10px + 40px);
     height: 420px;
 
     max-width: calc(100vw - 20px);
@@ -63,12 +75,32 @@ const Controls = styled(Column)`
  */
 const Parent = styled.div`
     flex-grow: 1;
+
+    display: flex;
+    flex-direction: row;
+`;
+
+/**
+ * Group selector
+ */
+const Groups = styled.div`
+    width: 40px;
+
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+    background: var(--secondary-background);
+    border-start-start-radius: var(--border-radius);
+
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
 `;
 
 /**
  * Wrapper around individual emojis in the grid
  */
-const EmojiContainer = styled.div`
+const EmojiContainer = styled.a`
     display: grid;
     place-items: center;
 
@@ -158,15 +190,18 @@ type Generated = {
 };
 
 /**
- * Hard-coded row size
- * ! FIXME: this will be calculated automatically later I guess
- */
-const ROW_SIZE = 8;
-
-/**
  * Emoji Picker (later media picker, will need to refactor slightly)
  */
-export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
+export function Picker({
+    emojis,
+    categories,
+    renderEmoji: Emoji,
+    onSelect,
+}: Props) {
+    // Take a ref of Virtuoso for scrolling to groups
+    const ref = useRef<GroupedVirtuosoHandle>(null);
+
+    // Keep track of user queries
     const [query, setQuery] = useState("");
 
     // Generate all the information required to render the grid
@@ -232,7 +267,7 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
             memo(({ index }: { index: number }) => (
                 <>
                     {items[index].map((emojiString) => (
-                        <EmojiContainer>
+                        <EmojiContainer onClick={() => onSelect?.(emojiString)}>
                             <Emoji emoji={emojiString} />
                         </EmojiContainer>
                     ))}
@@ -241,8 +276,29 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
         [items, Emoji],
     );
 
+    // Component for rendering group icons
+    const Icon = useMemo(
+        () =>
+            memo(({ category }: { category: Category }) => (
+                <CategoryIcon>
+                    {category.emoji ? (
+                        <EmojiContainer>
+                            <Emoji emoji={category.emoji} />
+                        </EmojiContainer>
+                    ) : (
+                        <Avatar
+                            size={32}
+                            fallback={category.name}
+                            src={category.iconURL}
+                        />
+                    )}
+                </CategoryIcon>
+            )),
+        [],
+    );
+
     return (
-        <Base>
+        <Base gap="0">
             <Controls>
                 <InputBox
                     value={query}
@@ -252,8 +308,9 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
             </Controls>
             <Parent>
                 <GroupedVirtuoso
+                    ref={ref}
                     style={{
-                        height: "100%",
+                        flexGrow: "1",
                         padding: "0 2px",
                         overflowX: "hidden",
                     }}
@@ -266,25 +323,24 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
 
                         return (
                             <CategoryBar>
-                                <CategoryIcon>
-                                    {category.emoji ? (
-                                        <EmojiContainer>
-                                            <Emoji emoji={category.emoji} />
-                                        </EmojiContainer>
-                                    ) : (
-                                        <Avatar
-                                            size={32}
-                                            fallback={category.name}
-                                            src={category.iconURL}
-                                        />
-                                    )}
-                                </CategoryIcon>
+                                <Icon category={category} />
                                 <CategoryName>{category.name}</CategoryName>
                             </CategoryBar>
                         );
                     }}
                     itemContent={(itemIndex) => <Row index={itemIndex} />}
                 />
+                <Groups>
+                    {activeCategories.map((cat, groupIndex) => (
+                        <EmojiContainer
+                            key={cat.id}
+                            onClick={() =>
+                                ref.current?.scrollIntoView({ groupIndex })
+                            }>
+                            <Icon category={cat} />
+                        </EmojiContainer>
+                    ))}
+                </Groups>
             </Parent>
         </Base>
     );
