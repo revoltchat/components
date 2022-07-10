@@ -68,6 +68,11 @@ const Template: ComponentStory<typeof Picker> = (args) => (
                                         .value as Server
                                 ).generateIconURL(),
                             },
+                            {
+                                id: "default",
+                                name: "Default",
+                                emoji: "smiley",
+                            },
                         ]}
                     />
                 </div>
