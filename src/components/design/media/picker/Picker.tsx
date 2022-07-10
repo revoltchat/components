@@ -335,7 +335,7 @@ export function Picker({
                         <EmojiContainer
                             key={cat.id}
                             onClick={() =>
-                                ref.current?.scrollIntoView({ groupIndex })
+                                ref.current?.scrollToIndex({ groupIndex })
                             }>
                             <Icon category={cat} />
                         </EmojiContainer>
