@@ -163,7 +163,7 @@ const CategoryIcon = styled.div`
  */
 const CategoryName = styled.span`
     width: 100%;
-    padding: 0 0.5em;
+    padding: 0 0.2em;
     text-align: left;
     color: var(--foreground);
     filter: brightness(0.75);
@@ -287,7 +287,7 @@ export function Picker({
                         </EmojiContainer>
                     ) : (
                         <Avatar
-                            size={32}
+                            size={24}
                             fallback={category.name}
                             src={category.iconURL}
                         />
