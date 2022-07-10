@@ -150,6 +150,11 @@ type Generated = {
      * Emoji count for each category
      */
     categoryCounts: number[];
+
+    /**
+     * Currently visible categories
+     */
+    activeCategories: Category[];
 };
 
 /**
@@ -165,52 +170,61 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
     const [query, setQuery] = useState("");
 
     // Generate all the information required to render the grid
-    const { items, categoryCounts }: Generated = useMemo(() => {
-        // Prepare query
-        const q = query.trim();
+    const { items, categoryCounts, activeCategories }: Generated =
+        useMemo(() => {
+            // Prepare query
+            const q = query.trim();
 
-        // Prepare data structures
-        const items: string[][] = [];
-        const categoryCounts: number[] = [];
+            // Prepare data structures
+            const items: string[][] = [];
+            const activeCategories: Category[] = [];
+            const categoryCounts: number[] = [];
 
-        // Iterate through all categories
-        for (const cat of [...categories, { id: "default", name: "Global" }]) {
-            let append = emojis[cat.id] ?? [];
+            // Iterate through all categories
+            for (const cat of categories) {
+                let append = emojis[cat.id] ?? [];
 
-            // Check if we match search query
-            if (q) {
-                // This may be quite slow
-                append = append.filter((emoji) => emoji.includes(q));
+                // Check if we match search query
+                if (q) {
+                    // This may be quite slow
+                    append = append.filter((emoji) => emoji.includes(q));
 
-                // Drop out if nothing found
-                if (append.length === 0) {
-                    continue;
+                    // Drop out if nothing found
+                    if (append.length === 0) {
+                        continue;
+                    }
                 }
+
+                const sliceArray = (
+                    array: string[],
+                    size: number,
+                ): string[][] => {
+                    const result = [];
+                    for (let i = 0; i < array.length; i += size) {
+                        result.push(array.slice(i, i + size));
+                    }
+                    return result;
+                };
+
+                // Slice emoji collection into chunks of maximum length of ROW_SIZE
+                const categoryEmojis = sliceArray(append, ROW_SIZE);
+
+                // Append emojis to full list
+                items.push(...categoryEmojis);
+
+                // Append category to active list
+                activeCategories.push(cat);
+
+                // Append category length
+                categoryCounts.push(categoryEmojis.length);
             }
 
-            const sliceArray = (array: string[], size: number): string[][] => {
-                const result = [];
-                for (let i = 0; i < array.length; i += size) {
-                    result.push(array.slice(i, i + size));
-                }
-                return result;
+            return {
+                items,
+                categoryCounts,
+                activeCategories,
             };
-
-            // Slice emoji collection into chunks of maximum length of ROW_SIZE
-            const categoryEmojis = sliceArray(append, ROW_SIZE);
-
-            // Append emojis to full list
-            items.push(...categoryEmojis);
-
-            // Append category length
-            categoryCounts.push(categoryEmojis.length);
-        }
-
-        return {
-            items,
-            categoryCounts,
-        };
-    }, [query]);
+        }, [query]);
 
     // Component for rendering each row of emojis
     const Row = useMemo(
@@ -248,7 +262,7 @@ export function Picker({ emojis, categories, renderEmoji: Emoji }: Props) {
                     }}
                     groupCounts={categoryCounts}
                     groupContent={(groupIndex) => {
-                        const category = categories[groupIndex];
+                        const category = activeCategories[groupIndex];
 
                         return (
                             <CategoryBar>
