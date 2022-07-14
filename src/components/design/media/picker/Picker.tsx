@@ -221,7 +221,7 @@ export function Picker({
     const { items, categoryCounts, activeCategories }: Generated =
         useMemo(() => {
             // Prepare query
-            const q = query.trim();
+            const q = query.trim().toLowerCase();
 
             // Prepare data structures
             const items: EmojiInfo[][] = [];
