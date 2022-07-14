@@ -1,9 +1,10 @@
-import React, { memo, useMemo, useRef, useState } from "react";
+import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import { Avatar, Column, InputBox } from "../../atoms";
 import { GroupedVirtuoso, GroupedVirtuosoHandle } from "react-virtuoso";
 import styled from "styled-components";
 import { EmojiPreview } from "./EmojiPreview";
 import { observable } from "mobx";
+import useCloseHook from "../../../../lib/closeHook";
 
 /**
  * Category of emoji
@@ -43,6 +44,11 @@ interface Props {
      * Select emoji handler
      */
     onSelect?: (emoji: string) => void;
+
+    /**
+     * Handle clicking outside of picker
+     */
+    onClose?: () => void;
 }
 
 /**
@@ -207,6 +213,7 @@ export function Picker({
     categories,
     renderEmoji: Emoji,
     onSelect,
+    onClose,
 }: Props) {
     // Take a ref of Virtuoso for scrolling to groups
     const ref = useRef<GroupedVirtuosoHandle>(null);
@@ -285,7 +292,13 @@ export function Picker({
                 <>
                     {items[index].map((emoji) => (
                         <EmojiContainer
-                            onClick={() => onSelect?.(emoji.id)}
+                            onClick={(ev) => {
+                                onSelect?.(emoji.id);
+
+                                if (!ev.shiftKey) {
+                                    onClose?.();
+                                }
+                            }}
                             onMouseOver={() => (active.emoji = emoji)}>
                             <Emoji emoji={emoji.id} />
                         </EmojiContainer>
@@ -316,8 +329,11 @@ export function Picker({
         [],
     );
 
+    // Register mouse events to close
+    const baseRef = useCloseHook(onClose);
+
     return (
-        <Base gap="0">
+        <Base gap="0" ref={baseRef}>
             <Controls>
                 <InputBox
                     autoFocus
