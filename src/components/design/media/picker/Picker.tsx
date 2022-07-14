@@ -2,6 +2,8 @@ import React, { memo, useMemo, useRef, useState } from "react";
 import { Avatar, Column, InputBox } from "../../atoms";
 import { GroupedVirtuoso, GroupedVirtuosoHandle } from "react-virtuoso";
 import styled from "styled-components";
+import { EmojiPreview } from "./EmojiPreview";
+import { observable } from "mobx";
 
 /**
  * Category of emoji
@@ -13,11 +15,19 @@ type Category = {
     iconURL?: string;
 };
 
+/**
+ * Emoji information
+ */
+export type EmojiInfo = {
+    id: string;
+    name?: string;
+};
+
 interface Props {
     /**
      * All available emojis
      */
-    emojis: Record<string | "default", string[]>;
+    emojis: Record<string | "default", EmojiInfo[]>;
 
     /**
      * Ordered list of categories
@@ -176,7 +186,7 @@ type Generated = {
     /**
      * Emoji items
      */
-    items: string[][];
+    items: EmojiInfo[][];
 
     /**
      * Emoji count for each category
@@ -204,6 +214,9 @@ export function Picker({
     // Keep track of user queries
     const [query, setQuery] = useState("");
 
+    // Keep track of "active" emoji (on hover)
+    const active: { emoji: EmojiInfo | null } = observable({ emoji: null });
+
     // Generate all the information required to render the grid
     const { items, categoryCounts, activeCategories }: Generated =
         useMemo(() => {
@@ -211,7 +224,7 @@ export function Picker({
             const q = query.trim();
 
             // Prepare data structures
-            const items: string[][] = [];
+            const items: EmojiInfo[][] = [];
             const activeCategories: Category[] = [];
             const categoryCounts: number[] = [];
 
@@ -222,7 +235,11 @@ export function Picker({
                 // Check if we match search query
                 if (q) {
                     // This may be quite slow
-                    append = append.filter((emoji) => emoji.includes(q));
+                    append = append.filter((emoji) =>
+                        emoji.name
+                            ? emoji.name.includes(q)
+                            : emoji.id.includes(q),
+                    );
 
                     // Drop out if nothing found
                     if (append.length === 0) {
@@ -231,9 +248,9 @@ export function Picker({
                 }
 
                 const sliceArray = (
-                    array: string[],
+                    array: EmojiInfo[],
                     size: number,
-                ): string[][] => {
+                ): EmojiInfo[][] => {
                     const result = [];
                     for (let i = 0; i < array.length; i += size) {
                         result.push(array.slice(i, i + size));
@@ -266,9 +283,11 @@ export function Picker({
         () =>
             memo(({ index }: { index: number }) => (
                 <>
-                    {items[index].map((emojiString) => (
-                        <EmojiContainer onClick={() => onSelect?.(emojiString)}>
-                            <Emoji emoji={emojiString} />
+                    {items[index].map((emoji) => (
+                        <EmojiContainer
+                            onClick={() => onSelect?.(emoji.id)}
+                            onMouseOver={() => (active.emoji = emoji)}>
+                            <Emoji emoji={emoji.id} />
                         </EmojiContainer>
                     ))}
                 </>
@@ -301,6 +320,7 @@ export function Picker({
         <Base gap="0">
             <Controls>
                 <InputBox
+                    autoFocus
                     value={query}
                     onChange={(e) => setQuery(e.currentTarget.value)}
                     placeholder="Type to search..."
@@ -342,6 +362,7 @@ export function Picker({
                     ))}
                 </Groups>
             </Parent>
+            <EmojiPreview active={active} renderEmoji={Emoji} />
         </Base>
     );
 }

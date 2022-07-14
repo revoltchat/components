@@ -12,8 +12,13 @@ export default {
         emojis: {
             name: "Emoji Dictionary",
             defaultValue: {
-                a: ["0", "0", "0", "0", "0"],
-                default: Object.keys(emojiDictionary),
+                a: [
+                    {
+                        id: "0",
+                        name: "el_gato",
+                    },
+                ],
+                default: Object.keys(emojiDictionary).map((id) => ({ id })),
             },
         },
         categories: {
