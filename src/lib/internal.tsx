@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import type { Client } from "revolt.js";
-import { Masks } from "../../lib";
+
 import { UIProvider } from "./context";
+
+import { Masks } from "../components/common/Masks";
+
 export const mockClient = () => (window as any).mock as Client;
 
 export const InjectMockClient = ({
