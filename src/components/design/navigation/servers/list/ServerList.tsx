@@ -1,20 +1,21 @@
+import { Cog } from "@styled-icons/boxicons-solid";
+import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Virtuoso } from "react-virtuoso";
-import React from "react";
-import styled, { css } from "styled-components";
-import { Item, ItemContainer } from "./Item";
-
-import { ListHeader } from "./ListHeader";
-import { FooterProps, ListFooter } from "./ListFooter";
-import { useDndComponents, useDragEndCustomReorder } from "../../../../common";
-
 import type { Client, Server } from "revolt.js";
 import type { INotificationChecker } from "revolt.js/dist/util/Unreads";
-import { Avatar } from "../../../atoms";
-import { Cog } from "@styled-icons/boxicons-solid";
-import { useLink } from "../../../../../lib/context";
-import { Tooltip } from "../../../atoms/indicators/Tooltip";
+import styled, { css } from "styled-components";
+
 import { isTouchscreenDevice } from "../../../../../lib";
+import { useLink } from "../../../../../lib/context";
+
+import { useDndComponents, useDragEndCustomReorder } from "../../../../common";
+
+import { Avatar } from "../../../atoms";
+import { Tooltip } from "../../../atoms/indicators/Tooltip";
+import { Item, ItemContainer } from "./Item";
+import { FooterProps, ListFooter } from "./ListFooter";
+import { ListHeader } from "./ListHeader";
 
 export type Props = {
     /**
@@ -36,6 +37,11 @@ export type Props = {
      * Active server ID
      */
     active?: string;
+
+    /**
+     * Whether to show discovery icon
+     */
+    showDiscovery?: boolean;
 };
 
 type ParentProps = {
@@ -88,8 +94,9 @@ const Shadow = styled.div`
  * Server List
  */
 export function ServerList(props: Props & ParentProps & FooterProps) {
-    const { servers, reorder, ...innerProps } = props;
-    const { active, createServer, permit } = props;
+    const { servers, reorder, createServer, showDiscovery, ...innerProps } =
+        props;
+    const { active, permit } = props;
 
     const Link = useLink();
 
@@ -125,6 +132,7 @@ export function ServerList(props: Props & ParentProps & FooterProps) {
                                         return (
                                             <ListFooter
                                                 createServer={createServer}
+                                                showDiscover={showDiscovery}
                                             />
                                         );
                                     }
