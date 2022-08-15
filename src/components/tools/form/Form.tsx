@@ -67,6 +67,11 @@ export interface Props<T extends FormTemplate> {
      * Submit button properties
      */
     submitBtn?: Omit<React.ComponentProps<typeof Button>, "type">;
+
+    /**
+     * Whether all elements are disabled
+     */
+    disabled?: boolean;
 }
 
 /**
@@ -96,6 +101,7 @@ export function getInitialValues<T extends FormTemplate>(
 export function Form<T extends FormTemplate>({
     schema,
     data,
+    disabled,
     onChange,
     onSubmit,
     observed,
@@ -117,6 +123,7 @@ export function Form<T extends FormTemplate>({
                     <ObservedInputElement
                         key={key}
                         type={schema[key]}
+                        disabled={disabled}
                         value={() =>
                             values[key] as Value<typeof schema[typeof key]>
                         }
@@ -128,7 +135,12 @@ export function Form<T extends FormTemplate>({
                     />
                 ))}
                 {submitBtn && (
-                    <Button type="submit" children="Submit" {...submitBtn} />
+                    <Button
+                        type="submit"
+                        children="Submit"
+                        disabled={disabled}
+                        {...submitBtn}
+                    />
                 )}
             </Column>
         </form>

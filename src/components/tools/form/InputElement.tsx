@@ -1,5 +1,6 @@
-import React from "react";
 import { observer } from "mobx-react-lite";
+import React from "react";
+
 import {
     Category,
     Checkbox,
@@ -46,6 +47,7 @@ type Props<T extends Type> = {
     type: T;
     value: Value<T> | (() => Value<T>);
     onChange: (v: Value<T>) => void;
+    disabled?: boolean;
 } & TypeProps<T>;
 
 /**

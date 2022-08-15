@@ -43,15 +43,18 @@ type Props<T extends FormTemplate> = Exclude<
 export function ModalForm<T extends FormTemplate>(props: Props<T>) {
     const values = observable(getInitialValues(props.schema, props.defaults));
     const [error, setError] = useState<string>(null!);
+    const [processing, setProcessing] = useState(false);
     const Text = useText();
 
     const onSubmit = useCallback(async () => {
         try {
+            setProcessing(true);
             await props.callback(values);
             return true;
         } catch (err) {
             // ! FIXME: map error correctly
             setError("" + err);
+            setProcessing(false);
             return false;
         }
     }, []);
@@ -59,6 +62,7 @@ export function ModalForm<T extends FormTemplate>(props: Props<T>) {
     return (
         <Modal
             {...props}
+            disabled={processing}
             actions={[
                 {
                     onClick: onSubmit,

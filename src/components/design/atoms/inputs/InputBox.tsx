@@ -20,6 +20,10 @@ export const InputBox = styled.input<Props>`
 
     transition: 0.1s ease-in-out all;
 
+    &:disabled {
+        filter: brightness(0.9);
+    }
+
     &:focus-visible {
         box-shadow: 0 0 0 1.5pt var(--accent);
     }
