@@ -1,6 +1,6 @@
 import { observable } from "mobx";
 import React, { useCallback, useMemo } from "react";
-import styled from "styled-components";
+
 import { Button, Column } from "../../design";
 import {
     emptyValue,
@@ -105,13 +105,10 @@ export function Form<T extends FormTemplate>({
     const keys = useMemo(() => Object.keys(schema), []);
     const values = observed ?? observable(getInitialValues(schema, defaults));
 
-    const submit = useCallback(
-        (ev: React.FormEvent) => {
-            ev.preventDefault();
-            onSubmit?.(values);
-        },
-        [onSubmit],
-    );
+    const submit = useCallback((ev: React.FormEvent) => {
+        ev.preventDefault();
+        onSubmit?.(values);
+    }, []);
 
     return (
         <form onSubmit={submit}>

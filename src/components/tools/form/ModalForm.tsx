@@ -1,6 +1,8 @@
 import { observable } from "mobx";
 import React, { useCallback, useRef, useState } from "react";
+
 import { useText } from "../../../lib";
+
 import { Button, Category, Error, Modal } from "../../design";
 import { Action, Props as ModalProps } from "../../design/atoms/display/Modal";
 import {
@@ -41,10 +43,8 @@ type Props<T extends FormTemplate> = Exclude<
 export function ModalForm<T extends FormTemplate>(props: Props<T>) {
     const values = observable(getInitialValues(props.schema, props.defaults));
     const [error, setError] = useState<string>(null!);
-    const confirm = useRef<() => void>();
     const Text = useText();
 
-    // Handle submission
     const onSubmit = useCallback(async () => {
         try {
             await props.callback(values);
@@ -56,16 +56,9 @@ export function ModalForm<T extends FormTemplate>(props: Props<T>) {
         }
     }, []);
 
-    // Handle form submit event
-    const onSubmitForm = useCallback(() => confirm.current?.(), []);
-
     return (
         <Modal
             {...props}
-            registerOnConfirm={(fn) => {
-                confirm.current = fn;
-                return () => {};
-            }}
             actions={[
                 {
                     onClick: onSubmit,
@@ -81,7 +74,7 @@ export function ModalForm<T extends FormTemplate>(props: Props<T>) {
                     },
                 ]),
             ]}>
-            <Form {...props} onSubmit={onSubmitForm} observed={values} />
+            <Form {...props} observed={values} />
             {error && (
                 <Category>
                     <Error error={<Text id={error} children={error} />} />
