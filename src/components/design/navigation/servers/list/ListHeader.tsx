@@ -1,15 +1,17 @@
-import React from "react";
-import { ItemContainer, SwooshOverlay } from "./Item";
 import { observer } from "mobx-react-lite";
+import React from "react";
 import type { Channel } from "revolt.js";
-import { Avatar, LineDivider, UserStatus } from "../../../atoms";
-import { isTouchscreenDevice } from "../../../../../lib/isTouchscreenDevice";
-import { Unreads } from "../../../atoms/indicators/Unreads";
 import styled from "styled-components";
-import { Props } from "./ServerList";
+
 import { useLink, useTrigger } from "../../../../../lib/context";
+import { isTouchscreenDevice } from "../../../../../lib/isTouchscreenDevice";
+
+import { Avatar, LineDivider, UserStatus } from "../../../atoms";
 import { Tooltip } from "../../../atoms/indicators/Tooltip";
+import { Unreads } from "../../../atoms/indicators/Unreads";
 import { UserTooltip } from "../../../atoms/indicators/UserTooltip";
+import { ItemContainer, SwooshOverlay } from "./Item";
+import { Props } from "./ServerList";
 
 const UserItem = observer(({ client, home, active }: Props) => {
     const Link = useLink();
@@ -79,6 +81,7 @@ const ChannelInner = observer(
                 <Avatar
                     size={42}
                     interactive
+                    fallback={channel.name}
                     holepunch={unread && "top-right"}
                     src={channel.generateIconURL({ max_side: 256 }, false)}
                     overlay={<Unreads unread={unread} count={count} />}
@@ -103,7 +106,7 @@ const UnreadDMs = observer(({ client, permit }: Props) => {
     return (
         <List>
             {channels.map((channel) => (
-                <Link to={`/channel/${channel._id}`}>
+                <Link key={channel._id} to={`/channel/${channel._id}`}>
                     <ChannelInner channel={channel} permit={permit} />
                 </Link>
             ))}

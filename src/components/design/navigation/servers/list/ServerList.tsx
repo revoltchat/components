@@ -94,11 +94,12 @@ const Shadow = styled.div`
  * Server List
  */
 export function ServerList(props: Props & ParentProps & FooterProps) {
+    const { active, permit } = props;
     const { servers, reorder, createServer, showDiscovery, ...innerProps } =
         props;
-    const { active, permit } = props;
 
     const Link = useLink();
+    const dndComponents = useDndComponents();
 
     return (
         <Base>
@@ -119,7 +120,7 @@ export function ServerList(props: Props & ParentProps & FooterProps) {
                         return (
                             <Virtuoso
                                 totalCount={servers.length + 2}
-                                components={useDndComponents()}
+                                components={dndComponents}
                                 className="list"
                                 // @ts-expect-error Incompatible types between libraries
                                 scrollerRef={provided.innerRef}

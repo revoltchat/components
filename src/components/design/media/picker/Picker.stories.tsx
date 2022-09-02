@@ -116,7 +116,8 @@ const Template: ComponentStory<typeof Picker> = (args) => (
                         height: "48px",
                         background: "var(--message-box)",
                         flexShrink: 0,
-                    }}></div>
+                    }}
+                />
             </div>
         )}
     </InjectMockClient>
