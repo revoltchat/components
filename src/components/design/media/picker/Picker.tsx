@@ -1,10 +1,12 @@
+import { observable } from "mobx";
 import React, { memo, useEffect, useMemo, useRef, useState } from "react";
-import { Avatar, Column, InputBox } from "../../atoms";
 import { GroupedVirtuoso, GroupedVirtuosoHandle } from "react-virtuoso";
 import styled from "styled-components";
-import { EmojiPreview } from "./EmojiPreview";
-import { observable } from "mobx";
+
 import useCloseHook from "../../../../lib/closeHook";
+
+import { Avatar, Column, InputBox } from "../../atoms";
+import { EmojiPreview } from "./EmojiPreview";
 
 /**
  * Category of emoji
@@ -91,6 +93,7 @@ const Controls = styled(Column)`
  */
 const Parent = styled.div`
     flex-grow: 1;
+    min-height: 0;
 
     display: flex;
     flex-direction: row;

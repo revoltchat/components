@@ -1,9 +1,11 @@
-import React, { memo } from "react";
-import { Picker } from "./Picker";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { emojiDictionary, parseEmoji } from "../../../../lib/internal/emojis";
-import { InjectMockClient } from "../../../../lib/internal";
+import React, { memo } from "react";
 import { Server } from "revolt.js";
+
+import { InjectMockClient } from "../../../../lib/internal";
+import { emojiDictionary, parseEmoji } from "../../../../lib/internal/emojis";
+
+import { Picker } from "./Picker";
 
 export default {
     title: "Design System/Media/Picker",
@@ -77,6 +79,34 @@ const Template: ComponentStory<typeof Picker> = (args) => (
                                 id: "default",
                                 name: "Default",
                                 emoji: "smiley",
+                            },
+                            {
+                                id: "b",
+                                name: "Deez Nuts",
+                            },
+                            {
+                                id: "c",
+                                name: "C",
+                            },
+                            {
+                                id: "d",
+                                name: "D",
+                            },
+                            {
+                                id: "e",
+                                name: "E",
+                            },
+                            {
+                                id: "f",
+                                name: "F",
+                            },
+                            {
+                                id: "g",
+                                name: "G",
+                            },
+                            {
+                                id: "h",
+                                name: "H",
                             },
                         ]}
                     />
