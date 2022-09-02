@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import React, { memo, useEffect, useMemo, useRef, useState } from "react";
+import React, { memo, useMemo, useRef, useState } from "react";
 import { GroupedVirtuoso, GroupedVirtuosoHandle } from "react-virtuoso";
 import styled from "styled-components";
 
@@ -286,7 +286,7 @@ export function Picker({
                 categoryCounts,
                 activeCategories,
             };
-        }, [query]);
+        }, [query, categories, emojis]);
 
     // Component for rendering each row of emojis
     const Row = useMemo(
@@ -295,6 +295,7 @@ export function Picker({
                 <>
                     {items[index].map((emoji) => (
                         <EmojiContainer
+                            key={emoji.id}
                             onClick={(ev) => {
                                 onSelect?.(emoji.id);
 
@@ -308,7 +309,7 @@ export function Picker({
                     ))}
                 </>
             )),
-        [items, Emoji],
+        [items, active, onClose, onSelect, Emoji],
     );
 
     // Component for rendering group icons
@@ -329,7 +330,7 @@ export function Picker({
                     )}
                 </CategoryIcon>
             )),
-        [],
+        [Emoji],
     );
 
     // Register mouse events to close
