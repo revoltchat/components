@@ -172,6 +172,7 @@ export function InputElement<T extends Type>({
                 <Column>
                     {choices.map(({ name, value: choiceValue, ...props }) => (
                         <Radio
+                            key={choiceValue}
                             title={name}
                             value={choiceValue === v}
                             onSelect={() => onChange(choiceValue)}

@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import React, { useCallback, useMemo } from "react";
+import React, { createContext, useCallback, useContext, useMemo } from "react";
 
 import { Button, Column } from "../../design";
 import {
@@ -72,6 +72,11 @@ export interface Props<T extends FormTemplate> {
      * Whether all elements are disabled
      */
     disabled?: boolean;
+
+    /**
+     * Custom form layout
+     */
+    children?: React.ReactNode;
 }
 
 /**
@@ -96,6 +101,36 @@ export function getInitialValues<T extends FormTemplate>(
 }
 
 /**
+ * Context providing form data
+ */
+const FormContext = createContext<
+    Pick<Props<any>, "schema" | "disabled" | "onChange" | "data"> & {
+        values: Record<string, any>;
+    }
+>(null!);
+
+/**
+ * Form element
+ */
+export function FormElement({ id }: { id: string }) {
+    const { schema, disabled, values, onChange, data } =
+        useContext(FormContext);
+
+    return (
+        <ObservedInputElement
+            type={schema[id]}
+            disabled={disabled}
+            value={() => values[id] as Value<typeof schema[typeof id]>}
+            onChange={(value) => {
+                values[id as keyof typeof values] = value;
+                onChange?.(values, id);
+            }}
+            {...data[id]}
+        />
+    );
+}
+
+/**
  * Dynamic Form component
  */
 export function Form<T extends FormTemplate>({
@@ -107,9 +142,13 @@ export function Form<T extends FormTemplate>({
     observed,
     defaults,
     submitBtn,
+    children,
 }: Props<T>) {
     const keys = useMemo(() => Object.keys(schema), []);
-    const values = observed ?? observable(getInitialValues(schema, defaults));
+    const values = useMemo(
+        () => observed ?? observable(getInitialValues(schema, defaults)),
+        [],
+    );
 
     const submit = useCallback((ev: React.FormEvent) => {
         ev.preventDefault();
@@ -119,21 +158,11 @@ export function Form<T extends FormTemplate>({
     return (
         <form onSubmit={submit}>
             <Column>
-                {keys.map((key) => (
-                    <ObservedInputElement
-                        key={key}
-                        type={schema[key]}
-                        disabled={disabled}
-                        value={() =>
-                            values[key] as Value<typeof schema[typeof key]>
-                        }
-                        onChange={(value) => {
-                            values[key as keyof typeof values] = value;
-                            onChange?.(values, key);
-                        }}
-                        {...data[key]}
-                    />
-                ))}
+                <FormContext.Provider
+                    value={{ schema, disabled, values, onChange, data } as any}>
+                    {children ??
+                        keys.map((key) => <FormElement key={key} id={key} />)}
+                </FormContext.Provider>
                 {submitBtn && (
                     <Button
                         type="submit"

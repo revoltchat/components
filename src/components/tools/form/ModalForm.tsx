@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import { useText } from "../../../lib";
 
@@ -41,7 +41,10 @@ type Props<T extends FormTemplate> = Exclude<
  * Modal Form
  */
 export function ModalForm<T extends FormTemplate>(props: Props<T>) {
-    const values = observable(getInitialValues(props.schema, props.defaults));
+    const values = useMemo(
+        () => observable(getInitialValues(props.schema, props.defaults)),
+        [],
+    );
     const [error, setError] = useState<string>(null!);
     const [processing, setProcessing] = useState(false);
     const Text = useText();
