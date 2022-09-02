@@ -150,10 +150,13 @@ export function Form<T extends FormTemplate>({
         [],
     );
 
-    const submit = useCallback((ev: React.FormEvent) => {
-        ev.preventDefault();
-        onSubmit?.(values);
-    }, []);
+    const submit = useCallback(
+        (ev: React.FormEvent) => {
+            ev.preventDefault();
+            onSubmit?.(values);
+        },
+        [onSubmit],
+    );
 
     return (
         <form onSubmit={submit}>
