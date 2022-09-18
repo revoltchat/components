@@ -1,10 +1,10 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from "react";
 
-import { UserStatus } from "./UserStatus";
-import { Avatar } from "../display/Avatar";
-import { Masks } from "../../../common";
 import { MaskDecorator } from "../../../../lib/internal";
+
+import { Avatar } from "../display/Avatar";
+import { UserStatus } from "./UserStatus";
 
 export default {
     title: "Design System/Atoms/Indicators/User Status",
@@ -13,7 +13,7 @@ export default {
         status: {
             name: "User Status",
             control: "radio",
-            options: ["Online", "Idle", "Busy", "Invisible"],
+            options: ["Online", "Idle", "Focus", "Busy", "Invisible"],
             defaultValue: "Online",
         },
     },
