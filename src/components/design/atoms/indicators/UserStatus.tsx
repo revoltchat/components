@@ -1,8 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-
-import type { UserStatus as Interface } from "revolt-api";
-import type { User } from "revolt.js";
+import type { User, API } from "revolt.js";
 
 export type Props = {
     /**
@@ -11,9 +9,10 @@ export type Props = {
     user?: User;
 };
 
-const mappings: Record<Interface["presence"] & string, string> = {
+const mappings: Record<API.UserStatus["presence"] & string, string> = {
     Online: "online",
     Idle: "away",
+    Focus: "focus",
     Busy: "busy",
     Invisible: "invisible",
 };
