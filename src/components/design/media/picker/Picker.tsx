@@ -350,7 +350,7 @@ export function Picker({
                 <GroupedVirtuoso
                     ref={ref}
                     style={{
-                        flexGrow: "1",
+                        flexGrow: 1,
                         padding: "0 2px",
                         overflowX: "hidden",
                     }}

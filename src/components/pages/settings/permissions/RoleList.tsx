@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Role, Server } from "revolt-api";
+import { API } from "revolt.js";
 import styled from "styled-components";
 import { Button, ButtonItem } from "../../../design";
 import { Lock } from "@styled-icons/boxicons-solid";
@@ -31,8 +31,8 @@ export interface Props {
      * Server to show role list for
      */
     server: {
-        roles: Exclude<Server["roles"], undefined> | null;
-        orderedRoles: (Role & { id: string })[];
+        roles: Exclude<API.Server["roles"], undefined> | null;
+        orderedRoles: (API.Role & { id: string })[];
     };
     /**
      * Whether to show the default role

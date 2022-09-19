@@ -32,6 +32,7 @@
         "@storybook/addon-essentials": "^6.5.5",
         "@storybook/addon-knobs": "^6.4.0",
         "@storybook/addon-links": "^6.5.5",
+        "@storybook/client-api": "^6.5.12",
         "@storybook/react": "^6.5.5",
         "@types/lodash.isequal": "^4.5.5",
         "@types/prismjs": "^1",
@@ -50,15 +51,15 @@
         "storybook-rtl-addon": "^0.3.3",
         "styled-components": "^5.3.5",
         "tsc-watch": "^5.0.3",
-        "typescript": "^4.7.4"
+        "typescript": "^4.8.3"
     },
     "scripts": {
-        "build": "yarn build:clean && yarn build:esm && yarn build:bundle",
+        "build": "npm run build:clean && npm run build:esm && npm run build:bundle",
         "build:clean": "rimraf dist esm",
         "build:esm": "babel src --no-babelrc --out-dir esm --extensions \".ts,.tsx\" --config-file ./.babelrc.es && tsc",
         "watch:esm": "tsc-watch",
         "build:bundle": "babel src --out-dir lib --extensions \".ts,.tsx\"",
-        "watch:bundle": "yarn build:bundle --watch",
+        "watch:bundle": "npm run build:bundle --watch",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook"
     },
