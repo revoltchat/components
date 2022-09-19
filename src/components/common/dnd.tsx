@@ -24,26 +24,37 @@ const HeightPreservingContainer = styled.div`
  * https://codesandbox.io/s/react-virutoso-with-react-beautiful-dnd-e6vmq?file=/src/index.js:1734-2319
  */
 export function useHeightPreservingItem() {
-    return useCallback(({ children, ...props }) => {
-        const [size, setSize] = useState(0);
-        const knownSize = props["data-known-size"];
+    return useCallback(
+        ({
+            children,
+            ...props
+        }: {
+            children: React.ReactNode;
+            "data-known-size": number;
+        }) => {
+            const [size, setSize] = useState(0);
+            const knownSize = props["data-known-size"];
 
-        useEffect(() => {
-            setSize((prevSize) => {
-                return knownSize == 0 ? prevSize : knownSize;
-            });
-        }, [knownSize]);
+            useEffect(() => {
+                setSize((prevSize) => {
+                    return knownSize == 0 ? prevSize : knownSize;
+                });
+            }, [knownSize]);
 
-        return (
-            <HeightPreservingContainer
-                {...props}
-                style={{
-                    "--child-height": `${size}px`,
-                }}>
-                {children}
-            </HeightPreservingContainer>
-        );
-    }, []);
+            return (
+                <HeightPreservingContainer
+                    {...props}
+                    style={
+                        {
+                            "--child-height": `${size}px`,
+                        } as React.CSSProperties
+                    }>
+                    {children}
+                </HeightPreservingContainer>
+            );
+        },
+        [],
+    );
 }
 
 /**

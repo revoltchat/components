@@ -120,6 +120,7 @@ export function ServerList(props: Props & ParentProps & FooterProps) {
                         return (
                             <Virtuoso
                                 totalCount={servers.length + 2}
+                                // @ts-expect-error I have no clue what's going on here lol
                                 components={dndComponents}
                                 className="list"
                                 // @ts-expect-error Incompatible types between libraries

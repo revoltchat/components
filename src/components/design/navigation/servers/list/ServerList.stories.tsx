@@ -56,7 +56,7 @@ const Template: ComponentStory<typeof ServerList> = (args) => (
             ]);
 
             const reorderFn = useCallback(
-                (source, dest) => {
+                (source: number, dest: number) => {
                     setServers((servers) => reorder(servers, source, dest));
                 },
                 [setServers],

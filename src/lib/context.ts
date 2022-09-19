@@ -17,9 +17,13 @@ export type Action = {
 };
 
 const UIContext = createContext<{
-    Link: React.FC<{ to: string; replace?: boolean }>;
-    Text: React.FC<{ id: string }>;
-    Trigger: React.FC<ContextMenu>;
+    Link: React.FC<{
+        to: string;
+        replace?: boolean;
+        children: React.ReactNode;
+    }>;
+    Text: React.FC<{ id: string; children?: React.ReactNode }>;
+    Trigger: React.FC<ContextMenu & { children: React.ReactNode }>;
     emitAction: (action: Action) => void;
     // TODO: migrate to react router v6 and add `navigate`
 }>({
