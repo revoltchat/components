@@ -96,7 +96,7 @@ const UnreadDMs = observer(({ client, permit }: Props) => {
 
     const channels = [...client.channels.values()].filter(
         (x) =>
-            (x.channel_type === "DirectMessage" ||
+            ((x.channel_type === "DirectMessage" && x.active) ||
                 x.channel_type === "Group") &&
             x.unread,
     );
