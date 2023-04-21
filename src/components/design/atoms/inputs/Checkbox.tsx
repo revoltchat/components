@@ -1,6 +1,7 @@
+import { Check } from "@styled-icons/boxicons-regular";
 import React, { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
-import { Check } from "@styled-icons/boxicons-regular";
+
 // import { VolumeFull } from "@styled-icons/boxicons-solid";
 
 const Base = styled.label`
@@ -152,6 +153,7 @@ export function Checkbox({
     ...props
 }: Props) {
     return (
+        // @ts-expect-error cope
         <Base {...props}>
             <Content>
                 {title && (

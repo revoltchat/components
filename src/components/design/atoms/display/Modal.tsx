@@ -1,17 +1,17 @@
+import React, { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import styled, { css } from "styled-components";
 
-import { createPortal } from "react-dom";
-import React, { useCallback, useEffect, useState } from "react";
-
-import { Button, Props as ButtonProps } from "../inputs/Button";
-import { H2 } from "../heading/H2";
-import { H4 } from "../heading/H4";
 import {
     animationFadeIn,
     animationFadeOut,
     animationZoomIn,
     animationZoomOut,
 } from "../../../common/animations";
+
+import { H2 } from "../heading/H2";
+import { H4 } from "../heading/H4";
+import { Button, Props as ButtonProps } from "../inputs/Button";
 
 export type Action = Omit<React.HTMLAttributes<HTMLButtonElement>, "as"> &
     Omit<ButtonProps, "onClick"> & {
@@ -148,7 +148,7 @@ const Actions = styled.div`
     border-radius: 0 0 var(--border-radius) var(--border-radius);
 `;
 
-export function Modal({
+export const Modal: (props: Props) => JSX.Element = ({
     children,
     actions,
     disabled,
@@ -160,7 +160,7 @@ export function Modal({
     registerOnConfirm,
     signal,
     ...props
-}: Props) {
+}: Props) => {
     const [closing, setClosing] = useState(false);
 
     const closeModal = useCallback(() => {
@@ -205,6 +205,7 @@ export function Modal({
                 {actions && actions.length > 0 && (
                     <Actions>
                         {actions.map((x, index) => (
+                            // @ts-expect-error cope
                             <Button
                                 disabled={disabled}
                                 key={index}
@@ -222,4 +223,4 @@ export function Modal({
         </Base>,
         document.body,
     );
-}
+};

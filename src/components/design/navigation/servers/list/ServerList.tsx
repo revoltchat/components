@@ -103,7 +103,9 @@ export function ServerList(props: Props & ParentProps & FooterProps) {
 
     return (
         <Base>
+            {/* @ts-expect-error cope */}
             <DragDropContext onDragEnd={useDragEndCustomReorder(reorder)}>
+                {/* @ts-expect-error cope */}
                 <Droppable
                     droppableId="droppable"
                     mode="virtual"
@@ -142,6 +144,7 @@ export function ServerList(props: Props & ParentProps & FooterProps) {
                                     const item = servers[index - 1];
 
                                     return (
+                                        // @ts-expect-error cope
                                         <Draggable
                                             draggableId={item._id}
                                             index={index - 1}
