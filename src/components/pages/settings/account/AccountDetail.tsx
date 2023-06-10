@@ -10,7 +10,6 @@ const UserId = styled.div`
     gap: 4px;
     display: flex;
     align-items: center;
-
     font-size: 12px;
     font-weight: 600;
     color: var(--tertiary-foreground);
@@ -46,7 +45,7 @@ export const AccountDetail = observer(({ user }: Props) => {
             </Link>
             <Row grow>
                 <Column>
-                    <H1>@{user.username}</H1>
+                    <H1>{user.username}#0000</H1>
                     <UserId>
                         <Tooltip
                             content={
