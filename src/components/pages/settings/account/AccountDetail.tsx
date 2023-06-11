@@ -3,7 +3,9 @@ import { observer } from "mobx-react-lite";
 import React from "react";
 import { User } from "revolt.js";
 import styled from "styled-components";
+
 import { useUI } from "../../../../lib";
+
 import { Button, Avatar, Column, H1, Row, Tooltip } from "../../../design";
 
 const UserId = styled.div`
@@ -45,7 +47,14 @@ export const AccountDetail = observer(({ user }: Props) => {
             </Link>
             <Row grow>
                 <Column>
-                    <H1>{user.username}#0000</H1>
+                    <H1>
+                        {user.username}
+                        {"#"}
+                        {
+                            (user as never as { discriminator: string })
+                                .discriminator
+                        }
+                    </H1>
                     <UserId>
                         <Tooltip
                             content={
