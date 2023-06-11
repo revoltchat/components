@@ -1,6 +1,7 @@
 import React from "react";
 import { User } from "revolt.js";
 import styled from "styled-components";
+
 import { Tooltip, TooltipProps } from "./Tooltip";
 
 const Base = styled.div`
@@ -10,6 +11,12 @@ const Base = styled.div`
     .username {
         font-size: 13px;
         font-weight: 600;
+    }
+
+    .username-new {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--secondary-foreground);
     }
 
     .status {
@@ -36,7 +43,18 @@ export function UserTooltip({ user, ...props }: Props) {
             {...props}
             content={
                 <Base>
-                    <span className="username">{user.username}</span>
+                    <span className="username">
+                        {(user as unknown as { display_name: string })
+                            .display_name ?? user.username}
+                    </span>
+                    <span className="username-new">
+                        {user.username}
+                        {"#"}
+                        {
+                            (user as unknown as { discriminator: string })
+                                .discriminator
+                        }
+                    </span>
                     <span className="status">{user.status?.presence}</span>
                 </Base>
             }
